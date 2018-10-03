@@ -9,7 +9,7 @@ public class bloq3ejer3 {
 			String mesmenu="MENU\n"
 					+ "1- Hipotenusa de un triangulo\n"
 					+ "2- Superficie de una circunferencia\n"
-					+ "3- Perímetro de una circunferencia\n"
+					+ "3- Perámetro de una circunferencia\n"
 					+ "4- Área de un rectángulo\n"
 					+ "5- Área de un triángulo\n"
 					+ "0- Salir de aplicación";
@@ -54,7 +54,7 @@ public class bloq3ejer3 {
 				resultado=(float) Math.pow(num2,1/num1);
 				break;
 			default:
-				JOptionPane.showMessageDialog(null, "Error. Introduce una opci�n del men�.");
+				JOptionPane.showMessageDialog(null, "Error. Introduce una opcion del menu.");
 				System.exit(1);
 			}
 			
