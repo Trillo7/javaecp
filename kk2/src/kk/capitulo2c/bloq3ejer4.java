@@ -6,59 +6,31 @@ public class bloq3ejer4 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-			String mesmenu="MENU\n"
-					+ "1- Hipotenusa de un triangulo\n"
-					+ "2- Superficie de una circunferencia\n"
-					+ "3- Perámetro de una circunferencia\n"
-					+ "4- Área de un rectángulo\n"
-					+ "5- Área de un triángulo\n"
-					+ "0- Salir de aplicación";
-			String str = JOptionPane.showInputDialog(mesmenu);
-			int opcion=Integer.parseInt(str);
-			float num1=0;
-			float num2=0;
-			if(opcion==2) {
-				str = JOptionPane.showInputDialog("Introduce un numero: ");
-				num1=Float.parseFloat(str);
-			}else {
-				str = JOptionPane.showInputDialog("Introduce un numero: ");
-				num1=Float.parseFloat(str);
-				str = JOptionPane.showInputDialog("Introduce un numero: ");
-				num2=Float.parseFloat(str);
-			}
+		//monedas de 100, 50, 25, 5, y 1 unidad
+		String mesmenu="Caja registradora Trillo 1.2\nIntroduce el dinero: ";
+		String str = JOptionPane.showInputDialog(mesmenu);
+		float unidades=Float.parseFloat(str);
+		int unid100=0;
+		int unid50=0;
+		int unid25=0;
+		int unid5=0;
+		int unid1=0;
 		
-			float resultado=0;
-			switch(opcion) {
-			case 1: 
-				resultado=(float) Math.pow(num1, 2)+ (float)Math.pow(num2, 2) ;
-				break;
-			case 2:
-				resultado=(float) (num1*3.14);
-				break;
-			case 3:
-				resultado=num1*num2;
-				break;
-			case 4:
-				resultado=num1/num2;
-				break;
-			case 5:
-				resultado=(float) Math.sqrt(num1);
-				break;
-			case 6:
-				resultado=(float) Math.pow(num1, num2);
-				break;
-			case 7:
-				resultado=num1%num2;
-				break;
-			case 8:
-				resultado=(float) Math.pow(num2,1/num1);
-				break;
-			default:
-				JOptionPane.showMessageDialog(null, "Error. Introduce una opcion del menu.");
-				System.exit(1);
-			}
-			
-			JOptionPane.showMessageDialog(null, "Resultado: "+resultado);
+		unid100=(int) (unidades/100);
+		float restosig=(float) unidades%100;
+		unid50=(int) (restosig/50);
+		restosig= restosig%50;
+		unid25= (int) (restosig/25);
+		restosig= restosig%25;
+		unid5= (int) (restosig/5);
+		restosig=restosig%5;
+		unid1=(int) (restosig/1);
+		JOptionPane.showMessageDialog(null, "Cambio:\n"
+				+ "Monedas de 100: "+unid100
+				+ "\nMonedas de 50: "+unid50
+				+ "\nMonedas de 25: "+unid25
+				+ "\nMonedas de 5: "+unid5
+				+ "\nMonedas de 1: "+unid1);
 	}
-
+	// Como sacariamos los centimos: "int decNumberInt = Integer.parseInt(str.substring(str.indexOf('.') + 1));"
 }
