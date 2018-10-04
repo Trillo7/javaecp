@@ -8,7 +8,7 @@ public class bloq3ejer3 {
 		// TODO Auto-generated method stub
 			String mesmenu="MENU\n"
 					+ "1- Hipotenusa de un triangulo\n"
-					+ "2- Superficie de una circunferencia\n"
+					+ "2- Superficie de una circulo\n"
 					+ "3- Perámetro de una circunferencia\n"
 					+ "4- Área de un rectángulo\n"
 					+ "5- Área de un triángulo\n"
@@ -17,20 +17,21 @@ public class bloq3ejer3 {
 			int opcion=Integer.parseInt(str);
 			float num1=0;
 			float num2=0;
-			if(opcion==2) {
-				str = JOptionPane.showInputDialog("Introduce un numero: ");
-				num1=Float.parseFloat(str);
-			}else {
-				str = JOptionPane.showInputDialog("Introduce un numero: ");
-				num1=Float.parseFloat(str);
-				str = JOptionPane.showInputDialog("Introduce un numero: ");
-				num2=Float.parseFloat(str);
+			if(opcion>0 && opcion<=5) {
+				if(opcion==2) {
+					str = JOptionPane.showInputDialog("Introduce un numero: ");
+					num1=Float.parseFloat(str);
+				}else {
+					str = JOptionPane.showInputDialog("Introduce un numero: ");
+					num1=Float.parseFloat(str);
+					str = JOptionPane.showInputDialog("Introduce un numero: ");
+					num2=Float.parseFloat(str);
+				}
 			}
-		
 			float resultado=0;
 			switch(opcion) {
 			case 1: 
-				resultado=(float) Math.pow(num1, 2)+ (float)Math.pow(num2, 2) ;
+				resultado=(float) Math.sqrt((float) Math.pow(num1, 2)+ (float)Math.pow(num2, 2));
 				break;
 			case 2:
 				resultado=(float) (num1*3.14);
