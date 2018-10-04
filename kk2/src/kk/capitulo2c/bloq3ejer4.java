@@ -22,11 +22,11 @@ public class bloq3ejer4 {
 		unid100=(int) (unidades/100);
 		float restosig=(float) unidades%100;
 		unid50=(int) (restosig/50);
-		restosig= restosig%50;
+		restosig= restosig%50; //restosig%=50; para hacerlo directamente, como el ++
 		unid25= (int) (restosig/25);
 		restosig= restosig%25;
 		unid5= (int) (restosig/5);
-		restosig=restosig%5;
+		restosig=restosig%5; 
 		unid1=(int) (restosig/1);
 		JOptionPane.showMessageDialog(null, "Cambio:\n"
 				+ "Monedas de 100: "+unid100
