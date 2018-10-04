@@ -22,7 +22,7 @@ public class bloq3ejer4 {
 		unid100=(int) (unidades/100);
 		float restosig=(float) unidades%100;
 		unid50=(int) (restosig/50);
-		restosig= restosig%50; //restosig%=50; para hacerlo directamente, como el ++
+		restosig= restosig%50; // restosig%=50; para hacerlo directamente, como el ++
 		unid25= (int) (restosig/25);
 		restosig= restosig%25;
 		unid5= (int) (restosig/5);
