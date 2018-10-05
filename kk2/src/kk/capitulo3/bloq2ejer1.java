@@ -2,7 +2,7 @@ package kk.capitulo3;
 
 import javax.swing.JOptionPane;
 
-public class bloq1ejer2{
+public class bloq2ejer1{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -15,10 +15,8 @@ public class bloq1ejer2{
 		for(int i=0;i<numerosfor;i++) {
 			str=JOptionPane.showInputDialog("Introduce el numero "+(i+1));
 			introdnum=Integer.parseInt(str);
-			if(introdnum>=10) {
-				suma=suma+introdnum;
-			}
+			suma=suma+introdnum;
 		}
-		JOptionPane.showMessageDialog(null, "La suma es: "+suma);
+		JOptionPane.showMessageDialog(null, "La media es: "+suma/numerosfor);
 	}
 }
