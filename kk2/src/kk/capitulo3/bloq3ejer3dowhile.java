@@ -2,7 +2,7 @@ package kk.capitulo3;
 
 import javax.swing.JOptionPane;
 
-public class bloq3ejer3{
+public class bloq3ejer3dowhile{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -10,7 +10,7 @@ public class bloq3ejer3{
 		int numintrod=1, i=0,mayor=0;
 	
 		
-		for(i=0;numintrod!=0;i++) {
+		do {
 			str=JOptionPane.showInputDialog("Introduce un numero: (0 para salir)");
 			numintrod=Integer.parseInt(str);
 			
@@ -22,7 +22,8 @@ public class bloq3ejer3{
 			}else if(numintrod>mayor) {
 				mayor=numintrod;
 			}
-		}
-		System.out.println("Numero de mayor: "+mayor);
+			i++;
+		}while(numintrod!=0);
+		System.out.println("Numero mayor: "+mayor);
 	}
 }
