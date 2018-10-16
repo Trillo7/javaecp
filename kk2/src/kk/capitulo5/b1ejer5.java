@@ -2,7 +2,7 @@ package kk.capitulo5;
 
 import javax.swing.JOptionPane;
 
-public class b1ejer4 {
+public class b1ejer5 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -10,15 +10,12 @@ public class b1ejer4 {
 		int sumapares=0,sumaimpares=0;
 		for(int i=0;i<numeros.length;i++) {
 			numeros[i]=(int) Math.round((Math.random()*100));
-			if(numeros[i]%2==0) {
+			if(i%2==0) {
 				sumapares+=numeros[i];
-			}else {
-				sumaimpares+=numeros[i];
 			}
 		}
 		
-		System.out.println("Suma impares: "+sumaimpares);
-		System.out.println("Suma pares: "+sumapares);
+		System.out.println("Suma índice par: "+sumapares);
 		
 	}
 }
