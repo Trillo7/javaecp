@@ -19,6 +19,9 @@ public class array1 {
 				mayor=numeros[i];
 				menor=numeros[i];
 			}
+			// hacerlo con operador ternario en vez de if seria:
+			// mayor= (array[i] > mayor)? array[i] : mayor; // los : son como un else
+			// menor= (array[i] < menor)? array[i] : menor; // los : son como un else
 			if(numeros[i]>mayor) {
 				mayor=numeros[i];
 			}

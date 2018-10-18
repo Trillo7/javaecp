@@ -6,9 +6,10 @@ public class b2ejer2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int array1[]=new int[150];
-		int array2[]=new int[150];
-		int array3[]=new int[150];
+		int longitudArray=150;
+		int array1[]=new int[longitudArray];
+		int array2[]=new int[longitudArray];
+		int array3[]=new int[longitudArray];
 		
 		for(int i=0;i<array1.length;i++) {
 			array1[i]=(int) Math.round((Math.random()*100));
