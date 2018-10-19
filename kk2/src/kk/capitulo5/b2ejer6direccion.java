@@ -11,8 +11,8 @@ public class b2ejer6direccion {
 		for(int i=0;i<numeros.length;i++) {
 			numeros[i]=(int) Math.round((Math.random()*100));
 			System.out.print(" "+numeros[i]);
-
 		}
+		
 		direccion=Integer.parseInt(JOptionPane.showInputDialog("Derecha (0) o Izquierda(1)"));
 		int mueve=Integer.parseInt(JOptionPane.showInputDialog("Cuantas posiciones quieres mover: "));
 		for(int x=0;x<mueve;x++) {
