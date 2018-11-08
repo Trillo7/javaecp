@@ -33,8 +33,11 @@ public class eso extends matricula{
 	 */
 	@Override
 	public String toString() {
-		return "eso [pmar=" + pmar + ", getFecha()=" + getFecha() + ", getCodigomatri()=" + getCodigomatri() + "]";
+		return "eso [pmar=" + pmar + ", getFecha()=" + getFecha() + ", getCodigomatri()=" + getCodigomatri()
+				+ ", getDNI()=" + getDNI() + "]";
 	}
+
+	
 	
 	
 	

@@ -10,9 +10,13 @@ public class main {
 		String menu = "Creacion de alumnos"
 				+ "\n\n1.- Persona no documentada"
 				+ "\n2.- Persona documentada";
+		String menumatri = "Creacion de alumnos"
+				+ "\n\n1.- ESO"
+				+ "\n2.- Bachillerato"
+				+ "\n3.- FP";
 		
 		int opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
-		
+		int opcionmatri= Integer.parseInt(JOptionPane.showInputDialog(menumatri));
 		
 		if (opcion > 0 && opcion < 3) {
 			persona alumno=null;
@@ -30,10 +34,20 @@ public class main {
 				break;
 			}
 		
-		alumno.setNombre(JOptionPane.showInputDialog("Nombre de la persona: "));
-		alumno.setApellidos(JOptionPane.showInputDialog("Apellido de la persona: "));
-		alumno.setFechaNaci(JOptionPane.showInputDialog("Fecha de la persona: "));
-		System.out.println(alumno);
+			alumno.setNombre(JOptionPane.showInputDialog("Nombre de la persona: "));
+			alumno.setApellidos(JOptionPane.showInputDialog("Apellido de la persona: "));
+			alumno.setFechaNaci(JOptionPane.showInputDialog("Fecha de la persona: "));
+			System.out.println(alumno);
+		
+		if (opcion > 0 && opcion < 4) {
+			matricula matriculado=null;
+		
+			//matricula eso
+			matriculado=new eso();
+			matriculado.setCodigomatri(JOptionPane.showInputDialog("ID matricula: "));
+			matriculado.setDNI(alumno.getDNI));
+			
 		}
+		
 	}
 }

@@ -3,6 +3,7 @@ package kk.instituto;
 public class matricula {
 	private String fecha;
 	private int codigomatri;
+	private String DNI;
 	
 	public matricula() {
 		super();
@@ -13,6 +14,12 @@ public class matricula {
 		super();
 		this.fecha = fecha;
 		this.codigomatri = codigomatri;
+	}
+	public matricula(String fecha, int codigomatri, String DNI) {
+		super();
+		this.fecha = fecha;
+		this.codigomatri = codigomatri;
+		this.DNI = DNI;
 	}
 
 	/**
@@ -41,6 +48,14 @@ public class matricula {
 	 */
 	public void setCodigomatri(int codigomatri) {
 		this.codigomatri = codigomatri;
+	}
+	
+	public void setDNI(String DNI) {
+		this.DNI = DNI;
+	}
+
+	public String getDNI() {
+		return DNI;
 	}
 	
 	
