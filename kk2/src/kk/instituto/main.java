@@ -31,23 +31,27 @@ public class main {
 				alumno = new personaD();
 				personaD alumnodocu=(personaD) alumno;
 				alumnodocu.setDNI(JOptionPane.showInputDialog("DNI de la persona: "));
+				
 				break;
 			}
 		
 			alumno.setNombre(JOptionPane.showInputDialog("Nombre de la persona: "));
 			alumno.setApellidos(JOptionPane.showInputDialog("Apellido de la persona: "));
 			alumno.setFechaNaci(JOptionPane.showInputDialog("Fecha de la persona: "));
-			System.out.println(alumno);
-		
-		if (opcion > 0 && opcion < 4) {
 			matricula matriculado=null;
+		if (opcion > 0 && opcion < 4) {
+			
 		
 			//matricula eso
 			matriculado=new eso();
-			matriculado.setCodigomatri(JOptionPane.showInputDialog("ID matricula: "));
-			matriculado.setDNI(alumno.getDNI));
+			matriculado.setCodigomatri(Integer.parseInt(JOptionPane.showInputDialog("ID matricula: ")));
+			// DNI en matricula
+			personaD alumnodocu=(personaD) alumno;
+			matriculado.setDNI(alumnodocu.getDNI());
 			
 		}
-		
+		System.out.println(alumno);
+		System.out.println(matriculado);
+	}
 	}
 }

@@ -20,7 +20,7 @@ public class personaD extends persona {
 	 * @return the dNI
 	 */
 	public String getDNI() {
-		return DNI;
+		return this.DNI;
 	}
 
 	/**

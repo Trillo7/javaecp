@@ -53,10 +53,8 @@ public class matricula {
 	public void setDNI(String DNI) {
 		this.DNI = DNI;
 	}
-
 	public String getDNI() {
 		return DNI;
 	}
-	
 	
 }
