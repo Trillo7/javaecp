@@ -3,7 +3,7 @@ package juegolaOca;
 public class Jugador {
 	private String nombre;
 	private int posicion;
-	private Tablero Tablero;
+	
 	/**
 	 * 
 	 */
@@ -15,22 +15,32 @@ public class Jugador {
 	 * @param nombre
 	 * @param posicion
 	 */
-	public Jugador(String nombre, Tablero tablero) {
+	public Jugador(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
 	
-	public void tirarDado() {
-		this.posicion+=(int) Math.round(Math.random()*(6-1)+1);
-		if(this.posicion>62) {
-			
-			this.posicion=62-(this.posicion-62);
-			System.out.println("rebote "+this.posicion);
+	public void tirarDado () {
+		int dado = (int) Math.round(Math.random()*(6-1)+1);
+		this.posicion += dado;
+		int indiceCasillaMeta=Tablero.getTablero().getCasillas().length-1;
+		if (this.posicion > indiceCasillaMeta) {
+			this.posicion = indiceCasillaMeta - 
+					(this.posicion - indiceCasillaMeta);
 		}
+		// Comprobamos si es una casilla con destino
+		if(Tablero.getTablero().getCasillas()[posicion].getDestino()!=null) {
+			// Comprobamos rebote de nuevo NO FUNCIONAAAAA
+		
+			Casilla casillaDestino = Tablero.getTablero().getCasillas()[this.posicion].getDestino();
+			this.posicion=casillaDestino.getOrden()-1;
+			System.out.println(casillaDestino.getMensajeEspecial());
+		}
+		
 	}
 	
 	public void imprimir() {
-		System.out.println(this.nombre + " - pos: " + this.posicion);
+		System.out.println("Jugador: "+this.nombre + " - pos: " + (this.posicion+1));
 	}
 	
 	
