@@ -18,6 +18,7 @@ public class Jugador {
 	public Jugador(String nombre) {
 		super();
 		this.nombre = nombre;
+		this.posicion=1;
 	}
 	
 	public void tirarDado () {
