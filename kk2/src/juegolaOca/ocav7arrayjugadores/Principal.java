@@ -25,7 +25,6 @@ public class Principal {
 				}
 			}
 		} while (!estaJuegoTerminado(jugadores));
-		
 		System.out.println("\n\n\tHAS GANADO EL JUEGO DE LA OCA");
 	}
 	
