@@ -55,44 +55,72 @@ public class baseMuneco {
 		String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
 		// Eligimos una palabra aleatoria
 		int randElige=(int) Math.round(Math.random() * ((bdPalabras.length-1) - 0) + 0);
-		System.out.println(bdPalabras[randElige]);
+		this.setPalabraElegida(bdPalabras[randElige]);
+		System.out.println(this.palabraElegida);
 		for(int i=0;i<bdPalabras[randElige].length();i++) {
 			palRellenar[i]='_';
 		}
-		muestraEstado();
-		this.setPalabraElegida(bdPalabras[randElige]);
+		// Damos partes de cuerpo
 		jugador.getJugador().setNumintentos(6);
+		// Separamos la palabra en char
+		palabra.getPalabras().separar();
+		muestraEstado();
 	}
 	
 	public void muestraEstado() {
+		int vidas=jugador.getJugador().getNumintentos();
+	    System.out.flush();  
 		System.out.println("");
-
-		for(int i=0;i<baseMuneco.getJuego().getPalabraElegida().length()-1;i++) {
+		for(int i=0;i<baseMuneco.getJuego().getPalabraElegida().length();i++) {
 			System.out.print(palRellenar[i]+" ");
 		}
+		System.out.println("");
+		if(vidas>=6) {
+			System.out.println("   (    )");
+			System.out.println("     ||");
+			System.out.println("   -------");
+			System.out.println("  //		\\");
+			System.out.println("  //		\\");
+			System.out.println("  //		\\");
+			System.out.println("  -----------");
+			System.out.println("  ||		||");
+			System.out.println("  ||		||");
+			System.out.println("  ||		||");
+			System.out.println("  ||		||");
+			System.out.println("--||	  --||");
+		}
+		System.out.println("Partes del cuerpo: "+vidas);
+		
 	}
 	public void iniciaJugada() {
 		do {
-			int acierto=1;
+			int acierto=0;
 			// Pide palabra
 			String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ");
 			jugador.getJugador().setPalabraJugador(palabraJugador);
-			System.out.println(palabraJugador.charAt(0));
 			// Comprobamos si la letra es correcta
-			for(int i=0;i<baseMuneco.getJuego().getPalabraElegida().length();i++) {
-				if(palabraJugador.charAt(0)==palabra.getPalabras().getSeparadas()[i]) {
+			
+			for(int i=0;i<this.palabraElegida.length();i++) {
+				char arrayPalabras[]=palabra.getPalabras().getSeparadas();
+				if(palabraJugador.charAt(0)==arrayPalabras[i]) {
 					palRellenar[i]=palabra.getPalabras().getSeparadas()[i];
-					muestraEstado();
-				}else {
-					acierto=0;
+					acierto=1;
 				}
 			}
 			if(acierto==0) {
 				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1);
 			}
-	
+			acierto=0;
+			muestraEstado();
 		}while(!isTerminado()&& jugador.getJugador().getNumintentos()>0); // Terminamos al acertar la palabra
-		System.out.println("");
+	
+		// Al acabar el juego, mostramos dependiendo si por victoria o por derrota
+		if(jugador.getJugador().getNumintentos()>1) {
+			System.out.println(this.palabraElegida+" Enhorabuena");
+			
+		}else {
+			System.out.println("Has muerto.");
+		}
 	}
 	public boolean isTerminado () {
 		
