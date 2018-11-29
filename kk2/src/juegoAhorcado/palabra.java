@@ -1,7 +1,6 @@
 package juegoAhorcado;
 
 public class palabra {
-	private String palabra_char []= new String [] {""};
 	private static palabra Palabras = null;
 	private char separadas[]=new char[1000];
 	
@@ -35,12 +34,6 @@ public class palabra {
 	/**
 	 * @param palabra_char
 	 */
-	public palabra(String[] palabra_char) {
-		super();
-		this.palabra_char = palabra_char;
-	}
-
-
 
 	/**
 	 * 
@@ -56,19 +49,12 @@ public class palabra {
 	/**
 	 * @return the palabra_char
 	 */
-	public String[] getPalabra_char() {
-		return palabra_char;
-	}
 
 
 
 	/**
 	 * @param palabra_char the palabra_char to set
 	 */
-	public void setPalabra_char(String[] palabra_char) {
-		this.palabra_char = palabra_char;
-	}
-
 
 
 	public static palabra getPalabras() {

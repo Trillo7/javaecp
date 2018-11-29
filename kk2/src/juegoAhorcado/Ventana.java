@@ -14,11 +14,12 @@ import javax.swing.JPanel;
 // libremente.
 public class Ventana extends Canvas {
 
-	// Declaraci�n de variables que nos permitir�n introducir el ancho y el alto
-	// de la ventana
+	// Declaraci�n de variables que nos permitir�n introducir el ancho y el alto de la ventana
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
 	private static Ventana ventana=null;
+	private String textoFinal=" ";
+	private String palabraAdivinar="";
 	
 	public Ventana () {
 		// La clase JFrame nos permite mostrar una ventana en pantalla
@@ -45,8 +46,6 @@ public class Ventana extends Canvas {
 		ventana.setResizable(false);
 	}
 	
-	
-	
 	/**
 	 * Sobrescribimos el m�todo "paint" que tienen todos los componentes gr�ficos en AWT-SWING
 	 */
@@ -68,7 +67,6 @@ public class Ventana extends Canvas {
 		//g.drawLine(290, 60, 410,10);
 		g.setColor(new Color(102, 51, 0));
 		g.drawRect(325, 55, 1, 85);
-		
 		
 		// Pintamos la cabeza
 		
@@ -119,12 +117,69 @@ public class Ventana extends Canvas {
 		}
 	
 		g.fillRect(328, 290, 20, 85);
+		g.setColor(Color.blue);
 		
-		// Pintando un ovalo relleno
-		//g.setColor(Color.red);
-	//	g.fillOval(300, 300, 120, 90);
+		//Dibujamos la cara
+		// Ojos
+		if(this.textoFinal=="Has muerto") {
+			g.setColor(Color.black);
+			g.fillRect(312, 163, 8, 3);
+			g.fillRect(315, 160, 3, 8);
+			g.fillRect(332, 163, 8, 3);
+			g.fillRect(335, 160, 3, 8);
+		}else {
+			g.setColor(Color.black);
+			g.fillOval(312, 160, 6, 6);
+			g.fillOval(333, 160, 6, 6);
+
+
+		}
 		
+		// Pintamos las vidas
+		g.drawString("Partes del cuerpo: "+jugador.getJugador().getNumintentos(), 450, 180);
+		// Espacio para victoria o derrota
+		g.drawString(textoFinal,450,193);
+		// Pintamos el juego (palabra adivinacion)
+		g.drawString("Juego: "+this.palabraAdivinar,450,280);
+		// Pintamos las palabras fallidas(intentos)
+		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),450,295);
+		
+
 	}
+	
+	/**
+	 * @return the palabraAdivinar
+	 */
+	public String getPalabraAdivinar() {
+		return palabraAdivinar;
+	}
+
+	/**
+	 * @param palabraAdivinar the palabraAdivinar to set
+	 */
+	public void setPalabraAdivinar(String palabraAdivinar) {
+		this.palabraAdivinar = palabraAdivinar;
+	}
+
+
+
+	/**
+	 * @return the textoFinal
+	 */
+	public String getTextoFinal() {
+		return textoFinal;
+	}
+
+
+
+	/**
+	 * @param textoFinal the textoFinal to set
+	 */
+	public void setTextoFinal(String textoFinal) {
+		this.textoFinal = textoFinal;
+	}
+
+
 
 	public static Ventana getVentana() {
 		if (ventana == null) {

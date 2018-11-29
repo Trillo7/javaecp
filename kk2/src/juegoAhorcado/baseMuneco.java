@@ -56,11 +56,12 @@ public class baseMuneco {
 		// Eligimos una palabra aleatoria
 		int randElige=(int) Math.round(Math.random() * ((bdPalabras.length-1) - 0) + 0);
 		this.setPalabraElegida(bdPalabras[randElige]);
-		System.out.println(this.palabraElegida);
+		System.out.println(this.palabraElegida); // Mostramos la palabra seleccionada (trampa)
+		System.out.println(""); // salto de linea
 		for(int i=0;i<bdPalabras[randElige].length();i++) {
 			palRellenar[i]='_';
 		}
-		// Damos partes de cuerpo
+		// Recargamos los intentos
 		jugador.getJugador().setNumintentos(6);
 		// Separamos la palabra en char
 		palabra.getPalabras().separar();
@@ -69,33 +70,21 @@ public class baseMuneco {
 	
 	public void muestraEstado() {
 		int vidas=jugador.getJugador().getNumintentos();
-	    System.out.flush();  
-		System.out.println("");
+		String formaPalabraJuego="";
+		// Juntamos el array de palabra _ _ _ (adivinacion actual) para setearla en Ventana como String
 		for(int i=0;i<baseMuneco.getJuego().getPalabraElegida().length();i++) {
-			System.out.print(palRellenar[i]+" ");
+			formaPalabraJuego+=palRellenar[i]+" ";
 		}
-		System.out.println("");
-		if(vidas>=6) {
-			System.out.println("   (    )");
-			System.out.println("     ||");
-			System.out.println("   -------");
-			System.out.println("  //		\\");
-			System.out.println("  //		\\");
-			System.out.println("  //		\\");
-			System.out.println("  -----------");
-			System.out.println("  ||		||");
-			System.out.println("  ||		||");
-			System.out.println("  ||		||");
-			System.out.println("  ||		||");
-			System.out.println("--||	  --||");
-		}
+		System.out.println(formaPalabraJuego);
+		Ventana.getVentana().setPalabraAdivinar(formaPalabraJuego);
+
+		System.out.println(""); // salto de linea
 		System.out.println("Partes del cuerpo: "+vidas);
 		
 		Ventana.getVentana().repaint();
-	}
-	public static void pintaVentana() {
 		
 	}
+	
 	public void iniciaJugada() {
 		do {
 			int acierto=0;
@@ -110,21 +99,24 @@ public class baseMuneco {
 					palRellenar[i]=palabra.getPalabras().getSeparadas()[i];
 					acierto=1;
 				}
-			}
+			}// y quitamos intento si has fallado
 			if(acierto==0) {
 				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1);
+				jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador.charAt(0)+" ");
 			}
 			acierto=0;
 			muestraEstado();
 		}while(!isTerminado()&& jugador.getJugador().getNumintentos()>0); // Terminamos al acertar la palabra
 	
 		// Al acabar el juego, mostramos dependiendo si por victoria o por derrota
-		if(jugador.getJugador().getNumintentos()>1) {
-			System.out.println(this.palabraElegida+" Enhorabuena");
-			
+		if(jugador.getJugador().getNumintentos()>=1) {
+			Ventana.getVentana().setTextoFinal("Enhorabuena has ganado");			
 		}else {
-			System.out.println("Has muerto.");
+			Ventana.getVentana().setTextoFinal("Has muerto");
 		}
+		// Al acabar el juego sustituimos los atinos _ por la palabra entera
+		Ventana.getVentana().setPalabraAdivinar(palabraElegida);
+
 	}
 	public boolean isTerminado () {
 		

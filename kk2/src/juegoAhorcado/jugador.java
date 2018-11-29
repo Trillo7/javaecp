@@ -5,6 +5,7 @@ public class jugador {
 	private String palabraJugador;
 	private int numintentos=0;
 	private static jugador elJugador = null;
+	private String palabrasFallidas="";
 	
 	
 	/**
@@ -74,6 +75,22 @@ public class jugador {
 	public void setPalabraJugador(String palabraJugador) {
 		this.palabraJugador = palabraJugador;
 	}
+	
+	/**
+	 * @return the palabrasFallidas
+	 */
+	public String getPalabrasFallidas() {
+		return palabrasFallidas;
+	}
+
+
+	/**
+	 * @param palabrasFallidas the palabrasFallidas to set
+	 */
+	public void setPalabrasFallidas(String palabrasFallidas) {
+		this.palabrasFallidas = palabrasFallidas;
+	}
+
 
 	//singleton
 	public static jugador getJugador() {
