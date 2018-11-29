@@ -75,7 +75,7 @@ public class jugador {
 		this.palabraJugador = palabraJugador;
 	}
 
-
+	//singleton
 	public static jugador getJugador() {
 		if (elJugador == null) {
 			elJugador = new jugador();

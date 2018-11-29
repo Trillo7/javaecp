@@ -91,6 +91,10 @@ public class baseMuneco {
 		}
 		System.out.println("Partes del cuerpo: "+vidas);
 		
+		Ventana.getVentana().repaint();
+	}
+	public static void pintaVentana() {
+		
 	}
 	public void iniciaJugada() {
 		do {
