@@ -123,8 +123,10 @@ public class Ventana extends Canvas {
 		// Ojos
 		if(this.textoFinal=="Has muerto") {
 			g.setColor(Color.black);
+			// Cruz ojo izquierdo
 			g.fillRect(312, 163, 8, 3);
 			g.fillRect(315, 160, 3, 8);
+			// Cruz ojo derecho
 			g.fillRect(332, 163, 8, 3);
 			g.fillRect(335, 160, 3, 8);
 		}else {
