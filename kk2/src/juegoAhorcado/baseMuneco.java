@@ -77,10 +77,8 @@ public class baseMuneco {
 		}
 		System.out.println(formaPalabraJuego);
 		Ventana.getVentana().setPalabraAdivinar(formaPalabraJuego);
-
 		System.out.println(""); // salto de linea
 		System.out.println("Partes del cuerpo: "+vidas);
-		
 		Ventana.getVentana().repaint();
 		
 	}
@@ -90,6 +88,7 @@ public class baseMuneco {
 			int acierto=0;
 			// Pide palabra
 			String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ");
+			
 			jugador.getJugador().setPalabraJugador(palabraJugador);
 			// Comprobamos si la letra es correcta
 			
@@ -102,7 +101,12 @@ public class baseMuneco {
 			}// y quitamos intento si has fallado
 			if(acierto==0) {
 				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1);
-				jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador.charAt(0)+" ");
+				if(palabraJugador.length()>1) {
+					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador);
+				}else {
+					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador.charAt(0)+" ");
+
+				}
 			}
 			acierto=0;
 			muestraEstado();

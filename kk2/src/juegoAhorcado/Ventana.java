@@ -63,11 +63,6 @@ public class Ventana extends Canvas {
 		// Suelo
 		g.fillRect(0, 410, 500, 45);
 		
-		// Pintamos la cuerda
-		//g.drawLine(290, 60, 410,10);
-		g.setColor(new Color(102, 51, 0));
-		g.drawRect(325, 55, 1, 85);
-		
 		// Pintamos la cabeza
 		
 		if(jugador.getJugador().getNumintentos()>=1) {
@@ -76,6 +71,12 @@ public class Ventana extends Canvas {
 			g.setColor(Color.red);
 		}
 		g.fillOval(295, 140, 60, 60);
+		
+		// Pintamos la cuerda
+		//g.drawLine(290, 60, 410,10);
+		g.setColor(new Color(102, 51, 0));
+		g.drawRect(325, 55, 1, 85);
+		g.fillRect(310, 197, 30, 3);
 		
 		// Pintamos el cuerpo
 		if(jugador.getJugador().getNumintentos()>=2) {
@@ -124,19 +125,22 @@ public class Ventana extends Canvas {
 		if(this.textoFinal=="Has muerto") {
 			g.setColor(Color.black);
 			// Cruz ojo izquierdo
-			g.fillRect(312, 163, 8, 3);
-			g.fillRect(315, 160, 3, 8);
+			g.fillRect(312, 163, 10, 6);
+			g.fillRect(315, 160, 5, 11);
 			// Cruz ojo derecho
-			g.fillRect(332, 163, 8, 3);
-			g.fillRect(335, 160, 3, 8);
+			g.fillRect(332, 163, 10, 6);
+			g.fillRect(335, 160, 5, 11);
 		}else {
 			g.setColor(Color.black);
-			g.fillOval(312, 160, 6, 6);
-			g.fillOval(333, 160, 6, 6);
-
-
+			g.fillOval(312, 160, 16, 16);
+			g.fillOval(333, 160, 16, 16);
+			g.setColor(Color.blue);
+			g.fillOval(318, 164, 6, 6);
+			g.fillOval(338, 164, 6, 6);
 		}
-		
+		// Boca
+        g.fillArc(285, 182, 80, 10, 65, 50);
+
 		// Pintamos las vidas
 		g.drawString("Partes del cuerpo: "+jugador.getJugador().getNumintentos(), 450, 180);
 		// Espacio para victoria o derrota
@@ -144,9 +148,8 @@ public class Ventana extends Canvas {
 		// Pintamos el juego (palabra adivinacion)
 		g.drawString("Juego: "+this.palabraAdivinar,450,280);
 		// Pintamos las palabras fallidas(intentos)
-		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),450,295);
+		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),140,400);
 		
-
 	}
 	
 	/**
@@ -164,14 +167,12 @@ public class Ventana extends Canvas {
 	}
 
 
-
 	/**
 	 * @return the textoFinal
 	 */
 	public String getTextoFinal() {
 		return textoFinal;
 	}
-
 
 
 	/**
