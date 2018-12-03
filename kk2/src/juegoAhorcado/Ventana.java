@@ -21,6 +21,8 @@ public class Ventana extends Canvas {
 	private static Ventana ventana=null;
 	private String textoFinal=" ";
 	private String palabraAdivinar="";
+	private String temporada="oeste";
+	private Color colorActual=Color.blue;
 	
 	public Ventana () {
 		// La clase JFrame nos permite mostrar una ventana en pantalla
@@ -52,35 +54,61 @@ public class Ventana extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		// Pintamos fondo
-		g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
 		
-		// Establecimiento del color del pincel
-		g.setColor(Color.blue);
-
+		// Pintamos fondo y color segun la temporada
+		//por que esto pestañea?
+		//if(temporada.equals("oeste")) {
+		//	g.drawImage(CacheImagenes.getCache().getImagen("ahorcadoFondo"+Ventana.getVentana().getTemporada()+".jpg"), 0, 0, this);
+		//	colorActual=Color.blue;
+		//}else if(temporada.equals("navidad")) {
+		//	g.drawImage(CacheImagenes.getCache().getahorcadoFondoNavidad(), 0, 0, this);
+		//	colorActual=Color.red;
+		//}
+		
+		if(temporada.equals("oeste")) {
+			g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
+			colorActual=Color.blue;
+		}else if(temporada.equals("navidad")) {
+			g.drawImage(CacheImagenes.getCache().getahorcadoFondoNavidad(), 0, 0, this);
+			colorActual=Color.red;
+		}else if(temporada.equals("verano")) {
+			g.drawImage(CacheImagenes.getCache().getahorcadoFondoVerano(), 0, 0, this);
+			colorActual=Color.yellow;
+			// Fondo marcos (recuadro)
+			g.setColor(Color.black);
+			g.fillRect(0, 578, 733, 132);
+		}
+		
 		// Pintamos la tabla de colgar 
 		//Techo
 		g.setColor(new Color(102, 51, 0));
-		g.fillRect(235, 50, 540, 35);
+		//g.fillRect(235, 50, 540, 35);
+		g.fillRect(335, 50, 440, 35);
+
 		// Muro
 		g.fillRect(690, 40, 80, 538);
 		// Suelo
 		//g.fillRect(0, 410, 500, 45);
+		// Silla
+		if(jugador.getJugador().getNumintentos()>=1) {
+			g.fillRect(492, 378, 65, 7);
+			g.fillRect(505, 378, 7, 50);
+			g.fillRect(535, 378, 7, 50);
+		}
 		
 		// Pintamos la cabeza
-		
 		if(jugador.getJugador().getNumintentos()>=1) {
 			g.setColor(Color.green);
 		}else {
 			g.setColor(Color.red);
 		}
-		g.fillOval(295, 140, 60, 60);
+		g.fillOval(495, 140, 60, 60);
 		
 		// Pintamos la cuerda
 		//g.drawLine(290, 60, 410,10);
 		g.setColor(new Color(102, 51, 0));
-		g.drawRect(325, 55, 1, 85);
-		g.fillRect(310, 197, 30, 3);
+		g.drawRect(525, 55, 1, 85);
+		g.fillRect(510, 197, 30, 3);
 		
 		// Pintamos el cuerpo
 		if(jugador.getJugador().getNumintentos()>=2) {
@@ -88,7 +116,7 @@ public class Ventana extends Canvas {
 		}else {
 			g.setColor(Color.red);
 		}
-		g.fillRect(300, 200, 50, 90);
+		g.fillRect(500, 200, 50, 90);
 		
 		// Pintamos brazo izquierdo
 		if(jugador.getJugador().getNumintentos()>=3) {
@@ -96,7 +124,7 @@ public class Ventana extends Canvas {
 		}else {
 			g.setColor(Color.red);
 		}
-		g.fillRect(278, 200, 20, 65);
+		g.fillRect(478, 200, 20, 65);
 		
 		// Pintamos brazo derecho
 		if(jugador.getJugador().getNumintentos()>=4) {
@@ -104,7 +132,7 @@ public class Ventana extends Canvas {
 		}else {
 			g.setColor(Color.red);
 		}
-		g.fillRect(352, 200, 20, 65);
+		g.fillRect(552, 200, 20, 65);
 		
 		// Pintamos pierna izquierda
 		if(jugador.getJugador().getNumintentos()>=5) {
@@ -112,7 +140,7 @@ public class Ventana extends Canvas {
 		}else {
 			g.setColor(Color.red);
 		}
-		g.fillRect(302, 290, 20, 85);
+		g.fillRect(502, 290, 20, 85);
 		
 		// Pintamos pierna derecho
 		if(jugador.getJugador().getNumintentos()>=6) {
@@ -121,7 +149,7 @@ public class Ventana extends Canvas {
 			g.setColor(Color.red);
 		}
 	
-		g.fillRect(328, 290, 20, 85);
+		g.fillRect(528, 290, 20, 85);
 		g.setColor(Color.blue);
 		
 		//Dibujamos la cara
@@ -129,25 +157,25 @@ public class Ventana extends Canvas {
 		if(this.textoFinal=="Has muerto") {
 			g.setColor(Color.black);
 			// Cruz ojo izquierdo
-			g.fillRect(312, 163, 10, 6);
-			g.fillRect(315, 160, 5, 11);
+			g.fillRect(512, 163, 10, 6);
+			g.fillRect(515, 160, 5, 11);
 			// Cruz ojo derecho
-			g.fillRect(332, 163, 10, 6);
-			g.fillRect(335, 160, 5, 11);
+			g.fillRect(532, 163, 10, 6);
+			g.fillRect(535, 160, 5, 11);
 		}else {
 			g.setColor(Color.white);
-			g.fillOval(312, 160, 16, 16);
-			g.fillOval(333, 160, 16, 16);
+			g.fillOval(512, 160, 16, 16);
+			g.fillOval(533, 160, 16, 16);
 			g.setColor(Color.blue);
-			g.fillOval(318, 164, 6, 6);
-			g.fillOval(338, 164, 6, 6);
+			g.fillOval(518, 164, 6, 6);
+			g.fillOval(538, 164, 6, 6);
 		}
 		// Boca
 		g.setColor(Color.red);
-        g.fillArc(285, 182, 80, 10, 65, 50);
+        g.fillArc(485, 182, 80, 20, 65, 50);
         
     	// Marcos
-		g.setColor(Color.blue);
+		g.setColor(colorActual);
 		//g.fillRect(0, 540, 740, 500);
 		
 		//Recuadro rojo global
@@ -161,9 +189,9 @@ public class Ventana extends Canvas {
         g.setFont(new Font("Segoe UI", Font.PLAIN, 28)); 
 	
 		// Pintamos las palabras fallidas(intentos) FALLOS
-		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),235,38);
+		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),255,38);
 		// Espacio para victoria o derrota ESTADO
-		g.drawString(textoFinal,5,60);
+		g.drawString(textoFinal,5,30);
 		// Pintamos la palabra adivinacion ADIVINA
         g.setFont(new Font("Segoe UI", Font.PLAIN, 25)); 
 		g.drawString("Adivina:",20,615);
@@ -173,10 +201,9 @@ public class Ventana extends Canvas {
 
 		// Pintamos las vidas VIDAS
         g.setFont(new Font("Segoe UI", Font.PLAIN, 28)); 
-		g.setColor(Color.blue);
+		g.setColor(colorActual);
 		g.drawString("Vidas: ", 565, 615);
         g.setFont(new Font("Impact", Font.ITALIC, 62)); 
-
 		g.drawString(""+jugador.getJugador().getNumintentos(), 618, 685);
 	}
 	
@@ -185,6 +212,14 @@ public class Ventana extends Canvas {
 	 */
 	public String getPalabraAdivinar() {
 		return palabraAdivinar;
+	}
+	
+	public String getTemporada() {
+		return temporada;
+	}
+
+	public void setTemporada(String temporada) {
+		this.temporada = temporada;
 	}
 
 	/**

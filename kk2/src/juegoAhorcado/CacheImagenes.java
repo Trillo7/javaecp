@@ -14,7 +14,10 @@ public class CacheImagenes {
 	private BufferedImage imagenTablero = null;
 	private BufferedImage iconoLaOca = null;
 	private BufferedImage ahorcadoFondo= null;
-	
+	private BufferedImage ahorcadoFondoNavidad= null;
+	private BufferedImage ahorcadoFondoVerano= null;
+	private BufferedImage IconoFinJuego= null;
+
 	
 	/**
 	 * El constructor busca los archivos en el sistema y los carga en memoria
@@ -66,8 +69,25 @@ public class CacheImagenes {
 		if (ahorcadoFondo == null) {
 			ahorcadoFondo = getCache().getImagen("ahorcadoFondo.jpg");
 		}
-		
 		return ahorcadoFondo;
+	}
+	public BufferedImage getahorcadoFondoNavidad() {
+		if (ahorcadoFondoNavidad == null) {
+			ahorcadoFondoNavidad = getCache().getImagen("ahorcadoFondoNavidad.jpg");
+		}
+		return ahorcadoFondoNavidad;
+	}
+	public BufferedImage getahorcadoFondoVerano() {
+		if (ahorcadoFondoVerano == null) {
+			ahorcadoFondoVerano = getCache().getImagen("ahorcadoFondoVerano.jpg");
+		}
+		return ahorcadoFondoVerano;
+	}
+	public BufferedImage getIconoFinJuego() {
+		if (IconoFinJuego == null) {
+			IconoFinJuego = getCache().getImagen("victoriamagistral.jpg");
+		}
+		return IconoFinJuego;
 	}
 
 }

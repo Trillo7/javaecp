@@ -111,24 +111,37 @@ public class baseMuneco {
 				palabraJugador+=palabra.getPalabras().getSeparadas()[randomPista];
 			}
 			// Juego normal. Comprobamos si la letra es correcta
-			for(int i=0;i<this.palabraElegida.length();i++) {
-				char arrayPalabras[]=palabra.getPalabras().getSeparadas();
-				if(palabraJugador.charAt(0)==arrayPalabras[i]) {
-					palRellenar[i]=palabra.getPalabras().getSeparadas()[i];
+			// Procesamos según sea palabra o letra
+			if(palabraJugador.length()>1) {
+				if(palabraJugador.equals(this.palabraElegida)) {
 					acierto=1;
 				}
-			}// y quitamos intento si has fallado
+			}else {
+				
+				for(int i=0;i<this.palabraElegida.length();i++) {
+					char arrayPalabras[]=palabra.getPalabras().getSeparadas();
+					if(palabraJugador.charAt(0)==arrayPalabras[i]) {
+						palRellenar[i]=palabra.getPalabras().getSeparadas()[i];
+						acierto=1;
+					}
+				}
+			}
+			//Quitamos intento si has fallado
 			if(acierto==0) {
 				if(jugador.getJugador().getGodmodeStatus()==0) {
 					jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
 				}
-				//jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1);
 				if(palabraJugador.length()>1) {
-					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador);
+					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador+" ");
 				}else {
 					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador.charAt(0)+" ");
 	
 				}
+			}
+			// Si fallas pero es una temporada devolvemos vida
+			if(acierto==0 &&( palabraJugador.equals("oeste") ||palabraJugador.equals("navidad") ||palabraJugador.equals("verano"))) {
+				Ventana.getVentana().setTemporada(palabraJugador);
+				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()+1);
 			}
 			acierto=0;
 			
@@ -137,13 +150,14 @@ public class baseMuneco {
 	
 		// Al acabar el juego, mostramos dependiendo si por victoria o por derrota
 		if(jugador.getJugador().getNumintentos()>=1) {
-			Ventana.getVentana().setTextoFinal("Enhorabuena has ganado");			
+			Ventana.getVentana().setTextoFinal("Victoria");			
 		}else {
 			Ventana.getVentana().setTextoFinal("Has muerto");
 		}
 		// Al acabar el juego sustituimos los atinos _ por la palabra entera
 		Ventana.getVentana().setPalabraAdivinar(palabraElegida);
-
+		VentanaEmergente.muestraVentanaEmergente("");
+		
 	}
 	public boolean isTerminado () {
 		

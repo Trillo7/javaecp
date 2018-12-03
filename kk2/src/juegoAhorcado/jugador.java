@@ -2,7 +2,7 @@ package juegoAhorcado;
 
 public class jugador {
 	private String nombreJugador;
-	private String palabraJugador;
+	public String palabraJugador;
 	private int numintentos=0;
 	private static jugador elJugador = null;
 	private String palabrasFallidas="";
