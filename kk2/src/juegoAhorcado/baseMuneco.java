@@ -52,8 +52,7 @@ public class baseMuneco {
 	public void cargaJuego() {
 		// TODO Auto-generated method stub
 		// Creamos el String de las palabras
-		//String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
-		String bdPalabras []= new String [] {"astronomo"};		// Eligimos una palabra aleatoria
+		String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
 		int randElige=(int) Math.round(Math.random() * ((bdPalabras.length-1) - 0) + 0);
 		this.setPalabraElegida(bdPalabras[randElige]);
 		System.out.println(this.palabraElegida); // Mostramos la palabra seleccionada (trampa)
@@ -92,6 +91,9 @@ public class baseMuneco {
 			jugador.getJugador().setPalabraJugador(palabraJugador);
 			
 			// Comprobamos si es algun evento especial
+			if(palabraJugador.equals("godmode")) {
+				jugador.getJugador().setGodmodeStatus(1);
+			}
 			if(palabraJugador.equals("hint")&& jugador.getJugador().getHint()==0) {
 				palabraJugador=""; // vaciamos el hint introducido por jugador, y para que no de error al juntar con separadas
 				int randomPista=1;
@@ -99,7 +101,9 @@ public class baseMuneco {
 					randomPista=(int) Math.round(Math.random() * ((this.palabraElegida.length()) - 0) + 0);
 					if(palRellenar[randomPista]=='_') {
 						palRellenar[randomPista]=palabra.getPalabras().getSeparadas()[randomPista];
-						jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
+						if(jugador.getJugador().getGodmodeStatus()==0) {
+							jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
+						}
 						pista=1; // control repeticion, para que elija una letra aleatoria no adivinada
 						jugador.getJugador().setHint(1); // para que el jugador no pueda usar mas pistas
 					}
@@ -115,7 +119,10 @@ public class baseMuneco {
 				}
 			}// y quitamos intento si has fallado
 			if(acierto==0) {
-				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1);
+				if(jugador.getJugador().getGodmodeStatus()==0) {
+					jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
+				}
+				//jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1);
 				if(palabraJugador.length()>1) {
 					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador);
 				}else {

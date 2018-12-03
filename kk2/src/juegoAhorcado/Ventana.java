@@ -53,6 +53,14 @@ public class Ventana extends Canvas {
 	public void paint(Graphics g) {
 		// Pintamos fondo
 		g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
+		
+		// Marcos
+	//	g.setColor(Color.white);
+	//	g.fillRect(0, 0, 175, 245);
+		
+	//	g.setColor(Color.black);
+	//	g.drawRect(0, 0, 175, 245);
+
 
 		
 		// Establecimiento del color del pincel
@@ -146,14 +154,14 @@ public class Ventana extends Canvas {
         g.fillArc(285, 182, 80, 10, 65, 50);
 
 		// Pintamos las vidas
-		g.drawString("Partes del cuerpo: "+jugador.getJugador().getNumintentos(), 450, 180);
-		// Espacio para victoria o derrota
-		g.drawString(textoFinal,450,193);
+		g.drawString("Partes del cuerpo: "+jugador.getJugador().getNumintentos(), 5, 20);
+
 		// Pintamos el juego (palabra adivinacion)
-		g.drawString("Juego: "+this.palabraAdivinar,450,280);
+		g.drawString("Juego: "+this.palabraAdivinar,5,40);
 		// Pintamos las palabras fallidas(intentos)
-		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),140,400);
-		
+		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),150,20);
+		// Espacio para victoria o derrota
+		g.drawString("Estado:" +textoFinal,5,60);
 		
 	}
 	

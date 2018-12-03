@@ -7,6 +7,7 @@ public class jugador {
 	private static jugador elJugador = null;
 	private String palabrasFallidas="";
 	private int hint=0;
+	private int godmodeStatus=0;
 	
 	
 	/**
@@ -106,6 +107,16 @@ public class jugador {
 	 */
 	public void setPalabrasFallidas(String palabrasFallidas) {
 		this.palabrasFallidas = palabrasFallidas;
+	}
+
+
+	public int getGodmodeStatus() {
+		return godmodeStatus;
+	}
+
+
+	public void setGodmodeStatus(int godmodeStatus) {
+		this.godmodeStatus = godmodeStatus;
 	}
 
 
