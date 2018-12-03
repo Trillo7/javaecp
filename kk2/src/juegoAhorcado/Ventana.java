@@ -143,7 +143,7 @@ public class Ventana extends Canvas {
 			g.fillRect(332, 163, 10, 6);
 			g.fillRect(335, 160, 5, 11);
 		}else {
-			g.setColor(Color.black);
+			g.setColor(Color.white);
 			g.fillOval(312, 160, 16, 16);
 			g.fillOval(333, 160, 16, 16);
 			g.setColor(Color.blue);
@@ -151,9 +151,12 @@ public class Ventana extends Canvas {
 			g.fillOval(338, 164, 6, 6);
 		}
 		// Boca
+		g.setColor(Color.red);
         g.fillArc(285, 182, 80, 10, 65, 50);
 
 		// Pintamos las vidas
+		g.setColor(Color.blue);
+
 		g.drawString("Partes del cuerpo: "+jugador.getJugador().getNumintentos(), 5, 20);
 
 		// Pintamos el juego (palabra adivinacion)
@@ -161,7 +164,7 @@ public class Ventana extends Canvas {
 		// Pintamos las palabras fallidas(intentos)
 		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),150,20);
 		// Espacio para victoria o derrota
-		g.drawString("Estado:" +textoFinal,5,60);
+		g.drawString(textoFinal,5,60);
 		
 	}
 	
