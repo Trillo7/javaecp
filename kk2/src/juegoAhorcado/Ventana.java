@@ -149,8 +149,9 @@ public class Ventana extends Canvas {
     	// Marcos
 		g.setColor(Color.blue);
 		//g.fillRect(0, 540, 740, 500);
+		
 		//Recuadro rojo global
-		g.setColor(Color.red);
+		//g.setColor(Color.red);
 		g.drawRect(0, 578, 733, 132);
 		//Recuadro rojo derecha (vidas)
 		g.drawRect(550, 578, 182, 132);
@@ -158,18 +159,25 @@ public class Ventana extends Canvas {
         
         // TEXTOS
         g.setFont(new Font("Segoe UI", Font.PLAIN, 28)); 
-		// Pintamos las vidas
-		g.setColor(Color.blue);
-
-		g.drawString("Vidas: "+jugador.getJugador().getNumintentos(), 5, 20);
-
-		// Pintamos el juego (palabra adivinacion)
-		g.drawString("Juego: "+this.palabraAdivinar,5,40);
-		// Pintamos las palabras fallidas(intentos)
-		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),150,20);
-		// Espacio para victoria o derrota
+	
+		// Pintamos las palabras fallidas(intentos) FALLOS
+		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),235,38);
+		// Espacio para victoria o derrota ESTADO
 		g.drawString(textoFinal,5,60);
+		// Pintamos la palabra adivinacion ADIVINA
+        g.setFont(new Font("Segoe UI", Font.PLAIN, 25)); 
+		g.drawString("Adivina:",20,615);
 		
+        g.setFont(new Font("Impact", Font.ITALIC, 62)); 
+		g.drawString(""+this.palabraAdivinar,20,675);
+
+		// Pintamos las vidas VIDAS
+        g.setFont(new Font("Segoe UI", Font.PLAIN, 28)); 
+		g.setColor(Color.blue);
+		g.drawString("Vidas: ", 565, 615);
+        g.setFont(new Font("Impact", Font.ITALIC, 62)); 
+
+		g.drawString(""+jugador.getJugador().getNumintentos(), 618, 685);
 	}
 	
 	/**
