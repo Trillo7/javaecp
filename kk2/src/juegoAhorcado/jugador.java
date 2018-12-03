@@ -6,6 +6,7 @@ public class jugador {
 	private int numintentos=0;
 	private static jugador elJugador = null;
 	private String palabrasFallidas="";
+	private int hint=0;
 	
 	
 	/**
@@ -52,6 +53,22 @@ public class jugador {
 	}
 
 
+
+
+	/**
+	 * @return the hint
+	 */
+	public int getHint() {
+		return hint;
+	}
+
+
+	/**
+	 * @param hint the hint to set
+	 */
+	public void setHint(int hint) {
+		this.hint = hint;
+	}
 
 
 	/**

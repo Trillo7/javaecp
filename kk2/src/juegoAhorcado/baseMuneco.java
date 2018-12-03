@@ -52,8 +52,8 @@ public class baseMuneco {
 	public void cargaJuego() {
 		// TODO Auto-generated method stub
 		// Creamos el String de las palabras
-		String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
-		// Eligimos una palabra aleatoria
+		//String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
+		String bdPalabras []= new String [] {"astronomo"};		// Eligimos una palabra aleatoria
 		int randElige=(int) Math.round(Math.random() * ((bdPalabras.length-1) - 0) + 0);
 		this.setPalabraElegida(bdPalabras[randElige]);
 		System.out.println(this.palabraElegida); // Mostramos la palabra seleccionada (trampa)
@@ -86,12 +86,27 @@ public class baseMuneco {
 	public void iniciaJugada() {
 		do {
 			int acierto=0;
-			// Pide palabra
+			int pista=0;
+			// Pide palabra y la inserta en su jugador
 			String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ");
-			
 			jugador.getJugador().setPalabraJugador(palabraJugador);
-			// Comprobamos si la letra es correcta
 			
+			// Comprobamos si es algun evento especial
+			if(palabraJugador.equals("hint")&& jugador.getJugador().getHint()==0) {
+				palabraJugador=""; // vaciamos el hint introducido por jugador, y para que no de error al juntar con separadas
+				int randomPista=1;
+				while(pista ==0 ) {
+					randomPista=(int) Math.round(Math.random() * ((this.palabraElegida.length()) - 0) + 0);
+					if(palRellenar[randomPista]=='_') {
+						palRellenar[randomPista]=palabra.getPalabras().getSeparadas()[randomPista];
+						jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
+						pista=1; // control repeticion, para que elija una letra aleatoria no adivinada
+						jugador.getJugador().setHint(1); // para que el jugador no pueda usar mas pistas
+					}
+				}
+				palabraJugador+=palabra.getPalabras().getSeparadas()[randomPista];
+			}
+			// Juego normal. Comprobamos si la letra es correcta
 			for(int i=0;i<this.palabraElegida.length();i++) {
 				char arrayPalabras[]=palabra.getPalabras().getSeparadas();
 				if(palabraJugador.charAt(0)==arrayPalabras[i]) {
@@ -105,10 +120,11 @@ public class baseMuneco {
 					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador);
 				}else {
 					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador.charAt(0)+" ");
-
+	
 				}
 			}
 			acierto=0;
+			
 			muestraEstado();
 		}while(!isTerminado()&& jugador.getJugador().getNumintentos()>0); // Terminamos al acertar la palabra
 	

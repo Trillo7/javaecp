@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 public class Ventana extends Canvas {
 
 	// Declaraci�n de variables que nos permitir�n introducir el ancho y el alto de la ventana
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 480;
+	public static final int WIDTH = 740;
+	public static final int HEIGHT = 580;
 	private static Ventana ventana=null;
 	private String textoFinal=" ";
 	private String palabraAdivinar="";
@@ -51,17 +51,21 @@ public class Ventana extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g) {
+		// Pintamos fondo
+		g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
+
+		
 		// Establecimiento del color del pincel
 		g.setColor(Color.blue);
 
 		// Pintamos la tabla de colgar 
 		//Techo
 		g.setColor(new Color(102, 51, 0));
-		g.fillRect(20, 20, 500, 35);
+		g.fillRect(235, 50, 540, 35);
 		// Muro
-		g.fillRect(20, 20, 40, 500);
+		g.fillRect(690, 40, 80, 540);
 		// Suelo
-		g.fillRect(0, 410, 500, 45);
+		//g.fillRect(0, 410, 500, 45);
 		
 		// Pintamos la cabeza
 		
@@ -149,6 +153,7 @@ public class Ventana extends Canvas {
 		g.drawString("Juego: "+this.palabraAdivinar,450,280);
 		// Pintamos las palabras fallidas(intentos)
 		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),140,400);
+		
 		
 	}
 	

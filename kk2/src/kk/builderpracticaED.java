@@ -92,5 +92,14 @@ public class builderpracticaED {
 		});
 		btnCalcular.setBounds(32, 167, 117, 25);
 		frame.getContentPane().add(btnCalcular);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(1);
+			}
+		});
+		btnSalir.setBounds(32, 217, 117, 25);
+		frame.getContentPane().add(btnSalir);
 	}
 }
