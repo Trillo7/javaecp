@@ -3,6 +3,7 @@ package juegoAhorcado;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -16,7 +17,7 @@ public class Ventana extends Canvas {
 
 	// Declaraci�n de variables que nos permitir�n introducir el ancho y el alto de la ventana
 	public static final int WIDTH = 740;
-	public static final int HEIGHT = 580;
+	public static final int HEIGHT = 740;
 	private static Ventana ventana=null;
 	private String textoFinal=" ";
 	private String palabraAdivinar="";
@@ -54,15 +55,6 @@ public class Ventana extends Canvas {
 		// Pintamos fondo
 		g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
 		
-		// Marcos
-	//	g.setColor(Color.white);
-	//	g.fillRect(0, 0, 175, 245);
-		
-	//	g.setColor(Color.black);
-	//	g.drawRect(0, 0, 175, 245);
-
-
-		
 		// Establecimiento del color del pincel
 		g.setColor(Color.blue);
 
@@ -71,7 +63,7 @@ public class Ventana extends Canvas {
 		g.setColor(new Color(102, 51, 0));
 		g.fillRect(235, 50, 540, 35);
 		// Muro
-		g.fillRect(690, 40, 80, 540);
+		g.fillRect(690, 40, 80, 538);
 		// Suelo
 		//g.fillRect(0, 410, 500, 45);
 		
@@ -153,11 +145,23 @@ public class Ventana extends Canvas {
 		// Boca
 		g.setColor(Color.red);
         g.fillArc(285, 182, 80, 10, 65, 50);
+        
+    	// Marcos
+		g.setColor(Color.blue);
+		//g.fillRect(0, 540, 740, 500);
+		//Recuadro rojo global
+		g.setColor(Color.red);
+		g.drawRect(0, 578, 733, 132);
+		//Recuadro rojo derecha (vidas)
+		g.drawRect(550, 578, 182, 132);
 
+        
+        // TEXTOS
+        g.setFont(new Font("Segoe UI", Font.PLAIN, 28)); 
 		// Pintamos las vidas
 		g.setColor(Color.blue);
 
-		g.drawString("Partes del cuerpo: "+jugador.getJugador().getNumintentos(), 5, 20);
+		g.drawString("Vidas: "+jugador.getJugador().getNumintentos(), 5, 20);
 
 		// Pintamos el juego (palabra adivinacion)
 		g.drawString("Juego: "+this.palabraAdivinar,5,40);
