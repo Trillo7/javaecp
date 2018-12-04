@@ -26,7 +26,7 @@ public class Ventana extends Canvas {
 	
 	public Ventana () {
 		// La clase JFrame nos permite mostrar una ventana en pantalla
-		JFrame ventana = new JFrame("El Ahorcado HD");
+		JFrame ventana = new JFrame("El Ahorcado HD by Trillo - Ronda "+jugador.getJugador().getRondas());
 		// Establecemos las dimensiones que queremos que tenga
 		ventana.setBounds(0,0,WIDTH,HEIGHT);
 		
@@ -184,14 +184,31 @@ public class Ventana extends Canvas {
 		//Recuadro rojo derecha (vidas)
 		g.drawRect(550, 578, 182, 132);
 
-        
         // TEXTOS
         g.setFont(new Font("Segoe UI", Font.PLAIN, 28)); 
 	
 		// Pintamos las palabras fallidas(intentos) FALLOS
-		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),255,38);
+		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),10,30);
+		//Pintamos los comodines
+        g.setFont(new Font("Segoe UI", Font.PLAIN, 14)); 
+		g.drawString("Comodin hint: ",10,60);
+		if(jugador.getJugador().getHint()==1) {
+			g.setColor(Color.red);
+			g.drawString("Usado",100,60);
+		}else {
+			g.setColor(Color.green);
+			g.drawString("Disponible",100,60);
+		}
+
+		//Pintamos la temporada actual
+		g.setColor(Color.blue);
+		g.drawString("Tema de temporada: ",10,80);
+		g.drawString(this.temporada,140,80);
+
+
 		// Espacio para victoria o derrota ESTADO
-		g.drawString(textoFinal,5,30);
+        g.setFont(new Font("Segoe UI", Font.PLAIN, 15)); 
+		g.drawString("Ronda "+jugador.getJugador().getRondas(),355,100);
 		// Pintamos la palabra adivinacion ADIVINA
         g.setFont(new Font("Segoe UI", Font.PLAIN, 25)); 
 		g.drawString("Adivina:",20,615);

@@ -3,12 +3,12 @@ package juegoAhorcado;
 public class jugador {
 	private String nombreJugador;
 	public String palabraJugador;
-	private int numintentos=0;
+	private int numintentos=6;
 	private static jugador elJugador = null;
 	private String palabrasFallidas="";
 	private int hint=0;
 	private int godmodeStatus=0;
-	
+	private int rondas=1;
 	
 	/**
 	 * 
@@ -117,6 +117,16 @@ public class jugador {
 
 	public void setGodmodeStatus(int godmodeStatus) {
 		this.godmodeStatus = godmodeStatus;
+	}
+
+
+	public int getRondas() {
+		return rondas;
+	}
+
+
+	public void setRondas(int rondas) {
+		this.rondas = rondas;
 	}
 
 

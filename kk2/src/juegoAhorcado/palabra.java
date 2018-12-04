@@ -11,16 +11,12 @@ public class palabra {
 		}
 	}
 	
-	
-	
 	/**
 	 * @return the separadas
 	 */
 	public char[] getSeparadas() {
 		return separadas;
 	}
-
-
 
 	/**
 	 * @param separadas the separadas to set
@@ -30,31 +26,14 @@ public class palabra {
 	}
 
 
-
 	/**
 	 * @param palabra_char
 	 */
 
-	/**
-	 * 
-	 */
 	public palabra() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-
-
-	/**
-	 * @return the palabra_char
-	 */
-
-
-
-	/**
-	 * @param palabra_char the palabra_char to set
-	 */
 
 
 	public static palabra getPalabras() {

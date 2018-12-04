@@ -5,10 +5,8 @@ import javax.swing.JOptionPane;
 public class baseMuneco {
 	private String palabraElegida=null;
 	private static baseMuneco juego = null;
-	private char palRellenar[]=new char[1000];
+	private char palRellenar[]=new char[1000]; // es el array del juego, _ _ _ que se usa luego para sustituir al acertar la palabra _ j e m _ l o 
 
-
-	
 	/**
 	 * @return the palabraElegida
 	 */
@@ -23,18 +21,6 @@ public class baseMuneco {
 		this.palabraElegida = palabraElegida;
 	}
 
-	/**
-	 * @return the numintentos
-	 */
-
-
-	/**
-	 * @param numintentos the numintentos to set
-	 */
-
-	/**
-	 * 
-	 */
 	public baseMuneco() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -61,7 +47,7 @@ public class baseMuneco {
 			palRellenar[i]='_';
 		}
 		// Recargamos los intentos
-		jugador.getJugador().setNumintentos(6);
+		//jugador.getJugador().setNumintentos(6);
 		// Separamos la palabra en char
 		palabra.getPalabras().separar();
 		muestraEstado();
@@ -77,7 +63,7 @@ public class baseMuneco {
 		System.out.println(formaPalabraJuego);
 		Ventana.getVentana().setPalabraAdivinar(formaPalabraJuego);
 		System.out.println(""); // salto de linea
-		System.out.println("Partes del cuerpo: "+vidas);
+		System.out.println("Vidas: "+vidas);
 		Ventana.getVentana().repaint();
 		
 	}
@@ -117,7 +103,6 @@ public class baseMuneco {
 					acierto=1;
 				}
 			}else {
-				
 				for(int i=0;i<this.palabraElegida.length();i++) {
 					char arrayPalabras[]=palabra.getPalabras().getSeparadas();
 					if(palabraJugador.charAt(0)==arrayPalabras[i]) {
@@ -131,11 +116,10 @@ public class baseMuneco {
 				if(jugador.getJugador().getGodmodeStatus()==0) {
 					jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
 				}
-				if(palabraJugador.length()>1) {
+				if(palabraJugador.length()>1 /**&& !palabraJugador.equals("verano")*/) {
 					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador+" ");
 				}else {
 					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador.charAt(0)+" ");
-	
 				}
 			}
 			// Si fallas pero es una temporada devolvemos vida
@@ -144,11 +128,10 @@ public class baseMuneco {
 				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()+1);
 			}
 			acierto=0;
-			
 			muestraEstado();
 		}while(!isTerminado()&& jugador.getJugador().getNumintentos()>0); // Terminamos al acertar la palabra
 	
-		// Al acabar el juego, mostramos dependiendo si por victoria o por derrota
+		// Al acabar el juego, mostramos dependiendo si por victoria o por derrota (Actualmente solo se utiliza para pintar la cara pues fue cambiado)
 		if(jugador.getJugador().getNumintentos()>=1) {
 			Ventana.getVentana().setTextoFinal("Victoria");			
 		}else {
@@ -159,7 +142,7 @@ public class baseMuneco {
 		VentanaEmergente.muestraVentanaEmergente("");
 		
 	}
-	public boolean isTerminado () {
+	public boolean isTerminado () { // si la palabra introducida por el jugador es igual a la Elegida, isterminado es true
 		
 		if (jugador.getJugador().getPalabraJugador().equals(getPalabraElegida())) {
 			return true;
