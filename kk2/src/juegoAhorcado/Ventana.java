@@ -80,11 +80,11 @@ public class Ventana extends Canvas {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondoVerano(), 0, 0, this);
 			colorActual=Color.yellow;
 			jugador.getJugador().setCambiotemporada(0);
-
 			palabra.getPalabras().generaPalabra();
 			// Fondo marcos (recuadro)
 			g.setColor(Color.black);
 			g.fillRect(0, 578, 733, 132);
+			
 		}else{
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
 			colorActual=Color.blue;
