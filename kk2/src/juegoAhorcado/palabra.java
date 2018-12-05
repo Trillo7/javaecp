@@ -10,7 +10,17 @@ public class palabra {
 			separadas[i]=aseparar.charAt(i);
 		}
 	}
-	
+	public void generaPalabra() {
+	// Creamos el String de las palabras
+		String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
+		int randElige=(int) Math.round(Math.random() * ((bdPalabras.length-1) - 0) + 0);
+		baseMuneco.getJuego().setPalabraElegida(bdPalabras[randElige]);
+		System.out.println(baseMuneco.getJuego().getPalabraElegida()); // Mostramos la palabra seleccionada (trampa)
+		System.out.println(""); // salto de linea
+		for(int i=0;i<bdPalabras[randElige].length();i++) {
+			baseMuneco.getJuego().getPalRellenar()[i]='_';
+		}
+	}
 	/**
 	 * @return the separadas
 	 */

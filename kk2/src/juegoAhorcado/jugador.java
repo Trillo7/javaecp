@@ -9,6 +9,7 @@ public class jugador {
 	private int hint=0;
 	private int godmodeStatus=0;
 	private int rondas=1;
+	private int cambiotemporada=0;  // lo necesito porque si no genera una palabra todo el rato ya que el fondo lo comprueba todo el rato tambien
 	
 	/**
 	 * 
@@ -109,7 +110,7 @@ public class jugador {
 		this.palabrasFallidas = palabrasFallidas;
 	}
 
-
+	
 	public int getGodmodeStatus() {
 		return godmodeStatus;
 	}
@@ -127,6 +128,22 @@ public class jugador {
 
 	public void setRondas(int rondas) {
 		this.rondas = rondas;
+	}
+	
+	
+	/**
+	 * @return the cambiotemporada
+	 */
+	public int getCambiotemporada() {
+		return cambiotemporada;
+	}
+
+
+	/**
+	 * @param cambiotemporada the cambiotemporada to set
+	 */
+	public void setCambiotemporada(int cambiotemporada) {
+		this.cambiotemporada = cambiotemporada;
 	}
 
 

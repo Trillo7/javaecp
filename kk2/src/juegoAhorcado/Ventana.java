@@ -65,19 +65,29 @@ public class Ventana extends Canvas {
 		//	colorActual=Color.red;
 		//}
 		
-		if(temporada.equals("oeste")) {
+		if(temporada.equals("oeste")&&jugador.getJugador().getCambiotemporada()==1) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
 			colorActual=Color.blue;
-			
-		}else if(temporada.equals("navidad")) {
+			palabra.getPalabras().generaPalabra();
+			jugador.getJugador().setCambiotemporada(0);
+		}else if(temporada.equals("navidad")&&jugador.getJugador().getCambiotemporada()==1) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondoNavidad(), 0, 0, this);
 			colorActual=Color.red;
-		}else if(temporada.equals("verano")) {
+			palabra.getPalabras().generaPalabra();
+			jugador.getJugador().setCambiotemporada(0);
+
+		}else if(temporada.equals("verano")&&jugador.getJugador().getCambiotemporada()==1) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondoVerano(), 0, 0, this);
 			colorActual=Color.yellow;
+			jugador.getJugador().setCambiotemporada(0);
+
+			palabra.getPalabras().generaPalabra();
 			// Fondo marcos (recuadro)
 			g.setColor(Color.black);
 			g.fillRect(0, 578, 733, 132);
+		}else{
+			g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
+			colorActual=Color.blue;
 		}
 		
 		// Pintamos la tabla de colgar 

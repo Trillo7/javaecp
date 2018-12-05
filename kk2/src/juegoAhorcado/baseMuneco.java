@@ -37,15 +37,7 @@ public class baseMuneco {
 
 	public void cargaJuego() {
 		// TODO Auto-generated method stub
-		// Creamos el String de las palabras
-		String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
-		int randElige=(int) Math.round(Math.random() * ((bdPalabras.length-1) - 0) + 0);
-		this.setPalabraElegida(bdPalabras[randElige]);
-		System.out.println(this.palabraElegida); // Mostramos la palabra seleccionada (trampa)
-		System.out.println(""); // salto de linea
-		for(int i=0;i<bdPalabras[randElige].length();i++) {
-			palRellenar[i]='_';
-		}
+		palabra.getPalabras().generaPalabra();
 		// Recargamos los intentos
 		//jugador.getJugador().setNumintentos(6);
 		// Separamos la palabra en char
@@ -75,7 +67,10 @@ public class baseMuneco {
 			// Pide palabra y la inserta en su jugador
 			String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ");
 			jugador.getJugador().setPalabraJugador(palabraJugador);
-			
+			//comprobamos si vamos a hacer el cambio
+			if(palabraJugador.equals("oeste")||palabraJugador.equals("navidad")||palabraJugador.equals("verano")) {
+				jugador.getJugador().setCambiotemporada(1);
+			}
 			// Comprobamos si es algun evento especial
 			if(palabraJugador.equals("godmode")) {
 				jugador.getJugador().setGodmodeStatus(1);
@@ -155,6 +150,20 @@ public class baseMuneco {
 			juego = new baseMuneco();
 		}
 		return juego;
+	}
+
+	/**
+	 * @return the palRellenar
+	 */
+	public char[] getPalRellenar() {
+		return palRellenar;
+	}
+
+	/**
+	 * @param palRellenar the palRellenar to set
+	 */
+	public void setPalRellenar(char[] palRellenar) {
+		this.palRellenar = palRellenar;
 	}
 	
 	
