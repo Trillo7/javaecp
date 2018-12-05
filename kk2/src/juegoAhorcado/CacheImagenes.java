@@ -75,7 +75,7 @@ public class CacheImagenes {
 	}
 	public BufferedImage getahorcadoFondoNavidad() {
 		if (ahorcadoFondoNavidad == null) {
-			ahorcadoFondoNavidad = getCache().getImagen("ahorcadoFondoNavidad.jpg");
+			ahorcadoFondoNavidad = getCache().getImagen("ahorcadoFondonavidad.jpg");
 		}
 		return ahorcadoFondoNavidad;
 	}

@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class Ventana extends Canvas {
 
 	// Declaraci�n de variables que nos permitir�n introducir el ancho y el alto de la ventana
-	public static final int WIDTH = 740;
+	public static final int WIDTH = 734;
 	public static final int HEIGHT = 740;
 	private static Ventana ventana=null;
 	private String textoFinal=" ";
@@ -68,6 +68,7 @@ public class Ventana extends Canvas {
 		if(temporada.equals("oeste")) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
 			colorActual=Color.blue;
+			
 		}else if(temporada.equals("navidad")) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondoNavidad(), 0, 0, this);
 			colorActual=Color.red;
@@ -194,16 +195,16 @@ public class Ventana extends Canvas {
 		g.drawString("Comodin hint: ",10,60);
 		if(jugador.getJugador().getHint()==1) {
 			g.setColor(Color.red);
-			g.drawString("Usado",100,60);
+			g.drawString("Usado",110,60);
 		}else {
 			g.setColor(Color.green);
-			g.drawString("Disponible",100,60);
+			g.drawString("Disponible",110,60);
 		}
 
 		//Pintamos la temporada actual
 		g.setColor(Color.blue);
 		g.drawString("Tema de temporada: ",10,80);
-		g.drawString(this.temporada,140,80);
+		g.drawString(this.temporada,160,80);
 
 
 		// Espacio para victoria o derrota ESTADO

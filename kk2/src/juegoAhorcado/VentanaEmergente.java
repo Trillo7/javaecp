@@ -44,7 +44,7 @@ public class VentanaEmergente {
 		}else {
 			jugador.getJugador().setRondas(jugador.getJugador().getRondas()+1);
 			//damos 3 vidas extra por ronda
-			jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()+3);
+			jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()+4);
 			//reiniciamos letras fallidas
 			jugador.getJugador().setPalabrasFallidas("");
 			//comienza el juego
