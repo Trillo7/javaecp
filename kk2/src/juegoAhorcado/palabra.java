@@ -4,6 +4,15 @@ public class palabra {
 	private static palabra Palabras = null;
 	private char separadas[]=new char[1000];
 	
+	/**
+	 * @param palabra_char
+	 */
+
+	public palabra() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public void separar() {
 		String aseparar=baseMuneco.getJuego().getPalabraElegida();
 		for (int i=0;i<aseparar.length();i++) {
@@ -53,17 +62,7 @@ public class palabra {
 		this.separadas = separadas;
 	}
 
-
-	/**
-	 * @param palabra_char
-	 */
-
-	public palabra() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
+	// Single-ton de palabra
 	public static palabra getPalabras() {
 		if (Palabras == null) {
 			Palabras= new palabra();

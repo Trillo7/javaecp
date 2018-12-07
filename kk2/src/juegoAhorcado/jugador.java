@@ -1,5 +1,7 @@
 package juegoAhorcado;
 
+import javax.swing.JOptionPane;
+
 public class jugador {
 	private String nombreJugador;
 	public String palabraJugador;
@@ -9,17 +11,48 @@ public class jugador {
 	private int hint=0;
 	private int godmodeStatus=0;
 	private int rondas=1;
-	private int cambiotemporada=0;  // lo necesito porque si no genera una palabra todo el rato ya que el fondo lo comprueba todo el rato tambien
+	private int cambiotemporada=0;  // para saber si es un nuevo cambio
 	
-	/**
-	 * 
-	 */
 	public jugador() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
+	public void pidePalabraJugador() {
+		int controlPista=0;
+		// Pide palabra y la inserta en su jugador
+		String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ");
+		jugador.getJugador().setPalabraJugador(palabraJugador);
+		
+		//comprobamos si vamos a hacer el cambio de temporada
+		if(palabraJugador.equals("oeste")||palabraJugador.equals("navidad")||palabraJugador.equals("verano")) {
+			jugador.getJugador().setCambiotemporada(1);
+			Ventana.getVentana().setTemporada(palabraJugador);
+			jugador.getJugador().setPalabraJugador(baseMuneco.getJuego().getPalabraElegida()); // le damos la victoria para que el juego acabe y empieze de nuevo con la nueva temporada
+		}
+		// Comprobamos si es algun evento especial
+		if(palabraJugador.equals("godmode")) {
+			jugador.getJugador().setGodmodeStatus(1);
+		}
+		if(palabraJugador.equals("hint")&& jugador.getJugador().getHint()==0) {
+			palabraJugador=""; // vaciamos el hint introducido por jugador, y para que no de error al juntar con separadas
+			int randomPista=1;
+			while(controlPista ==0 ) {
+				randomPista=(int) Math.round(Math.random() * ((baseMuneco.getJuego().getPalabraElegida().length()) - 0) + 0);
+				if(baseMuneco.getJuego().getPalRellenar()[randomPista]=='_') {
+					baseMuneco.getJuego().getPalRellenar()[randomPista]=palabra.getPalabras().getSeparadas()[randomPista];
+					if(jugador.getJugador().getGodmodeStatus()==0) {
+						jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
+					}
+					controlPista=1; // control repeticion, para que elija una letra aleatoria no adivinada
+					jugador.getJugador().setHint(1); // para que el jugador no pueda usar mas pistas
+				}
+			}
+			// en la palabra del jugador metemos una letra correcta elegida
+			palabraJugador+=palabra.getPalabras().getSeparadas()[randomPista];
+		}
+	}
+	
 	/**
 	 * @return the numintentos
 	 */

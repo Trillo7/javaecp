@@ -47,7 +47,7 @@ public class VentanaEmergente {
 
 		}
 		
-		// Comprobaci�n de la opci�n elegida por el usuario
+		// Comprobación de la opci�n elegida por el usuario
 		if (opcionElegida == 1) { // Si la opci�n elegida es la de �ndice "1", salimos
 			System.exit(0);
 		}else {
@@ -63,7 +63,7 @@ public class VentanaEmergente {
 				jugador.getJugador().setCambiotemporada(0);
 				jugador.getJugador().setNumintentos(6);
 			}
-			//comienza el juego
+			//Vuelve a comenzar el juego
 			baseMuneco.getJuego().cargaJuego();
 			baseMuneco.getJuego().iniciaJugada();
 		}

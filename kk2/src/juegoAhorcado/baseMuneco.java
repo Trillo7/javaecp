@@ -1,35 +1,15 @@
 package juegoAhorcado;
 
-import javax.swing.JOptionPane;
-
 public class baseMuneco {
 	private String palabraElegida=null;
 	private static baseMuneco juego = null;
 	private char palRellenar[]=new char[1000]; // es el array del juego, _ _ _ que se usa luego para sustituir al acertar la palabra _ j e m _ l o 
-
-	/**
-	 * @return the palabraElegida
-	 */
-	public String getPalabraElegida() {
-		return palabraElegida;
-	}
-
-	/**
-	 * @param palabraElegida the palabraElegida to set
-	 */
-	public void setPalabraElegida(String palabraElegida) {
-		this.palabraElegida = palabraElegida;
-	}
 
 	public baseMuneco() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @param palabraElegida
-	 * @param numintentos
-	 */
 	public baseMuneco(String palabraElegida, int numintentos) {
 		super();
 		this.palabraElegida = palabraElegida;
@@ -38,8 +18,6 @@ public class baseMuneco {
 	public void cargaJuego() {
 		// TODO Auto-generated method stub
 		palabra.getPalabras().generaPalabra();
-		// Recargamos los intentos
-		//jugador.getJugador().setNumintentos(6);
 		// Separamos la palabra en char
 		palabra.getPalabras().separar();
 		muestraEstado();
@@ -57,52 +35,22 @@ public class baseMuneco {
 		System.out.println(""); // salto de linea
 		System.out.println("Vidas: "+vidas);
 		Ventana.getVentana().repaint();
-		
 	}
 	
 	public void iniciaJugada() {
 		do {
 			int acierto=0;
-			int pista=0;
-			// Pide palabra y la inserta en su jugador
-			String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ");
-			jugador.getJugador().setPalabraJugador(palabraJugador);
-			//comprobamos si vamos a hacer el cambio
-			if(palabraJugador.equals("oeste")||palabraJugador.equals("navidad")||palabraJugador.equals("verano")) {
-				jugador.getJugador().setCambiotemporada(1);
-				Ventana.getVentana().setTemporada(palabraJugador);
-				jugador.getJugador().setPalabraJugador(this.palabraElegida);
-			}
-			// Comprobamos si es algun evento especial
-			if(palabraJugador.equals("godmode")) {
-				jugador.getJugador().setGodmodeStatus(1);
-			}
-			if(palabraJugador.equals("hint")&& jugador.getJugador().getHint()==0) {
-				palabraJugador=""; // vaciamos el hint introducido por jugador, y para que no de error al juntar con separadas
-				int randomPista=1;
-				while(pista ==0 ) {
-					randomPista=(int) Math.round(Math.random() * ((this.palabraElegida.length()) - 0) + 0);
-					if(palRellenar[randomPista]=='_') {
-						palRellenar[randomPista]=palabra.getPalabras().getSeparadas()[randomPista];
-						if(jugador.getJugador().getGodmodeStatus()==0) {
-							jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
-						}
-						pista=1; // control repeticion, para que elija una letra aleatoria no adivinada
-						jugador.getJugador().setHint(1); // para que el jugador no pueda usar mas pistas
-					}
-				}
-				palabraJugador+=palabra.getPalabras().getSeparadas()[randomPista];
-			}
+			jugador.getJugador().pidePalabraJugador();
 			// Juego normal. Comprobamos si la letra es correcta
 			// Procesamos según sea palabra o letra
-			if(palabraJugador.length()>1) {
-				if(palabraJugador.equals(this.palabraElegida)) {
+			if(jugador.getJugador().getPalabraJugador().length()>1) {
+				if(jugador.getJugador().getPalabraJugador().equals(this.palabraElegida)) {
 					acierto=1;
 				}
 			}else {
 				for(int i=0;i<this.palabraElegida.length();i++) {
 					char arrayPalabras[]=palabra.getPalabras().getSeparadas();
-					if(palabraJugador.charAt(0)==arrayPalabras[i]) {
+					if(jugador.getJugador().getPalabraJugador().charAt(0)==arrayPalabras[i]) {
 						palRellenar[i]=palabra.getPalabras().getSeparadas()[i];
 						acierto=1;
 					}
@@ -113,15 +61,15 @@ public class baseMuneco {
 				if(jugador.getJugador().getGodmodeStatus()==0) {
 					jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-1); // quitamos un intento pues ha usado hint
 				}
-				if(palabraJugador.length()>1 /**&& !palabraJugador.equals("verano")*/) {
-					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador+" ");
+				if(jugador.getJugador().getPalabraJugador().length()>1 /**&& !palabraJugador.equals("verano")*/) {
+					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+jugador.getJugador().getPalabraJugador()+" ");
 				}else {
-					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+palabraJugador.charAt(0)+" ");
+					jugador.getJugador().setPalabrasFallidas(jugador.getJugador().getPalabrasFallidas()+jugador.getJugador().getPalabraJugador().charAt(0)+" ");
 				}
 			}
-			// Si fallas pero es una temporada devolvemos vida
-			if(acierto==0 &&( palabraJugador.equals("oeste") ||palabraJugador.equals("navidad") ||palabraJugador.equals("verano"))) {
-				Ventana.getVentana().setTemporada(palabraJugador);
+			// Si fallas por una palabra de cambio de temporada devolvemos 1 intento
+			if(acierto==0 &&( jugador.getJugador().getPalabraJugador().equals("oeste") ||jugador.getJugador().getPalabraJugador().equals("navidad") ||jugador.getJugador().getPalabraJugador().equals("verano"))) {
+				Ventana.getVentana().setTemporada(jugador.getJugador().getPalabraJugador());
 				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()+1);
 			}
 			acierto=0;
@@ -137,21 +85,27 @@ public class baseMuneco {
 		// Al acabar el juego sustituimos los atinos _ por la palabra entera
 		Ventana.getVentana().setPalabraAdivinar(palabraElegida);
 		VentanaEmergente.muestraVentanaEmergente("");
-		
 	}
-	public boolean isTerminado () { // si la palabra introducida por el jugador es igual a la Elegida, isterminado es true
-		
+	
+	public boolean isTerminado () { // si la palabra introducida por el jugador es igual a la Elegida, isterminado es trues
 		if (jugador.getJugador().getPalabraJugador().equals(getPalabraElegida())) {
 			return true;
 		}
 		return false;
 	}
-	
-	public static baseMuneco getJuego() {
-		if (juego == null) {
-			juego = new baseMuneco();
-		}
-		return juego;
+
+	/**
+	 * @return the palabraElegida
+	 */
+	public String getPalabraElegida() {
+		return palabraElegida;
+	}
+
+	/**
+	 * @param palabraElegida the palabraElegida to set
+	 */
+	public void setPalabraElegida(String palabraElegida) {
+		this.palabraElegida = palabraElegida;
 	}
 
 	/**
@@ -168,6 +122,13 @@ public class baseMuneco {
 		this.palRellenar = palRellenar;
 	}
 	
+	// Single-ton de base Muneco
+		public static baseMuneco getJuego() {
+			if (juego == null) {
+				juego = new baseMuneco();
+			}
+			return juego;
+		}
 	
 	
 	

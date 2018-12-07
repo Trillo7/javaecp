@@ -254,8 +254,6 @@ public class Ventana extends Canvas {
 		this.textoFinal = textoFinal;
 	}
 
-
-
 	public static Ventana getVentana() {
 		if (ventana == null) {
 		ventana = new Ventana();
