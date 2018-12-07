@@ -16,13 +16,22 @@ public class VentanaEmergente {
 		int opcionElegida=0;
 		// La ventana emergente devuelve un valor entero, correspondiente
 		// con la opci�n elegida por el usuario
-		if(Ventana.getVentana().getTextoFinal().equals("Victoria")) {
+		if(Ventana.getVentana().getTextoFinal().equals("Victoria")&&jugador.getJugador().getCambiotemporada()==0) {
 			opcionElegida = JOptionPane.showOptionDialog(null, // Componente "padre" de la ventana emergente, de momento utiliza siempre "null"
 					mensaje, // Mensaje a mostrar en la ventana
-					"Fin del juego", // T�tulo de la ventana
+					"Enhorabuena", // T�tulo de la ventana
 					JOptionPane.YES_NO_CANCEL_OPTION, // Tipo de ventana emergente 
 					JOptionPane.INFORMATION_MESSAGE, // Tipo de mensaje a mostrar
 					new ImageIcon(CacheImagenes.getCache().getIconoFinJuego()), // Icono personalizado para la ventana
+					opciones, // Array de elementos a mostrar en forma de bot�n 
+					0); // Bot�n "por defecto"
+		}else if(jugador.getJugador().getCambiotemporada()==1){
+			opcionElegida = JOptionPane.showOptionDialog(null, // Componente "padre" de la ventana emergente, de momento utiliza siempre "null"
+					mensaje, // Mensaje a mostrar en la ventana
+					"Cambio de Temporada", // T�tulo de la ventana
+					JOptionPane.YES_NO_CANCEL_OPTION, // Tipo de ventana emergente 
+					JOptionPane.INFORMATION_MESSAGE, // Tipo de mensaje a mostrar
+					new ImageIcon(CacheImagenes.getCache().getIconoCambioTemporada()), // Icono personalizado para la ventana
 					opciones, // Array de elementos a mostrar en forma de bot�n 
 					0); // Bot�n "por defecto"
 		}else {

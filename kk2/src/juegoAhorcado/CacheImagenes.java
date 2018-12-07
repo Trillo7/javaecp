@@ -17,6 +17,7 @@ public class CacheImagenes {
 	private BufferedImage ahorcadoFondoNavidad= null;
 	private BufferedImage ahorcadoFondoVerano= null;
 	private BufferedImage IconoFinJuego= null;
+	private BufferedImage IconoCambioTemporada= null;
 	private BufferedImage IconoFinJuegoDerrota= null;
 
 
@@ -94,6 +95,12 @@ public class CacheImagenes {
 	public BufferedImage getIconoFinJuegoDerrota() {
 		if (IconoFinJuegoDerrota == null) {
 			IconoFinJuegoDerrota = getCache().getImagen("derrotamuere.jpg");
+		}
+		return IconoFinJuegoDerrota;
+	}
+	public BufferedImage getIconoCambioTemporada() {
+		if (IconoFinJuegoDerrota == null) {
+			IconoFinJuegoDerrota = getCache().getImagen("cambioTemporada.png");
 		}
 		return IconoFinJuegoDerrota;
 	}

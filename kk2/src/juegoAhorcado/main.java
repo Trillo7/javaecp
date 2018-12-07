@@ -7,7 +7,8 @@ public class main {
 		
 		baseMuneco.getJuego().cargaJuego();
 		baseMuneco.getJuego().iniciaJugada();
-		
+		// dudas: Como cambiar el array literal? en vez de manualmente
+		// Como no hacer un metodo para cada imagen? Al utilizar el getImagen y mandarle el nombre del archivo de imagen como que se refrescaba mas?
 	}
 
 }
