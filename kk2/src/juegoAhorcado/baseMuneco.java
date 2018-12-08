@@ -32,7 +32,7 @@ public class baseMuneco {
 		}
 		System.out.println(formaPalabraJuego);
 		Ventana.getVentana().setPalabraAdivinar(formaPalabraJuego);
-		System.out.println(""); // salto de linea
+		System.out.println(""); // salto de lineaa
 		System.out.println("Vidas: "+vidas);
 		Ventana.getVentana().repaint();
 	}
