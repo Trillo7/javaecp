@@ -59,7 +59,7 @@ public class VentanaEmergente {
 			// Si el juego acaba por cambio de temporada, cambiamos para que no gane como si hubiera finalizado la ronda
 			if(jugador.getJugador().getCambiotemporada()==1) {
 				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-4);
-				jugador.getJugador().setRondas(jugador.getJugador().getRondas()-1);
+				jugador.getJugador().setRondas(1);
 				jugador.getJugador().setCambiotemporada(0);
 				jugador.getJugador().setNumintentos(6);
 			}

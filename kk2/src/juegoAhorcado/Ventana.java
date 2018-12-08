@@ -2,12 +2,8 @@ package juegoAhorcado;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,6 +11,10 @@ import javax.swing.JPanel;
 // libremente.
 public class Ventana extends Canvas {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Declaraci�n de variables que nos permitir�n introducir el ancho y el alto de la ventana
 	public static final int WIDTH = 734;
 	public static final int HEIGHT = 740;
@@ -27,6 +27,7 @@ public class Ventana extends Canvas {
 	public Ventana () {
 		// La clase JFrame nos permite mostrar una ventana en pantalla
 		JFrame ventana = new JFrame("El Ahorcado HD by Trillo - Ronda "+jugador.getJugador().getRondas());
+		
 		// Establecemos las dimensiones que queremos que tenga
 		ventana.setBounds(0,0,WIDTH,HEIGHT);
 		
@@ -56,7 +57,6 @@ public class Ventana extends Canvas {
 	public void paint(Graphics g) {
 		
 		// Pintamos fondo y color segun la temporada
-		
 		if(temporada.equals("oeste")) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
 			colorActual=Color.blue;
@@ -71,16 +71,13 @@ public class Ventana extends Canvas {
 			g.fillRect(0, 578, 733, 132);
 		}
 		
-		// Pintamos la tabla de colgar 
-		//Techo
+		// Techo tabla de colgar
 		g.setColor(new Color(102, 51, 0));
-		//g.fillRect(235, 50, 540, 35);
 		g.fillRect(335, 50, 440, 35);
 
-		// Muro
+		// Muro tabla de colgar
 		g.fillRect(690, 40, 80, 538);
-		// Suelo
-		//g.fillRect(0, 410, 500, 45);
+		
 		// Silla
 		if(jugador.getJugador().getNumintentos()>=1) {
 			g.fillRect(492, 378, 65, 7);
@@ -96,8 +93,31 @@ public class Ventana extends Canvas {
 		}
 		g.fillOval(495, 140, 60, 60);
 		
+		//Dibujamos la cara
+		// Ojos
+		g.setColor(Color.blue);
+		if(this.textoFinal=="Has muerto") {
+			g.setColor(Color.black);
+			// Cruz ojo izquierdo
+			g.fillRect(512, 163, 10, 6);
+			g.fillRect(515, 160, 5, 11);
+			// Cruz ojo derecho
+			g.fillRect(532, 163, 10, 6);
+			g.fillRect(535, 160, 5, 11);
+		}else {
+			g.setColor(Color.white);
+			g.fillOval(512, 160, 16, 16);
+			g.fillOval(533, 160, 16, 16);
+			g.setColor(Color.blue);
+			g.fillOval(518, 164, 6, 6);
+			g.fillOval(538, 164, 6, 6);
+		}
+		
+		// Boca
+		g.setColor(Color.red);
+        g.fillArc(485, 182, 80, 20, 65, 50);
+        
 		// Pintamos la cuerda
-		//g.drawLine(290, 60, 410,10);
 		g.setColor(new Color(102, 51, 0));
 		g.drawRect(525, 55, 1, 85);
 		g.fillRect(510, 197, 30, 3);
@@ -140,71 +160,55 @@ public class Ventana extends Canvas {
 		}else {
 			g.setColor(Color.red);
 		}
-	
 		g.fillRect(528, 290, 20, 85);
-		g.setColor(Color.blue);
-		
-		//Dibujamos la cara
-		// Ojos
-		if(this.textoFinal=="Has muerto") {
-			g.setColor(Color.black);
-			// Cruz ojo izquierdo
-			g.fillRect(512, 163, 10, 6);
-			g.fillRect(515, 160, 5, 11);
-			// Cruz ojo derecho
-			g.fillRect(532, 163, 10, 6);
-			g.fillRect(535, 160, 5, 11);
-		}else {
-			g.setColor(Color.white);
-			g.fillOval(512, 160, 16, 16);
-			g.fillOval(533, 160, 16, 16);
-			g.setColor(Color.blue);
-			g.fillOval(518, 164, 6, 6);
-			g.fillOval(538, 164, 6, 6);
-		}
-		// Boca
-		g.setColor(Color.red);
-        g.fillArc(485, 182, 80, 20, 65, 50);
         
     	// Marcos
+		//Recuadro global del juego (Adivina _ _ _)
 		g.setColor(colorActual);
-		//g.fillRect(0, 540, 740, 500);
-		
-		//Recuadro rojo global
-		//g.setColor(Color.red);
 		g.drawRect(0, 578, 733, 132);
+		
 		//Recuadro rojo derecha (vidas)
 		g.drawRect(550, 578, 182, 132);
-
+		
+		// Pintamos cartel de Ronda
+		g.setColor(new Color(102, 51, 0));
+		g.fillRect(355, 105, 70, 40);
+			// Palos del cartel
+		g.fillRect(365, 85, 7, 30);
+		g.fillRect(405, 85, 7, 30);
+		
         // TEXTOS
+		g.setColor(colorActual);
         g.setFont(new Font("Segoe UI", Font.PLAIN, 28)); 
 	
 		// Pintamos las palabras fallidas(intentos) FALLOS
 		g.drawString("Fallos: "+jugador.getJugador().getPalabrasFallidas(),10,30);
-		//Pintamos los comodines
+		
+		//Pintamos los comodines HINT
         g.setFont(new Font("Segoe UI", Font.PLAIN, 14)); 
 		g.drawString("Comodin hint: ",10,60);
 		if(jugador.getJugador().getHint()==1) {
 			g.setColor(Color.red);
-			g.drawString("Usado",110,60);
+			g.drawString("Usado",100,60);
 		}else {
 			g.setColor(Color.green);
-			g.drawString("Disponible",110,60);
+			g.drawString("Disponible",100,60);
 		}
 
-		//Pintamos la temporada actual
+		//Pintamos la temporada actual TEMPORADA
 		g.setColor(Color.blue);
 		g.drawString("Tema de temporada: ",10,80);
-		g.drawString(this.temporada,160,80);
+		g.drawString(this.temporada,140,80);
 
-
-		// Espacio para victoria o derrota ESTADO
+		// Pintamos las rondas que llevamos RONDAS
+		g.setColor(Color.white);
         g.setFont(new Font("Segoe UI", Font.PLAIN, 15)); 
-		g.drawString("Ronda "+jugador.getJugador().getRondas(),355,100);
+		g.drawString("Ronda "+jugador.getJugador().getRondas(),363,130);
+		
 		// Pintamos la palabra adivinacion ADIVINA
+		g.setColor(colorActual);
         g.setFont(new Font("Segoe UI", Font.PLAIN, 25)); 
 		g.drawString("Adivina:",20,615);
-		
         g.setFont(new Font("Impact", Font.ITALIC, 62)); 
 		g.drawString(""+this.palabraAdivinar,20,675);
 
@@ -254,6 +258,7 @@ public class Ventana extends Canvas {
 		this.textoFinal = textoFinal;
 	}
 
+	// Single-ton de ventana
 	public static Ventana getVentana() {
 		if (ventana == null) {
 		ventana = new Ventana();
