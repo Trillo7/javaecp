@@ -11,8 +11,6 @@ public class CacheImagenes {
 	private static CacheImagenes cache= null;
 	
 	// Variables con im�genes almacenadas
-	private BufferedImage imagenTablero = null;
-	private BufferedImage iconoLaOca = null;
 	private BufferedImage ahorcadoFondo= null;
 	private BufferedImage ahorcadoFondoNavidad= null;
 	private BufferedImage ahorcadoFondoVerano= null;
@@ -74,6 +72,18 @@ public class CacheImagenes {
 		}
 		return ahorcadoFondo;
 	}
+	/** PORQUE FLASHEA?
+	public BufferedImage getahorcadoFondo() {
+		if(Ventana.getVentana().getTemporada().equals("oeste")) {
+			ahorcadoFondo = getCache().getImagen("ahorcadoFondo.jpg");
+		}else if(Ventana.getVentana().getTemporada().equals("navidad")){
+			ahorcadoFondo = getCache().getImagen("ahorcadoFondonavidad.jpg");
+		}else if(Ventana.getVentana().getTemporada().equals("verano")) {
+			ahorcadoFondo= getCache().getImagen("ahorcadoFondoVerano.jpg");
+		}
+	return ahorcadoFondo;
+}
+*/
 	public BufferedImage getahorcadoFondoNavidad() {
 		if (ahorcadoFondoNavidad == null) {
 			ahorcadoFondoNavidad = getCache().getImagen("ahorcadoFondonavidad.jpg");
@@ -99,9 +109,9 @@ public class CacheImagenes {
 		return IconoFinJuegoDerrota;
 	}
 	public BufferedImage getIconoCambioTemporada() {
-		if (IconoFinJuegoDerrota == null) {
-			IconoFinJuegoDerrota = getCache().getImagen("cambioTemporada.png");
+		if (IconoCambioTemporada == null) {
+			IconoCambioTemporada = getCache().getImagen("cambioTemporada.png");
 		}
-		return IconoFinJuegoDerrota;
+		return IconoCambioTemporada;
 	}
 }

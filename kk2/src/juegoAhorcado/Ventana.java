@@ -60,17 +60,44 @@ public class Ventana extends Canvas {
 		if(temporada.equals("oeste")) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
 			colorActual=Color.blue;
+			// Fondo color marcos (recuadro)
+			g.setColor(Color.white);
+			g.fillRect(0, 578, 733, 132);
 		}else if(temporada.equals("navidad")) {
-			g.drawImage(CacheImagenes.getCache().getahorcadoFondoNavidad(), 0, 0, this);
 			colorActual=Color.red;
+			g.drawImage(CacheImagenes.getCache().getahorcadoFondoNavidad(), 0, 0, this);
+			// Fondo color marcos (recuadro)
+			g.setColor(Color.white);
+			g.fillRect(0, 578, 733, 132);
 		}else if(temporada.equals("verano")) {
 			g.drawImage(CacheImagenes.getCache().getahorcadoFondoVerano(), 0, 0, this);
 			colorActual=Color.yellow;
-			// Fondo marcos (recuadro)
+			// Fondo color marcos (recuadro)
 			g.setColor(Color.black);
 			g.fillRect(0, 578, 733, 132);
 		}
 		
+		/** PORQUE FLASHEA
+		 // Pintamos fondo y color segun la temporada
+		g.drawImage(CacheImagenes.getCache().getahorcadoFondo(), 0, 0, this);
+
+		if(temporada.equals("oeste")) {
+			colorActual=Color.blue;
+			// Fondo color marcos (recuadro)
+			g.setColor(Color.white);
+			g.fillRect(0, 578, 733, 132);
+		}else if(temporada.equals("navidad")) {
+			colorActual=Color.red;
+			// Fondo color marcos (recuadro)
+			g.setColor(Color.white);
+			g.fillRect(0, 578, 733, 132);
+		}else if(temporada.equals("verano")) {
+			colorActual=Color.yellow;
+			// Fondo color marcos (recuadro)
+			g.setColor(Color.black);
+			g.fillRect(0, 578, 733, 132);
+		}
+		*/
 		// Techo tabla de colgar
 		g.setColor(new Color(102, 51, 0));
 		g.fillRect(335, 50, 440, 35);
@@ -96,7 +123,7 @@ public class Ventana extends Canvas {
 		//Dibujamos la cara
 		// Ojos
 		g.setColor(Color.blue);
-		if(this.textoFinal=="Has muerto") {
+		if(jugador.getJugador().getNumintentos()<1) {
 			g.setColor(Color.black);
 			// Cruz ojo izquierdo
 			g.fillRect(512, 163, 10, 6);

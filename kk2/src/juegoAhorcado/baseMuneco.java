@@ -23,7 +23,6 @@ public class baseMuneco {
 	}
 	
 	public void muestraEstado() {
-		int vidas=jugador.getJugador().getNumintentos();
 		String formaPalabraJuego="";
 		// Juntamos el array de palabra _ _ _ (adivinacion actual) para setearla en Ventana como String
 		for(int i=0;i<baseMuneco.getJuego().getPalabraElegida().length();i++) {
@@ -73,12 +72,6 @@ public class baseMuneco {
 			muestraEstado();
 		}while(!isTerminado()&& jugador.getJugador().getNumintentos()>0); // Terminamos al acertar la palabra
 	
-		// Al acabar el juego, mostramos dependiendo si por victoria o por derrota (Actualmente solo se utiliza para pintar la cara pues fue cambiado)
-		if(jugador.getJugador().getNumintentos()>=1) {
-			Ventana.getVentana().setTextoFinal("Victoria");			
-		}else {
-			Ventana.getVentana().setTextoFinal("Has muerto");
-		}
 		// Al acabar el juego sustituimos los atinos _ por la palabra entera y mostramos la ventana emergente
 		Ventana.getVentana().setPalabraAdivinar(palabraElegida);
 		VentanaEmergente.muestraVentanaEmergente("");
