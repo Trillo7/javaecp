@@ -3,11 +3,10 @@ package juegoAhorcado;
 public class baseMuneco {
 	private String palabraElegida=null;
 	private static baseMuneco juego = null;
-	private char palRellenar[]=new char[1000]; // es el array del juego, _ _ _ que se usa luego para sustituir al acertar la palabra _ j e m _ l o 
+	private char palRellenar[]=new char[1000]; // palabraRellenar es el array del juego, _ _ _ que se usa luego para sustituir al acertar la palabra _ j e m _ l o 
 
 	public baseMuneco() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public baseMuneco(String palabraElegida, int numintentos) {
@@ -30,10 +29,8 @@ public class baseMuneco {
 		for(int i=0;i<baseMuneco.getJuego().getPalabraElegida().length();i++) {
 			formaPalabraJuego+=palRellenar[i]+" ";
 		}
-		System.out.println(formaPalabraJuego);
-		Ventana.getVentana().setPalabraAdivinar(formaPalabraJuego);
-		System.out.println(""); // salto de lineaa
-		System.out.println("Vidas: "+vidas);
+		Ventana.getVentana().setPalabraAdivinar(formaPalabraJuego); // mandamos cada vez la palabra formada
+		//System.out.println(formaPalabraJuego);
 		Ventana.getVentana().repaint();
 	}
 	
@@ -82,7 +79,7 @@ public class baseMuneco {
 		}else {
 			Ventana.getVentana().setTextoFinal("Has muerto");
 		}
-		// Al acabar el juego sustituimos los atinos _ por la palabra entera
+		// Al acabar el juego sustituimos los atinos _ por la palabra entera y mostramos la ventana emergente
 		Ventana.getVentana().setPalabraAdivinar(palabraElegida);
 		VentanaEmergente.muestraVentanaEmergente("");
 	}
