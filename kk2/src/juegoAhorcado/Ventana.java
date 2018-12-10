@@ -26,8 +26,10 @@ public class Ventana extends Canvas {
 	
 	public Ventana () {
 		// La clase JFrame nos permite mostrar una ventana en pantalla
-		JFrame ventana = new JFrame("El Ahorcado HD by Trillo - Ronda "+jugador.getJugador().getRondas());
-		
+		JFrame ventana = new JFrame("El Ahorcado HD by Trillo");
+		// Como hacer para que la Ronda no se refresca el numero en la ventana
+		//JFrame ventana = new JFrame("El Ahorcado HD by Trillo - Ronda "+jugador.getJugador().getRondas());
+
 		// Establecemos las dimensiones que queremos que tenga
 		ventana.setBounds(0,0,WIDTH,HEIGHT);
 		
@@ -114,7 +116,7 @@ public class Ventana extends Canvas {
 		
 		// Pintamos la cabeza
 		if(jugador.getJugador().getNumintentos()>=1) {
-			g.setColor(Color.green);
+			g.setColor(new Color(253, 221, 202));
 		}else {
 			g.setColor(Color.red);
 		}
@@ -151,7 +153,7 @@ public class Ventana extends Canvas {
 		
 		// Pintamos el cuerpo
 		if(jugador.getJugador().getNumintentos()>=2) {
-			g.setColor(Color.green);
+			g.setColor(new Color(253, 221, 202));
 		}else {
 			g.setColor(Color.red);
 		}
@@ -159,7 +161,7 @@ public class Ventana extends Canvas {
 		
 		// Pintamos brazo izquierdo
 		if(jugador.getJugador().getNumintentos()>=3) {
-			g.setColor(Color.green);
+			g.setColor(new Color(253, 221, 202));
 		}else {
 			g.setColor(Color.red);
 		}
@@ -167,7 +169,7 @@ public class Ventana extends Canvas {
 		
 		// Pintamos brazo derecho
 		if(jugador.getJugador().getNumintentos()>=4) {
-			g.setColor(Color.green);
+			g.setColor(new Color(253, 221, 202));
 		}else {
 			g.setColor(Color.red);
 		}
@@ -175,15 +177,15 @@ public class Ventana extends Canvas {
 		
 		// Pintamos pierna izquierda
 		if(jugador.getJugador().getNumintentos()>=5) {
-			g.setColor(Color.green);
+			g.setColor(new Color(253, 221, 202));
 		}else {
 			g.setColor(Color.red);
 		}
 		g.fillRect(502, 290, 20, 85);
 		
-		// Pintamos pierna derecho
+		// Pintamos pierna derecha
 		if(jugador.getJugador().getNumintentos()>=6) {
-			g.setColor(Color.green);
+			g.setColor(new Color(253, 221, 202));
 		}else {
 			g.setColor(Color.red);
 		}
@@ -216,21 +218,21 @@ public class Ventana extends Canvas {
 		g.drawString("Comodin hint: ",10,60);
 		if(jugador.getJugador().getHint()==1) {
 			g.setColor(Color.red);
-			g.drawString("Usado",100,60);
+			g.drawString("Usado",108,60);
 		}else {
 			g.setColor(Color.green);
-			g.drawString("Disponible",100,60);
+			g.drawString("Disponible",108,60);
 		}
 
 		//Pintamos la temporada actual TEMPORADA
 		g.setColor(Color.blue);
 		g.drawString("Tema de temporada: ",10,80);
-		g.drawString(this.temporada,140,80);
+		g.drawString(this.temporada,155,80);
 
 		// Pintamos las rondas que llevamos RONDAS
 		g.setColor(Color.white);
         g.setFont(new Font("Segoe UI", Font.PLAIN, 15)); 
-		g.drawString("Ronda "+jugador.getJugador().getRondas(),363,130);
+		g.drawString("Ronda "+jugador.getJugador().getRondas(),360,130);
 		
 		// Pintamos la palabra adivinacion ADIVINA
 		g.setColor(colorActual);

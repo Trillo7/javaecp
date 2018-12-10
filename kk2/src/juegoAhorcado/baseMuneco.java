@@ -40,6 +40,7 @@ public class baseMuneco {
 			// Juego normal. Comprobamos si la letra es correcta
 			// Procesamos según sea palabra o letra
 			if(jugador.getJugador().getPalabraJugador().length()>1) {
+				System.out.println(jugador.getJugador().getPalabraJugador().length());
 				if(jugador.getJugador().getPalabraJugador().equals(this.palabraElegida)) {
 					acierto=1;
 				}

@@ -31,9 +31,8 @@ public class jugador {
 	public void pidePalabraJugador() {
 		int controlPista=0;
 		// Pide palabra y la inserta en su jugador
-		String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ");
+		String palabraJugador=JOptionPane.showInputDialog("Introduce una letra o una palabra: ").toLowerCase(); // to lowercase para las mayusculas
 		jugador.getJugador().setPalabraJugador(palabraJugador);
-		
 		//comprobamos si vamos a hacer el cambio de temporada
 		if(palabraJugador.equals("oeste")||palabraJugador.equals("navidad")||palabraJugador.equals("verano")) {
 			jugador.getJugador().setCambiotemporada(1);
@@ -59,7 +58,8 @@ public class jugador {
 				}
 			}
 			// en la palabra del jugador metemos una letra correcta elegida
-			palabraJugador+=palabra.getPalabras().getSeparadas()[randomPista];
+			this.palabraJugador="";
+			this.palabraJugador+=palabra.getPalabras().getSeparadas()[randomPista];
 		}
 	}
 	
