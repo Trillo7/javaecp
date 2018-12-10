@@ -21,24 +21,15 @@ public class palabra {
 	}
 	public void generaPalabra() {
 	// Creamos el String de las palabras
-		//String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
-		String bdPalabras []= new String [4];
+		String bdPalabras []= new String [] {"libreria","mayordomo","paleta","serrucho","bate","pelota","futbol","baloncesto","ordenador","juego","trabajo","nuclear","uniforme","avion","coche"};
+		//String bdPalabras []= new String [4];
 		//Generamos segun la temporada
 		if(Ventana.getVentana().getTemporada().equals("oeste")) {
-			bdPalabras[0]="sheriff";
-			bdPalabras[1]="pistola";
-			bdPalabras[2]="desierto";
-			bdPalabras[3]="caballo";
+			bdPalabras = new String[] {"sheriff","pistola","desierto","caballo"};
 		}else if(Ventana.getVentana().getTemporada().equals("navidad")) {
-			bdPalabras[0]="papa noel";
-			bdPalabras[1]="reyes magos";
-			bdPalabras[2]="regalos";
-			bdPalabras[3]="cenas";
+			bdPalabras = new String[] {"cena","regalos","reyes magos","papa noel"};
 		}else if(Ventana.getVentana().getTemporada().equals("verano")) {
-			bdPalabras[0]="calor";
-			bdPalabras[1]="piscina";
-			bdPalabras[2]="bañador";
-			bdPalabras[3]="helado";
+			bdPalabras = new String[] {"calor","piscina","bañador","helado"};
 		}
 		int randElige=(int) Math.round(Math.random() * ((bdPalabras.length-1) - 0) + 0);
 		baseMuneco.getJuego().setPalabraElegida(bdPalabras[randElige]);

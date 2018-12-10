@@ -23,19 +23,21 @@ public class Ventana extends Canvas {
 	private String palabraAdivinar="";
 	private String temporada="oeste";
 	private Color colorActual=Color.blue;
+	static JFrame jframe;
+	
 	
 	public Ventana () {
 		// La clase JFrame nos permite mostrar una ventana en pantalla
-		JFrame ventana = new JFrame("El Ahorcado HD by Trillo");
+		//JFrame ventana = new JFrame("El Ahorcado HD by Trillo");
 		// Como hacer para que la Ronda no se refresca el numero en la ventana
-		//JFrame ventana = new JFrame("El Ahorcado HD by Trillo - Ronda "+jugador.getJugador().getRondas());
+		jframe = new JFrame("El Ahorcado HD by Trillo - Ronda "+jugador.getJugador().getRondas());
 
 		// Establecemos las dimensiones que queremos que tenga
-		ventana.setBounds(0,0,WIDTH,HEIGHT);
+		jframe.setBounds(0,0,WIDTH,HEIGHT);
 		
 		// Obtengo una referencia al panel principal de la ventana.
 		// Todas las ventanas tienen un panel principal	
-		JPanel panel = (JPanel)ventana.getContentPane();
+		JPanel panel = (JPanel)jframe.getContentPane();
 
 		// Al panel principal de la ventana le a�adimos el objeto this, un Canvas
 		panel.add(this);
@@ -44,12 +46,12 @@ public class Ventana extends Canvas {
 		this.setBounds(0,0,WIDTH,HEIGHT);
 		
 		// Provocamos que el programa se acabe cuando cerramos la ventana 
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// Hacemos visible la ventana.
-		ventana.setVisible(true);
+		jframe.setVisible(true);
 		// Evitamos que la ventana pueda redimensionarse.
-		ventana.setResizable(false);
+		jframe.setResizable(false);
 	}
 	
 	/**
@@ -293,5 +295,10 @@ public class Ventana extends Canvas {
 		ventana = new Ventana();
 		}
 		return ventana;
+	}
+	
+	
+	public static void setTitle (String newTitle) {
+		jframe.setTitle(newTitle);
 	}
 }

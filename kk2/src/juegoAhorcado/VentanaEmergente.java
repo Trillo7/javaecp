@@ -62,6 +62,7 @@ public class VentanaEmergente {
 			if(jugador.getJugador().getCambiotemporada()==1) {
 				jugador.getJugador().setNumintentos(jugador.getJugador().getNumintentos()-4);
 				jugador.getJugador().setRondas(1);
+				Ventana.setTitle(("El Ahorcado HD by Trillo - Ronda "+jugador.getJugador().getRondas()));
 				jugador.getJugador().setCambiotemporada(0);
 				jugador.getJugador().setNumintentos(6);
 			}
