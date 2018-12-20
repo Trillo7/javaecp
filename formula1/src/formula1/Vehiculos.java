@@ -29,7 +29,10 @@ public abstract class Vehiculos {
 
 	abstract void paint();
 	
-	abstract void avanza();
+	public void avanza() {
+		this.setMetros(this.getMetros()+(int) Math.round(Math.random() * ((50) - 3) + 3));;
+
+	}
 
 	/**
 	 * @return the nombreVehiculo

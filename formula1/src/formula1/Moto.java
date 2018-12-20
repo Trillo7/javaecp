@@ -1,11 +1,12 @@
 package formula1;
 
-public class Coche extends Vehiculos {
+public class Moto extends Vehiculos {
 
+	
 	/**
 	 * 
 	 */
-	public Coche() {
+	public Moto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -15,7 +16,7 @@ public class Coche extends Vehiculos {
 	 * @param posicion
 	 * @param metros
 	 */
-	public Coche(String nombreVehiculo, int posicion, int metros) {
+	public Moto(String nombreVehiculo, int posicion, int metros) {
 		super(nombreVehiculo, posicion, metros);
 		// TODO Auto-generated constructor stub
 	}
@@ -26,16 +27,14 @@ public class Coche extends Vehiculos {
 
 	}
 
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Coche [getNombreVehiculo()=" + getNombreVehiculo() + ", getPosicion()=" + getPosicion()
+		return "Moto [getNombreVehiculo()=" + getNombreVehiculo() + ", getPosicion()=" + getPosicion()
 				+ ", getMetros()=" + getMetros() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
 				+ ", hashCode()=" + hashCode() + "]";
 	}
 
-	
 }
