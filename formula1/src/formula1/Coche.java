@@ -15,8 +15,8 @@ public class Coche extends Vehiculos {
 	 * @param posicion
 	 * @param metros
 	 */
-	public Coche(String nombreVehiculo, int posicion, int metros) {
-		super(nombreVehiculo, posicion, metros);
+	public Coche(String nombreVehiculo, int posicion, int metros, int meta) {
+		super(nombreVehiculo, posicion, metros, meta);
 		// TODO Auto-generated constructor stub
 	}
 

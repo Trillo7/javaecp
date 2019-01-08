@@ -4,7 +4,7 @@ public abstract class Vehiculos {
 	private String nombreVehiculo=null;
 	private int posicion=0;
 	private int metros=0;
-	
+	private int meta;
 	
 	
 	/**
@@ -20,7 +20,7 @@ public abstract class Vehiculos {
 	 * @param posicion
 	 * @param metros
 	 */
-	public Vehiculos(String nombreVehiculo, int posicion, int metros) {
+	public Vehiculos(String nombreVehiculo, int posicion, int metros, int meta) {
 		super();
 		this.nombreVehiculo = nombreVehiculo;
 		this.posicion = posicion;
