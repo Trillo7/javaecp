@@ -16,8 +16,8 @@ public class Moto extends Vehiculos {
 	 * @param posicion
 	 * @param metros
 	 */
-	public Moto(String nombreVehiculo, int posicion, int metros) {
-		super(nombreVehiculo, posicion, metros);
+	public Moto(int id,String nombreVehiculo, int posicion, int metros, int meta) {
+		super(id, nombreVehiculo, posicion, metros, meta);
 		// TODO Auto-generated constructor stub
 	}
 
