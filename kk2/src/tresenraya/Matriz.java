@@ -68,27 +68,42 @@ public class Matriz {
 	public boolean isJuegoTerminado () {
 		
 		if (matriz[0][0] == matriz [0][1] && matriz[0][1] == matriz[0][2] && matriz[0][2] != 0) {
+			System.out.println("gana 1");
 			return true;
 		}
 		if (matriz[1][0] == matriz [1][1] && matriz[1][1] == matriz[1][2] && matriz[1][2] != 0) {
+			System.out.println("gana 2");
+
 			return true;
 		}
 		if (matriz[2][0] == matriz [2][1] && matriz[2][1] == matriz[2][2] && matriz[2][2] != 0) {
+			System.out.println("gana 3");
+
 			return true;
 		}
 		if (matriz[0][0] == matriz [1][0] && matriz[1][0] == matriz[2][0] && matriz[2][0] != 0) {
+			System.out.println("gana 4");
+
 			return true;
 		}
 		if (matriz[0][1] == matriz [1][1] && matriz[1][1] == matriz[2][1] && matriz[2][1] != 0) {
+			System.out.println("gana 5");
+
 			return true;
 		}
 		if (matriz[0][2] == matriz [1][2] && matriz[1][2] == matriz[2][2] && matriz[2][2] != 0) {
+			System.out.println("gana 6");
+
 			return true;
 		}
 		if (matriz[0][0] == matriz [1][1] && matriz[1][1] == matriz[2][2] && matriz[2][2] != 0) {
+			System.out.println("gana 7");
+
 			return true;
 		}
 		if (matriz[0][2] == matriz [1][1] && matriz[1][1] == matriz[2][0] && matriz[2][0] != 0) {
+			System.out.println("gana 8");
+
 			return true;
 		}
 		

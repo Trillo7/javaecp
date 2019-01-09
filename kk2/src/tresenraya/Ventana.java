@@ -10,7 +10,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 public class Ventana extends Canvas {
 
@@ -27,7 +29,7 @@ public class Ventana extends Canvas {
 	 * 
 	 */
 	public Ventana () {
-		JFrame ventana = new JFrame("3 en raya");
+		JFrame ventana = new JFrame("Tres en raya");
 		ventana.setBounds(0,0,WIDTH+8,HEIGHT+35);
 		
 		JPanel panel = (JPanel)ventana.getContentPane();
@@ -38,7 +40,7 @@ public class Ventana extends Canvas {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
 		
-		
+	
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -57,6 +59,7 @@ public class Ventana extends Canvas {
 		
 		
 		initCeldas();
+		
 	}
 	
 	
@@ -74,6 +77,8 @@ public class Ventana extends Canvas {
 		celdas[6] = new Celda (0, 400, this);
 		celdas[7] = new Celda (200, 400, this);
 		celdas[8] = new Celda (400, 400, this);
+		
+	
 	}
 	
 	
@@ -83,10 +88,12 @@ public class Ventana extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g) {
+
 		for (Celda celda : celdas) {
 			celda.paint(g);
 		}
-		
+		g.drawImage(CacheImagenes.getCache().getFondoRaya(), 0, 0, this);
+	
 	}
 
 

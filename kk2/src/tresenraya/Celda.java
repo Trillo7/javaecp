@@ -30,8 +30,9 @@ public class Celda {
 		g.fillRect(this.x, this.y, LADO, LADO);
 		
 		if (this.jugador != null) {
-			this.jugador.paint(g, this.x, this.y);
+			this.jugador.paint(g, this.x+7, this.y);
 		}
+		
 	}
 	
 	
@@ -73,6 +74,7 @@ public class Celda {
 		
 		if (Matriz.getInstance().isJuegoTerminado()) {
 			JOptionPane.showMessageDialog(null, "Juego Terminado");
+
 		}
 	}
 	

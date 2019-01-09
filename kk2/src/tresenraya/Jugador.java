@@ -6,7 +6,7 @@ public abstract class Jugador {
 
 	private String nombre;
 	private int codigo;
-
+	
 	/**
 	 * @param nombre
 	 */
@@ -36,5 +36,5 @@ public abstract class Jugador {
 	 * @param g
 	 */
 	public abstract void paint(Graphics g, int offsetX, int offsetY);
-
+	
 }
