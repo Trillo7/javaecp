@@ -25,7 +25,7 @@ public class Pista {
 		// Asignamos los obstaculos sin que se superpongan
 		for(int i=0;i<4;i++) {
 			boolean flag=false;
-			int numposi=(int) Math.round(Math.random() * ((720) - 0) + 0);
+			int numposi=(int) Math.round(Math.random() * ((710) - 5) + 5);
 			for(int x=0;x<4;x++) {
 				if(numposi==obstaculos[x].getPosicion()) {
 					flag=true;

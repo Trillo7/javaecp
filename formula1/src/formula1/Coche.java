@@ -45,12 +45,13 @@ public class Coche extends Vehiculos {
 	@Override
 	void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.black);
+		g.setColor(this.getColor());
 		g.fillRect(this.getPosicion()+17, this.getMialtura()-25, 60, 25);//cabina
 		g.fillRect(this.getPosicion(), this.getMialtura(), 90, 35);//chasis
 	    g.fillOval(this.getPosicion()+10, this.getMialtura()+25,20,20);//ruedas
 	    g.fillOval(this.getPosicion()+50, this.getMialtura()+25,20,20);//ruedas
-
+	    
+	    
 	}
 	
 }

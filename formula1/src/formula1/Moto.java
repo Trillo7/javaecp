@@ -41,7 +41,7 @@ public class Moto extends Vehiculos {
 	}
 	void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.black);
+		g.setColor(this.getColor());
 		g.fillOval(this.getPosicion()+33, this.getMialtura()-10, 10, 25);//cabina
 		g.fillRect(this.getPosicion(), this.getMialtura()+10, 70, 15);//chasis
 		//g.fillRect(this.getPosicion(), this.getMialtura()+10, 5, 25);//guardabarros

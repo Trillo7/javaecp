@@ -1,5 +1,6 @@
 package formula1;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Vehiculos {
@@ -9,7 +10,7 @@ public abstract class Vehiculos {
 	private int id=0;
 	private int metros=0;
 	private int meta;
-	private int pole=0;
+	private Color color=null;
 	
 	
 	/**
@@ -40,8 +41,6 @@ public abstract class Vehiculos {
 	public void avanza() {
 		this.setMetros((int) Math.round(Math.random() * ((50) - 3) + 3));
 		this.setPosicion(this.getMetros()+this.getPosicion()); 
-		
-		
 		
 		// Meta para que termine el juego y tambien lo usamos para el podium
 		if(this.posicion>=Juego.getInstance().getLongitudCarrera() && this.meta!=1) {
@@ -119,6 +118,14 @@ public abstract class Vehiculos {
 
 	
 	
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	public int getMeta() {
 		return meta;
 	}
