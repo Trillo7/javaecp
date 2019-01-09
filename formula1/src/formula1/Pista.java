@@ -25,16 +25,23 @@ public class Pista {
 		// Asignamos los obstaculos sin que se superpongan
 		for(int i=0;i<4;i++) {
 			boolean flag=false;
-			int numposi=(int) Math.round(Math.random() * ((800) - 0) + 0);
+			int numposi=(int) Math.round(Math.random() * ((720) - 0) + 0);
 			for(int x=0;x<4;x++) {
 				if(numposi==obstaculos[x].getPosicion()) {
 					flag=true;
-				}
+				}// si alguna vez se activa la bandera vuelve a generar um numero
 			}
 			obstaculos[i].setPosicion(numposi);
 			if (flag==true) {i--;}
 			
 		}
+	}
+	
+	public Obstaculo[] getObstaculos() {
+		return obstaculos;
+	}
+	public void setObstaculos(Obstaculo[] obstaculos) {
+		this.obstaculos = obstaculos;
 	}
 	public Vehiculos getCorredor() {
 		return corredor;

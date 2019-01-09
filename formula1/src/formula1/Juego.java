@@ -1,8 +1,10 @@
 package formula1;
 
+import javax.swing.JOptionPane;
+
 public class Juego {
-	private static Vehiculos vehiculos[] = new Vehiculos[6];
-	private static Pista pistas[]=new Pista[vehiculos.length];
+	private static Vehiculos vehiculos[] = new Vehiculos[5];
+	public static Pista pistas[]=new Pista[vehiculos.length];
 	private static Juego juego=null;
 	private static int LongitudCarrera=800;
 	private static Integer[] podium=new Integer[3];
@@ -10,12 +12,12 @@ public class Juego {
 	public void cargaJuego() {
 		// TODO Auto-generated method stub
 		//Generamos los vehiculos
-		vehiculos[0]= new Coche(0,"Stroper 200",0,0,0);
-		vehiculos[1]= new Moto(1,"Kingle 3000",0,0,0);
-		vehiculos[2]= new Coche(2,"Harfkel 7",0,0,0);
-		vehiculos[3]= new Moto(3,"Vonhelkiem I",0,0,0);
-		vehiculos[4]= new Coche(4,"Propulsion 900",0,0,0);
-		vehiculos[5]= new Moto(5,"Betowin 0",0,0,0);
+		vehiculos[0]= new Coche(0,"Stroper 200",0,70,0,0);
+		vehiculos[1]= new Moto(1,"Kingle 3000",0,250,0,0);
+		vehiculos[2]= new Coche(2,"Harfkel 7",0,430,0,0);
+		vehiculos[3]= new Moto(3,"Vonhelkiem I",0,610,0,0);
+		vehiculos[4]= new Coche(4,"Propulsion 900",0,790,0,0);
+	
 		
 		//Inicializamos las pistas
 		for(int i=0;i <vehiculos.length;i++) {
@@ -23,13 +25,19 @@ public class Juego {
 			
 		}	
 		
-		
 		//Sistema de turnos
 		do {
 			for(int i=0;i<vehiculos.length;i++) {
 				vehiculos[i].avanza();
-				//System.out.println("vehiculo "+i+" "+vehiculos[i].getPosicion());
+				for(int h=0;h<4;h++) {
+					if(vehiculos[i].getPosicion()>=pistas[i].getObstaculos()[h].getPosicion()&& pistas[i].getObstaculos()[h].getPisado()==0) {
+						System.out.println("pisa obstaculo");
+						pistas[i].getObstaculos()[h].setPisado(1);
+					}
+				}
+				Ventana.getVentana().repaint();
 				System.out.println(pistas[i].toString());
+				JOptionPane.showMessageDialog(null, "Siguiente jugada");
 			}
 			
 		}while(!isTerminado());
@@ -53,6 +61,18 @@ public class Juego {
 		
 	}
 	
+	public static Vehiculos[] getVehiculos() {
+		return vehiculos;
+	}
+
+
+
+	public static void setVehiculos(Vehiculos[] vehiculos) {
+		Juego.vehiculos = vehiculos;
+	}
+
+
+
 	public static int getLongitudCarrera() {
 		return LongitudCarrera;
 	}

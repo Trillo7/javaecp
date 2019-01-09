@@ -1,8 +1,11 @@
 package formula1;
 
+import java.awt.Graphics;
+
 public abstract class Vehiculos {
 	private String nombreVehiculo=null;
 	private int posicion=0;
+	private int mialtura=0;
 	private int id=0;
 	private int metros=0;
 	private int meta;
@@ -22,11 +25,12 @@ public abstract class Vehiculos {
 	 * @param posicion
 	 * @param metros
 	 */
-	public Vehiculos(int id,String nombreVehiculo, int posicion, int metros, int meta) {
+	public Vehiculos(int id,String nombreVehiculo, int posicion,int mialtura, int metros, int meta) {
 		super();
 		this.id=id;
 		this.nombreVehiculo = nombreVehiculo;
 		this.posicion = posicion;
+		this.mialtura = mialtura;
 		this.metros = metros;
 		this.meta = meta;
 	}
@@ -91,6 +95,14 @@ public abstract class Vehiculos {
 		this.posicion = posicion;
 	}
 
+	public int getMialtura() {
+		return mialtura;
+	}
+
+	public void setMialtura(int mialtura) {
+		this.mialtura = mialtura;
+	}
+
 	/**
 	 * @return the metros
 	 */
@@ -121,6 +133,11 @@ public abstract class Vehiculos {
 	@Override
 	public String toString() {
 		return "Vehiculos [nombreVehiculo=" + nombreVehiculo + ", posicion=" + posicion + ", metros=" + metros + "]";
+	}
+
+	void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

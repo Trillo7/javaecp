@@ -3,6 +3,7 @@ package formula1;
 public abstract class Obstaculo {
 	private int accion=0;
 	private int posicion=0;
+	private int pisado=0;
 
 	public Obstaculo() {
 		super();
@@ -25,6 +26,14 @@ public abstract class Obstaculo {
 
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
+	}
+
+	public int getPisado() {
+		return pisado;
+	}
+
+	public void setPisado(int pisado) {
+		this.pisado = pisado;
 	}
 
 	@Override
