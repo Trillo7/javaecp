@@ -73,7 +73,8 @@ public class Celda {
 		ventana.repaint();
 		
 		if (Matriz.getInstance().isJuegoTerminado()) {
-			JOptionPane.showMessageDialog(null, "Juego Terminado");
+			JOptionPane.showMessageDialog(null, "Fin del juego");
+			JOptionPane.showMessageDialog(null, "El ganador es: "+Principal.getJugadorTurnoActivo().getNombre());
 
 		}
 	}
