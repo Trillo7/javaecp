@@ -1,5 +1,8 @@
 package formula1;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Coche extends Vehiculos {
 
 	/**
@@ -15,16 +18,12 @@ public class Coche extends Vehiculos {
 	 * @param posicion
 	 * @param metros
 	 */
-	public Coche(String nombreVehiculo, int posicion, int metros, int meta) {
-		super(nombreVehiculo, posicion, metros, meta);
+	public Coche(int id, String nombreVehiculo, int posicion, int mialtura, int metros, int meta) {
+		super(id,nombreVehiculo, posicion, mialtura, metros, meta);
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	void paint() {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 
 	/* (non-Javadoc)
@@ -37,5 +36,22 @@ public class Coche extends Vehiculos {
 				+ ", hashCode()=" + hashCode() + "]";
 	}
 
+	@Override
+	void paint() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(this.getColor());
+		g.fillRect(this.getPosicion()+17, this.getMialtura()-25, 60, 25);//cabina
+		g.fillRect(this.getPosicion(), this.getMialtura(), 90, 35);//chasis
+	    g.fillOval(this.getPosicion()+10, this.getMialtura()+25,20,20);//ruedas
+	    g.fillOval(this.getPosicion()+50, this.getMialtura()+25,20,20);//ruedas
+	    
+	    
+	}
 	
 }
