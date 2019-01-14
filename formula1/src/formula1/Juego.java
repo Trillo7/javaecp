@@ -79,7 +79,7 @@ public class Juego {
 						// REPRODUCIMOS SONIDO SEGUN PISEMOS
 						if(pistas[i].getObstaculos()[h] instanceof Rampa) {
 							 // open the sound file as a Java input stream
-						    String gongFile = "/Users/frtri/git/javaecpf1/formula1/src/formula1/assets/rampa.au";
+						    String gongFile = "/home/diurno/git/javaecp/formula1/src/formula1/assets/rampa.au";
 						    InputStream in = new FileInputStream(gongFile);
 
 						    // create an audiostream from the inputstream
@@ -89,7 +89,7 @@ public class Juego {
 						    AudioPlayer.player.start(audioStream);
 						}else {
 							 // open the sound file as a Java input stream
-						    String gongFile = "/Users/frtri/git/javaecpf1/formula1/src/formula1/assets/mancha.au";
+						    String gongFile = "/home/diurno/git/javaecp/formula1/src/formula1/assets/mancha.au";
 						    InputStream in = new FileInputStream(gongFile);
 
 						    // create an audiostream from the inputstream

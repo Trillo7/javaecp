@@ -33,16 +33,17 @@ public class Ventana extends Canvas {
 	
 	public Ventana () throws Exception{
 		//SONIDO CONTINUO
-	/** asi solo hace esto y no continua pero es continuo	
-        AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("/Users/frtri/git/javaecpf1/formula1/src/formula1/assets/machines.au"));
+
+        AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("/home/diurno/git/javaecp/formula1/src/formula1/assets/machines.au"));
         Clip clip = AudioSystem.getClip();
         clip.open(inputStream);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-        Thread.sleep(10000); // looping as long as this thread is alive
-        */
+        //Thread.sleep(10000); // looping as long as this thread is alive
+        
 		
 		  // open the sound file as a Java input stream
-	    String gongFile = "/Users/frtri/git/javaecpf1/formula1/src/formula1/assets/formula1.au";
+	   /**
+        String gongFile = "/home/diurno/git/javaecp/formula1/src/formula1/assets/formula1.au";
 	    InputStream in = new FileInputStream(gongFile);
 
 	    // create an audiostream from the inputstream
@@ -50,7 +51,7 @@ public class Ventana extends Canvas {
 
 	    // play the audio clip with the audioplayer class
 	    AudioPlayer.player.start(audioStream);
-	    
+	    */
 	    // FIN SONIDO
 		// La clase JFrame nos permite mostrar una ventana en pantalla
 		// Como hacer para que la Ronda no se refresca el numero en la ventana
