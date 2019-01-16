@@ -52,9 +52,10 @@ public class b4ejer4 {
 		System.out.println("La matriz es simetrica: "+isSimetrica(usoarray));
 		//Ejer 9 Traspuesta
 		int[][] matriz4=new int[][] {
-			{1,0,0,0,0},
-			{0,1,0,0,0},
+			{1,2,3,4,5},
+			{6,7,8,9,10},
 			};
+		imprimeMatriz(matriz4);
 		matrizTraspuesta(matriz4);
 		imprimeMatriz(matrizTraspuesta(matriz4));
 	
@@ -72,11 +73,12 @@ public class b4ejer4 {
 	
 	public static void imprimeMatriz(int[][] usoarray){
 		for(int i=0;i<usoarray.length;i++) {
-			for(int x=0;x<usoarray.length;x++) {
+			for(int x=0;x<usoarray[0].length;x++) {
 				System.out.print("["+usoarray[i][x]+"]\t");
 			}
 			System.out.println(" ");
 		}
+		System.out.println(" ");
 	}
 	
 	public static boolean isPositiva(int[][] usoarray){
@@ -198,10 +200,10 @@ public class b4ejer4 {
 	}
 	
 	public static int[][] matrizTraspuesta(int[][] usoarray){
-		int[][] arraytraspuesto=new int[5][5];
+		int[][] arraytraspuesto=new int[usoarray[0].length][usoarray.length];//[5][2]
 		for(int i=0;i<usoarray.length;i++) {
-			for(int x=0;x<usoarray.length;x++) {
-				arraytraspuesto[i][x]=usoarray[i][x];
+			for(int x=0;x<usoarray[0].length;x++) {
+				arraytraspuesto[x][i]=usoarray[i][x];
 			}
 		}
 		return arraytraspuesto;
