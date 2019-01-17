@@ -1,5 +1,7 @@
 package kk.capitulo5.bloque4;
 
+import javax.swing.JOptionPane;
+
 public class b4ejer4 {
 
 	public static void main(String[] args) {
@@ -54,11 +56,16 @@ public class b4ejer4 {
 		int[][] matriz4=new int[][] {
 			{1,2,3,4,5},
 			{6,7,8,9,10},
+			{6,7,8,9,10},
 			};
 		imprimeMatriz(matriz4);
-		matrizTraspuesta(matriz4);
 		imprimeMatriz(matrizTraspuesta(matriz4));
-	
+		//Ejer 10 Opuesta
+		imprimeMatriz(usoarray);
+		imprimeMatriz(matrizOpuesta(usoarray));
+		//Ejer 11 Eliminar fila de array
+		imprimeMatriz(usoarray);
+		imprimeMatriz(eliminarFila(usoarray));
 	}
 	
 	public static void rellenamatriz(int[][] usoarray) {
@@ -209,6 +216,37 @@ public class b4ejer4 {
 		return arraytraspuesto;
 	}
 	
+	public static int[][] matrizOpuesta(int[][]usoarray) {
+		int[][] arrayopuesto = new int[usoarray[0].length][usoarray.length];
+	
+		for(int i=0;i<usoarray.length;i++) {
+			for(int x=0;x<usoarray.length;x++) {
+				arrayopuesto[i][x]=(usoarray[i][x]*-1);
+			}
+		}
+		return arrayopuesto;
+	}
+	public static int[][] eliminarFila(int[][]usoarray) {
+		boolean eliminada=false;
+		int fila=Integer.parseInt(JOptionPane.showInputDialog("Introduce una fila a eliminar: "));
+		int[][] arraysinfila = new int[usoarray[0].length-1][usoarray.length];
+		for(int i=0;i<usoarray.length;i++) {
+			for(int x=0;x<usoarray.length;x++) {
+				if(i==fila) {
+					eliminada=true; //bandera porque si no da error de outofbounds al escribir en la i con una mas ya que tenemos una fila menos
+				}else {
+					if(eliminada) {
+						arraysinfila[i-1][x]=usoarray[i][x];
+					}else {
+						arraysinfila[i][x]=usoarray[i][x];
+					}
+					
+				}
+				
+			}
+		}
+		return arraysinfila;
+	}
 }
 
 
