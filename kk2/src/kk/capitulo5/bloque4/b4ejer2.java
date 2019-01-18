@@ -5,7 +5,7 @@ public class b4ejer2 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		int[] usoarray=new int[200];
+		int[] usoarray=new int[21];
 
 		for(int i=0;i<usoarray.length;i++) {
 			int aleat=(int) Math.round(Math.random() * ((10) - 0) + 0);
