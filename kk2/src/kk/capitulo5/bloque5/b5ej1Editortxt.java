@@ -46,7 +46,7 @@ public class b5ej1Editortxt {
 				posicion=Integer.parseInt(JOptionPane.showInputDialog("Que línea quieres editar: ")); 
 				nuevotexto=JOptionPane.showInputDialog("Introduce el texto: ");
 				if(posicion>=1) {posicion--;} // porque 0 es uno en la posicion
-				if(posicion>linea.size()) {
+				if(posicion>linea.size()) { // para el error indexoutofbounds, escribe en la ultima si quieres editar una que no existe
 					linea.set(linea.size(),nuevotexto);
 
 				}else {
