@@ -61,7 +61,7 @@ public class b5ej1Editortxt {
 			case 5:
 				int posicion1=Integer.parseInt(JOptionPane.showInputDialog("Primera línea a cortar: ")); 
 				int posicion2=Integer.parseInt(JOptionPane.showInputDialog("Última línea a cortar: ")); 
-				if(posicion1>=1) {posicion1--;}
+				if(posicion1>=1) {posicion1--;} // para que introduzcan las lineas desde el 1
 				if(posicion2>=1) {posicion2--;}
 				int borrar = posicion1; // para aprovechar que mueve el arraylist
 				for(int i=posicion1;i<=posicion2;i++) {
