@@ -12,12 +12,38 @@ public class Supermercado {
 		Cliente cliente4=new Cliente(4,"Antonio");
 		Cliente cliente5=new Cliente(5,"Maria");
 		Cliente cliente6=new Cliente(6,"Alba");
-		Cola.Instance().agregarCliente(cliente1, colas);
-		Cola.Instance().agregarCliente(cliente2, colas);
-		Cola.Instance().agregarCliente(cliente3, colas);
-		Cola.Instance().agregarCliente(cliente4, colas);
-		Cola.Instance().agregarCliente(cliente5, colas);
-		Cola.Instance().agregarCliente(cliente6, colas);
+		Cliente cliente7=new Cliente(7,"Jesus");
+
+		cola1.agregarCliente(cliente1);
+		cola1.agregarCliente(cliente2);
+		cola1.agregarCliente(cliente3);
+		cola1.agregarCliente(cliente4);
+		cola1.agregarCliente(cliente5);
+		cola1.agregarCliente(cliente6);
+		cola1.agregarCliente(cliente7);
+		cola1.imprime();
+		Cola cola2=new Cola(2);
+		cola2=cola1.dividirCola();
+		cola1.imprime();
+		System.out.println("Cola 2");
+		cola2.imprime();
+		
+		
 
 	}
+
+	/**
+	 * @return the colas
+	 */
+	public static int getColas() {
+		return colas;
+	}
+
+	/**
+	 * @param colas the colas to set
+	 */
+	public static void setColas(int colas) {
+		Supermercado.colas = colas;
+	}
+	
 }

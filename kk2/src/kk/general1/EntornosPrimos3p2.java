@@ -1,17 +1,17 @@
 package kk.general1;
 
-public class EntornosPrimos {
+public class EntornosPrimos3p2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] tresprimos=getTresUltimosPrimos(50000);
+		int[] tresprimos=getTresUltimosPrimos(50);
 		for(int i=0;i<3;i++) {
 			System.out.println(tresprimos[i]);
 		}
 
 	}
 
-	private static int[] getTresUltimosPrimos(int limiteSuperior){
+	public static int[] getTresUltimosPrimos(int limiteSuperior){
 		int ultimosPrimos[]=new int[] {-1,-1,-1};
 		int contador=0;
 		
@@ -27,7 +27,7 @@ public class EntornosPrimos {
 		return ultimosPrimos;
 	}
 	
-	private static boolean esPrimo(int num) {
+	public static boolean esPrimo(int num) {
 		boolean primo=true;
 		for(int i=2;i<num;i++) {
 			if(num %i==0) {

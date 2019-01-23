@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Cola {
 	private int IDCola;
-	private List<Cliente> clientes0=new ArrayList<Cliente>();
+	private List<Cliente> clientes=new ArrayList<Cliente>();
 	private static Cola cola=null;
 	private int alterna=0;
 	
@@ -26,17 +26,20 @@ public class Cola {
 		IDCola = iDCola;
 	}
 
-
-	public void agregarCliente(Cliente pcliente, int colas) {
-		if(colas>1) {
-			
-			
-			//Para ir poniendolos en una cola u otra equitativamente
-			if(alterna==0) {alterna=1;}else {alterna=0;}
-		}else {
-			clientes0.add(pcliente);
-		}
+	public Cola dividirCola() {
+		System.out.println("Separamos la cola");
+		Supermercado.setColas(Supermercado.getColas()+1);
+		Cola cola2=new Cola(2);
 		
+		for(int i=0;i<=clientes.size()/2;i++) {
+			cola2.clientes.add(clientes.get(i));
+			clientes.remove(i);
+		}
+		return cola2;
+	}
+
+	public void agregarCliente(Cliente pcliente) {
+		clientes.add(pcliente);
 	}
 
 
@@ -54,6 +57,12 @@ public class Cola {
 		this.clientes = clientes;
 	};
 	
+	public void imprime() {
+		for(int i=0;i<clientes.size();i++) {
+			System.out.print(" "+clientes.get(i).getNombre());
+		}
+		System.out.println(" ");
+	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
