@@ -1,11 +1,3 @@
-/**
- * Curso B�sico de desarrollo de Juegos en Java - Invaders
- * 
- * (c) 2004 Planetalia S.L. - Todos los derechos reservados. Prohibida su reproducci�n
- * 
- * http://www.planetalia.com
- * 
- */
 package Arkanoid;
 
 import java.awt.image.BufferedImage;
@@ -37,7 +29,7 @@ public class SpriteCache {
 	public BufferedImage getSprite(String nombre) {
 		BufferedImage img = (BufferedImage)sprites.get(nombre);
 		if (img == null) {
-			img = loadImage("../res/"+nombre);
+			img = loadImage("assets/"+nombre);
 			sprites.put(nombre,img);
 		}
 		return img;
