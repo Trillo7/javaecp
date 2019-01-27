@@ -21,7 +21,7 @@ public class Ball extends Actor {
 		if (y < 0 || y > Stage.HEIGHT) { // calcular rebote
 			vy = -vy; 	
 		}
-		if(y> yplayer-20 && ((x<= xplayer +104)&&(x>= xplayer))) { //comprobamos rebote plataforma
+		if(y>= yplayer-12 && ((x<= xplayer +104)&&(x>= xplayer))) { //comprobamos rebote plataforma
 			vy = -vy; 
 		}
 	}
