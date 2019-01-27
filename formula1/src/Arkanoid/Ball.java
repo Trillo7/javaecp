@@ -11,7 +11,7 @@ public class Ball extends Actor {
 		setFrameSpeed(35);
 	}
 	
-	public void act() {
+	public void act(int yplayer, int xplayer) {
 		super.act();
 		x+=vx;//aumentamos su posicion para que se mueva
 		y+=vy;
@@ -20,6 +20,9 @@ public class Ball extends Actor {
 		}
 		if (y < 0 || y > Stage.HEIGHT) { // calcular rebote
 			vy = -vy; 	
+		}
+		if(y> yplayer-20 && ((x<= xplayer +104)&&(x>= xplayer))) { //comprobamos rebote plataforma
+			vy = -vy; 
 		}
 	}
 

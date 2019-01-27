@@ -50,17 +50,58 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	public void initWorld() {
 	//Creamos los ladrillos en arraylist
 		actors = new ArrayList();
-		for (int i = 0; i < 10; i++){
-		  Ladrillo l = new Ladrillo(this);
-		  l.setX( (int)(Math.random()*Stage.WIDTH) );
-		  l.setY( i*20 );
-		  l.setVx( (int)(Math.random()*20-10) ); // velocidad de movimiento
+		
+		// CREAMOS ESTE NIVEL
+		// creamos ladrillos verdes
+		for (int i = 0; i < 11; i++){
+		  Ladrillo l = new Ladrillo(this,"green");
+		  l.setX(15+(i * 70) );
+		  l.setY(10);
+		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
+		  actors.add(l);
+		}
+		// creamos ladrillos azules
+		for (int i = 0; i < 11; i++){
+		  Ladrillo l = new Ladrillo(this,"blue");
+		  l.setX(15+(i * 70) );
+		  l.setY(50);
+		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
+		  actors.add(l);
+		}
+		
+		for (int i = 0; i < 11; i++){
+		  Ladrillo l = new Ladrillo(this,"grey");
+		  l.setX(15+(i * 70) );
+		  l.setY(90);
+		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
+		  actors.add(l);
+		}
+		for (int i = 0; i < 11; i++){
+		  Ladrillo l = new Ladrillo(this,"purple");
+		  l.setX(15+(i * 70) );
+		  l.setY(130);
+		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
+		  actors.add(l);
+		}
+		for (int i = 0; i < 11; i++){
+		  Ladrillo l = new Ladrillo(this,"red");
+		  l.setX(15+(i * 70) );
+		  l.setY(170);
+		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
+		  actors.add(l);
+		}
+		for (int i = 0; i < 11; i++){
+		  Ladrillo l = new Ladrillo(this,"yellow");
+		  l.setX(15+(i * 70) );
+		  l.setY(210);
+		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		//Inicializamos al jugador
 		player = new Player(this); // no entiendo que le mandamos aqui por this
 		player.setX(Stage.WIDTH/2);
 		player.setY(Stage.HEIGHT - 2*player.getHeight());
+		
 		//Inicializamos la bola
 		ball= new Ball(this); 
 		ball.setX(Stage.WIDTH/2);
@@ -75,7 +116,7 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 			Actor l = (Actor)actors.get(i);
 			l.act();
 		}
-			ball.act();
+			ball.act(player.getY(), player.getX());
 			player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
 		}
 	
