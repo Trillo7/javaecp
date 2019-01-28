@@ -1,6 +1,7 @@
 package Arkanoid;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Actor {
@@ -57,5 +58,13 @@ public class Actor {
 			t=0;
   		currentFrame = (currentFrame + 1) % spriteNames.length;
 		}
+	}
+	//Detector de Colisiones
+     public Rectangle getBounds() {
+    	 return new Rectangle(x,y,width,height);
+     }
+		    
+     public void collision(Actor a){
+		      
 	}
 }
