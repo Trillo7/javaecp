@@ -4,8 +4,14 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
@@ -13,6 +19,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Arkanoid.soundUtils.PlaySound;
 
 public class Arkanoid extends Canvas implements Stage, KeyListener {
 	
@@ -34,12 +42,44 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		panel.setLayout(null);
 		panel.add(this);
 		ventana.setBounds(0,0,Stage.WIDTH,Stage.HEIGHT);
-		ventana.setVisible(true);
+		ventana.setVisible(true);		
 		ventana.addWindowListener( new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
+		
+		this.addMouseMotionListener( new MouseMotionAdapter() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(e.getX());
+				player.setX(e.getX());
+			}
+		});
+		
+		this.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		ventana.setResizable(false);
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
@@ -50,55 +90,56 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	public void initWorld() {
 	//Creamos los ladrillos en arraylist
 		actors = new ArrayList();
-		
+		//Sonido de fondo
+		PlaySound.getSonido().gameplaybackgroundSound();
 		// CREAMOS ESTE NIVEL
 		// creamos ladrillos verdes
-		for (int i = 0; i < 11; i++){
+		for (int i = 0; i < 10; i++){
 		  Ladrillo l = new Ladrillo(this,"green");
-		  l.setX(15+(i * 70) );
+		  l.setX(3+(i * 70) );
 		  l.setY(10);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		// creamos ladrillos azules
-		for (int i = 0; i < 11; i++){
+		for (int i = 0; i < 10; i++){
 		  Ladrillo l = new Ladrillo(this,"blue");
-		  l.setX(15+(i * 70) );
+		  l.setX(3+(i * 70) );
 		  l.setY(50);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		
-		for (int i = 0; i < 11; i++){
+		for (int i = 0; i < 10; i++){
 		  Ladrillo l = new Ladrillo(this,"grey");
-		  l.setX(15+(i * 70) );
+		  l.setX(3+(i * 70) );
 		  l.setY(90);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
-		for (int i = 0; i < 11; i++){
+		for (int i = 0; i < 10; i++){
 		  Ladrillo l = new Ladrillo(this,"purple");
-		  l.setX(15+(i * 70) );
+		  l.setX(3+(i * 70) );
 		  l.setY(130);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
-		for (int i = 0; i < 11; i++){
+		for (int i = 0; i < 10; i++){
 		  Ladrillo l = new Ladrillo(this,"red");
-		  l.setX(15+(i * 70) );
+		  l.setX(3+(i * 70) );
 		  l.setY(170);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
-		for (int i = 0; i < 11; i++){
+		for (int i = 0; i < 10; i++){
 		  Ladrillo l = new Ladrillo(this,"yellow");
-		  l.setX(15+(i * 70) );
+		  l.setX(3+(i * 70) );
 		  l.setY(210);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		//Inicializamos al jugador
-		player = new Player(this); // no entiendo que le mandamos aqui por this
+		player = new Player(this); 
 		player.setX(Stage.WIDTH/2);
 		player.setY(Stage.HEIGHT - 2*player.getHeight());
 		
@@ -107,7 +148,8 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		ball.setX(Stage.WIDTH/2);
 		ball.setY(Stage.WIDTH/2);
 		ball.setVx(3); // velocidad de movimiento lateral
-		ball.setVy(3); // velocidad de movimiento vertical
+		ball.setVy(3); // velocidad de mov
+
 	}
 	
 	public void updateWorld() {
@@ -119,18 +161,35 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 			ball.act(player.getY(), player.getX());
 			player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
 		}
-	
+	  public void checkCollisions() {
+		  Rectangle playerBounds = ball.getBounds();
+		  for (int i = 0; i < actors.size(); i++) {
+		        Actor a1 = (Actor)actors.get(i);
+		        Rectangle r1 = a1.getBounds();
+		        if (r1.intersects(playerBounds)) {
+		        //	a1.remove();
+		        	actors.remove(i);
+		        	ball.vy=-ball.vy;
+		        	System.out.println("colisiona 1");
+		       }
+		   
+		  }
+     }
 	public void paintWorld() {
 		Graphics2D g = (Graphics2D)strategy.getDrawGraphics();
+		Toolkit.getDefaultToolkit().sync(); //toolkit linux ubuntu java
+		//fondo
 		g.setColor(Color.black);
 		g.fillRect(0,0,getWidth(),getHeight());
+		g.drawImage( spriteCache.getSprite("background1.jpg"), 0,0, this );
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = (Actor) actors.get(i);
-			l.paint(g);
+			if(l.isMarkedForRemoval()==false) {
+				l.paint(g);
+			}
 		}
 		player.paint(g);
 		ball.paint(g);
-
 		g.setColor(Color.white);
 			//Contador de fps
 			if (usedTime > 0) {
@@ -160,6 +219,7 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		while (isVisible()) {
 			long startTime = System.currentTimeMillis();
 			updateWorld();
+			checkCollisions();
 			paintWorld();
 			usedTime = System.currentTimeMillis()-startTime;
 			try { 

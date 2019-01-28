@@ -1,5 +1,7 @@
 package Arkanoid;
 
+import java.awt.Rectangle;
+
 public class Ball extends Actor {
 	protected int vx;
 	protected int vy;
@@ -21,11 +23,17 @@ public class Ball extends Actor {
 		if (y < 0 || y > Stage.HEIGHT) { // calcular rebote
 			vy = -vy; 	
 		}
-		if(y>= yplayer-12 && ((x<= xplayer +104)&&(x>= xplayer))) { //comprobamos rebote plataforma
+		
+		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24);
+		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
+		if(rectball.intersects(rectplayer)) {
 			vy = -vy; 
 		}
 	}
 
+    
+	
+	//getter and setters
 	public int getVx() { return vx; }
 	public void setVx(int i) {vx = i;	}
 	public int getVy() { return vy; }

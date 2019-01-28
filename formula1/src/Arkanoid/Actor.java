@@ -13,6 +13,8 @@ public class Actor {
 	protected int t;
 	protected Stage stage;
 	protected SpriteCache spriteCache;
+	protected boolean markedForRemoval;
+
 	
 	public Actor(Stage stage) {
 		this.stage = stage;
@@ -41,9 +43,9 @@ public class Actor {
 		height = 0;
 		width = 0;
 		for (int i = 0; i < names.length; i++ ) {
-  		BufferedImage image = spriteCache.getSprite(spriteNames[i]);
-	  	height = Math.max(height,image.getHeight());
-		  width = Math.max(width,image.getWidth());
+			BufferedImage image = spriteCache.getSprite(spriteNames[i]);
+	  		height = Math.max(height,image.getHeight());
+	  		width = Math.max(width,image.getWidth());
 		}
 	}			
 	
@@ -59,6 +61,14 @@ public class Actor {
   		currentFrame = (currentFrame + 1) % spriteNames.length;
 		}
 	}
+	
+	public void remove() {
+		markedForRemoval = true;
+	}
+	public boolean isMarkedForRemoval() {
+		return markedForRemoval;
+	}
+	
 	//Detector de Colisiones
      public Rectangle getBounds() {
     	 return new Rectangle(x,y,width,height);

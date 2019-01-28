@@ -29,13 +29,18 @@ public class Ladrillo extends Actor {
 	
 	public void act() {
 		super.act();
-		//x+=vx;// para que se mueva
 		if (x < 0 || x > Stage.WIDTH) { // calcular rebote
 			vx = -vx; 	
 		}
 		  
 	}
-
+	
+    public void collision(Actor a) {
+    	if (a instanceof Ball)
+    		remove();
+    }
+	
+	//getter and setters
 	public int getVx() { return vx; }
 	public void setVx(int i) {vx = i;	}
 }
