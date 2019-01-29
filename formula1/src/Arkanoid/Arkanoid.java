@@ -51,10 +51,9 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		
 		this.addMouseMotionListener( new MouseMotionAdapter() {
 			
-			@Override
-			public void mouseMoved(MouseEvent e) {
+			@Override 
+			public void mouseMoved(MouseEvent e) { //SENSOR RATON
 				// TODO Auto-generated method stub
-				System.out.println(e.getX());
 				player.setX(e.getX());
 			}
 		});
@@ -170,7 +169,6 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		        //	a1.remove();
 		        	actors.remove(i);
 		        	ball.vy=-ball.vy;
-		        	System.out.println("colisiona 1");
 		       }
 		   
 		  }
@@ -191,11 +189,10 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		player.paint(g);
 		ball.paint(g);
 		g.setColor(Color.white);
-			//Contador de fps
-			if (usedTime > 0) {
+			if (usedTime > 0) { //contador de fps
 				g.drawString(String.valueOf(1000/usedTime)+" fps",0,Stage.HEIGHT-50);
 			}else {
-				g.drawString("--- fps",0,Stage.HEIGHT-50);
+				g.drawString("---- fps",0,Stage.HEIGHT-50);
 			}
 		strategy.show();
 	}
