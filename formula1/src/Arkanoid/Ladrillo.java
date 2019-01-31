@@ -1,8 +1,10 @@
 package Arkanoid;
 
+import java.util.List;
+
 public class Ladrillo extends Actor {
 	protected int vx;
-
+	private int lives;
 	
 	public Ladrillo(Stage stage, String color) {
 		super(stage);
@@ -35,9 +37,14 @@ public class Ladrillo extends Actor {
 		  
 	}
 	
-    public void collision(Actor a) {
-    	if (a instanceof Ball)
-    		remove();
+    public void remove(List<Actor> actors, int i) {
+    	if(lives>0) {
+    		lives--;
+    	}else {
+        	actors.remove(i);
+
+    	}
+
     }
 	
 	//getter and setters

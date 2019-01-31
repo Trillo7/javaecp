@@ -39,7 +39,7 @@ public class PlaySound {
 	}
 	
 	//sonido rampa
-	public void rampa() {
+	public void crumblingSound() {
 		HiloSonido rampa = new HiloSonido("Arkanoid/soundUtils/rampa.wav");
 		rampa.start();
 	}

@@ -16,6 +16,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,10 +29,10 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	private long usedTime;
 	
 	private SpriteCache spriteCache;
-	private ArrayList actors; 
 	private Player player;
 	private Ball ball;
-	
+	private List<Actor> actors = new ArrayList<Actor>();
+
 	public Arkanoid() {
 		spriteCache = new SpriteCache();
 		
@@ -88,7 +89,6 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	
 	public void initWorld() {
 	//Creamos los ladrillos en arraylist
-		actors = new ArrayList();
 		//Sonido de fondo
 		PlaySound.getSonido().gameplaybackgroundSound();
 		// CREAMOS ESTE NIVEL
@@ -163,12 +163,12 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	  public void checkCollisions() {
 		  Rectangle playerBounds = ball.getBounds();
 		  for (int i = 0; i < actors.size(); i++) {
-		        Actor a1 = (Actor)actors.get(i);
+		        Actor a1 = actors.get(i);
 		        Rectangle r1 = a1.getBounds();
 		        if (r1.intersects(playerBounds)) {
-		        //	a1.remove();
-		        	actors.remove(i);
-		        	ball.vy=-ball.vy;
+			        ball.vy=-ball.vy;
+		        	a1.remove(actors, i);
+		        	PlaySound.getSonido().crumblingSound();
 		       }
 		   
 		  }

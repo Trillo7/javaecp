@@ -3,6 +3,7 @@ package Arkanoid;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class Actor {
 	protected int x,y;
@@ -62,9 +63,6 @@ public class Actor {
 		}
 	}
 	
-	public void remove() {
-		markedForRemoval = true;
-	}
 	public boolean isMarkedForRemoval() {
 		return markedForRemoval;
 	}
@@ -74,7 +72,7 @@ public class Actor {
     	 return new Rectangle(x,y,width,height);
      }
 		    
-     public void collision(Actor a){
+     public void remove(List<Actor> actors, int i) {
 		      
 	}
 }
