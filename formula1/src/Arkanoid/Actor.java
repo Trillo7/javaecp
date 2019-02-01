@@ -56,7 +56,8 @@ public class Actor {
 		t++;
 		if (t % frameSpeed == 0){
 			t=0;
-  		currentFrame = (currentFrame + 1) % spriteNames.length;
+			currentFrame = (currentFrame + 1) % spriteNames.length;
+			markedForRemoval=true;
 		}
 	}
 	

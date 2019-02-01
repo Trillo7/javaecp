@@ -30,7 +30,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private Player player;
 	private Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
-	private List<Actor> explosionlist = new ArrayList<Actor>();
+	public static List<Actor> explosionlist = new ArrayList<Actor>();
 	public static final int WIDTH=701;
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 670; 
@@ -155,14 +155,23 @@ public class Arkanoid extends Canvas implements KeyListener {
 	}
 	
 	public void updateWorld() {
-		//actuamos las posiciones y estados de los Bricks
+		// Llamamos al act de cada actor
 		for (int i = 0; i < actors.size(); i++) {
-			Actor l = (Actor)actors.get(i);
+			Actor l = actors.get(i);
 			l.act();
+			
 		}
-			ball.act(player.getY(), player.getX());
-			player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
+		//Llamamos al act de cada explosion
+		for (int i = 0; i < explosionlist.size(); i++) {
+			Actor exp = explosionlist.get(i);
+			exp.act();
+			if(exp.markedForRemoval) {
+				explosionlist.clear();
+			}
 		}
+		ball.act(player.getY(), player.getX());
+		player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
+	}
 	  public void checkCollisions() {
 		  Rectangle playerBounds = ball.getBounds();
 		  for (int i = 0; i < actors.size(); i++) {
@@ -178,26 +187,30 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public void paintWorld() {
 		Graphics2D g = (Graphics2D)strategy.getDrawGraphics();
 		Toolkit.getDefaultToolkit().sync(); //toolkit linux ubuntu java
-		//fondo
+		//Fondo
 		g.setColor(Color.black);
 		g.fillRect(0,0,getWidth(),getHeight());
 		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, null );
+		//Bucle para pintarse así mismo cada actor
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = actors.get(i);
 			l.paint(g);
 		}
+		//BUcle para pintarse así mismo cada explosión
 		for (int i = 0; i < explosionlist.size(); i++) {
 			Actor exp = explosionlist.get(i);
 			exp.paint(g);
 		}
+		//Pintamos la nave y la pelota
 		player.paint(g);
 		ball.paint(g);
 		g.setColor(Color.white);
-			if (usedTime > 0) { //contador de fps
-				g.drawString(String.valueOf(1000/usedTime)+" fps",0,Arkanoid.HEIGHT-50);
-			}else {
-				g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
-			}
+		if (usedTime > 0) { //contador de fps
+			g.drawString(String.valueOf(1000/usedTime)+" fps",0,Arkanoid.HEIGHT-50);
+		}else {
+			g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
+		}
+
 		strategy.show();
 	}
 	

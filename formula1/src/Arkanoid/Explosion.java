@@ -11,14 +11,7 @@ public class Explosion extends Actor {
 	public Explosion() {
 		super();
 		setSpriteNames( new String[] {"exp1.png","exp2.png","exp3.png"});
-		setFrameSpeed(35);
+		setFrameSpeed(10);
 	}
 		
-    public void remove(List<Actor> actors, int i) {
-     
-    }
-	
-	//getter and setters
-	public int getVx() { return vx; }
-	public void setVx(int i) {vx = i;	}
 }
