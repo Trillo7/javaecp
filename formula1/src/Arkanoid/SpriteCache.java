@@ -6,35 +6,62 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Esta clase se utiliza como un almac�n de ficheros de imagen. Para almacenar las im�genes utilizamos
+ * un HashMap<String, BufferedImage>. Adem�s esta clase incorpora un patr�n Singleton
+ * @author R
+ *
+ */
 public class SpriteCache {
-	private HashMap sprites;
+	// HashMap que act�a como almac�n de im�genes
+	private HashMap<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
 	
-	public SpriteCache() {
-		sprites = new HashMap();
+	// Instancia Singleton
+	private static SpriteCache instance= null;
+	
+	
+	/**
+	 * Getter Singleton
+	 * @return
+	 */
+	public static SpriteCache getInstance () {
+		if (instance == null) {
+			instance = new SpriteCache();
+		}
+		return instance;
 	}
+
 	
-	private BufferedImage loadImage(String nombre) {
+	/**
+	 * Este m�todo carga un fichero de imagen del sistema de ficheros y lo devuelve
+	 * como un objeto de tipo BufferedImage
+	 * @param nombre
+	 * @return
+	 */
+	private BufferedImage loadImage (String nombre) {
 		URL url=null;
 		try {
 			url = getClass().getResource(nombre);
 			return ImageIO.read(url);
-		} catch (Exception e) {
-			System.out.println("No se pudo cargar la imagen " + nombre +" de "+url);
-			System.out.println("El error fue : "+e.getClass().getName()+" "+e.getMessage());
+		} catch (Exception e) { // algo ha fallado, se acaba el programa si no podemos cargar alguna imagen
+			e.printStackTrace();
 			System.exit(0);
-			return null;
 		}
+		return null;
 	}
 	
+	/**
+	 * M�todo utilizado desde fuera de esta clase para permitir acceder a las im�genes. En primer lugar se 
+	 * busca la imagen en el almac�n, si no se encuentra se busca en el sistema de ficheros.
+	 * @param nombre
+	 * @return
+	 */
 	public BufferedImage getSprite(String nombre) {
-		BufferedImage img = (BufferedImage)sprites.get(nombre);
+		BufferedImage img = sprites.get(nombre);
 		if (img == null) {
 			img = loadImage("assets/"+nombre);
 			sprites.put(nombre,img);
 		}
 		return img;
 	}
-	
-
-
 }

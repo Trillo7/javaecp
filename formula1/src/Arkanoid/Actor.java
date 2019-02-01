@@ -12,21 +12,18 @@ public class Actor {
 	protected int currentFrame;
 	protected int frameSpeed;
 	protected int t;
-	protected Stage stage;
-	protected SpriteCache spriteCache;
+
 	protected boolean markedForRemoval;
 
 	
 	public Actor(Stage stage) {
-		this.stage = stage;
-		spriteCache = stage.getSpriteCache();
 		currentFrame = 0;
 		frameSpeed = 1;
 		t=0;
 	}
 	
 	public void paint(Graphics2D g){
-		g.drawImage( spriteCache.getSprite(spriteNames[currentFrame]), x,y, stage );
+		g.drawImage( SpriteCache.getInstance().getSprite(spriteNames[currentFrame]), x,y, null );
 	}
 	
 	public int getX()  { return x; }
@@ -44,7 +41,7 @@ public class Actor {
 		height = 0;
 		width = 0;
 		for (int i = 0; i < names.length; i++ ) {
-			BufferedImage image = spriteCache.getSprite(spriteNames[i]);
+			BufferedImage image = SpriteCache.getInstance().getSprite(spriteNames[i]);
 	  		height = Math.max(height,image.getHeight());
 	  		width = Math.max(width,image.getWidth());
 		}

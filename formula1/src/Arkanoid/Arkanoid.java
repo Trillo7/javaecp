@@ -27,22 +27,24 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	
 	private BufferStrategy strategy;
 	private long usedTime;
-	
-	private SpriteCache spriteCache;
 	private Player player;
 	private Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
+	public static final int WIDTH=700;
+	public static final int HEIGHT=750;
+	public static final int PLAY_HEIGHT = 670; 
+	public static final int SPEED=10;
+	private static Arkanoid instance = null;
 
 	public Arkanoid() {
-		spriteCache = new SpriteCache();
 		
 		JFrame ventana = new JFrame("Arkanoid HD by Trillo");
 		JPanel panel = (JPanel)ventana.getContentPane();
-		setBounds(0,0,Stage.WIDTH,Stage.HEIGHT);
-		panel.setPreferredSize(new Dimension(Stage.WIDTH,Stage.HEIGHT));
+		setBounds(0,0,Arkanoid.WIDTH,Arkanoid.HEIGHT);
+		panel.setPreferredSize(new Dimension(Arkanoid.WIDTH,Arkanoid.HEIGHT));
 		panel.setLayout(null);
 		panel.add(this);
-		ventana.setBounds(0,0,Stage.WIDTH,Stage.HEIGHT);
+		ventana.setBounds(0,0,Arkanoid.WIDTH,Arkanoid.HEIGHT);
 		ventana.setVisible(true);		
 		ventana.addWindowListener( new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -139,13 +141,13 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		}
 		//Inicializamos al jugador
 		player = new Player(this); 
-		player.setX(Stage.WIDTH/2);
-		player.setY(Stage.HEIGHT - 2*player.getHeight());
+		player.setX(Arkanoid.WIDTH/2);
+		player.setY(Arkanoid.HEIGHT - 2*player.getHeight());
 		
 		//Inicializamos la bola
 		ball= new Ball(this); 
-		ball.setX(Stage.WIDTH/2);
-		ball.setY(Stage.WIDTH/2);
+		ball.setX(Arkanoid.WIDTH/2);
+		ball.setY(Arkanoid.WIDTH/2);
 		ball.setVx(3); // velocidad de movimiento lateral
 		ball.setVy(3); // velocidad de mov
 
@@ -178,7 +180,7 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		//fondo
 		g.setColor(Color.black);
 		g.fillRect(0,0,getWidth(),getHeight());
-		g.drawImage( spriteCache.getSprite("background1.jpg"), 0,0, this );
+		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, this );
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = (Actor) actors.get(i);
 			if(l.isMarkedForRemoval()==false) {
@@ -189,16 +191,13 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		ball.paint(g);
 		g.setColor(Color.white);
 			if (usedTime > 0) { //contador de fps
-				g.drawString(String.valueOf(1000/usedTime)+" fps",0,Stage.HEIGHT-50);
+				g.drawString(String.valueOf(1000/usedTime)+" fps",0,Arkanoid.HEIGHT-50);
 			}else {
-				g.drawString("---- fps",0,Stage.HEIGHT-50);
+				g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
 			}
 		strategy.show();
 	}
 	
-	public SpriteCache getSpriteCache() {
-		return spriteCache;
-	}
 	
 	public void keyPressed(KeyEvent e) {
 		player.keyPressed(e);
@@ -222,6 +221,17 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 				 Thread.sleep(SPEED);
 			} catch (InterruptedException e) {}
 		}
+	}
+	
+	/**
+	 * Getter Singleton
+	 * @return
+	 */
+	public static Arkanoid getInstancia () {
+		if (instance == null) {
+			instance = new Arkanoid();
+		}
+		return instance;
 	}
 	
 	public static void main(String[] args) {

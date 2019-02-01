@@ -7,7 +7,6 @@ public interface Stage extends ImageObserver {
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 670; 
 	public static final int SPEED=10;
-	public SpriteCache getSpriteCache();
 	
 
 }
