@@ -30,6 +30,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private Player player;
 	private Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
+	private List<Actor> explosionlist = new ArrayList<Actor>();
 	public static final int WIDTH=701;
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 670; 
@@ -180,12 +181,14 @@ public class Arkanoid extends Canvas implements KeyListener {
 		//fondo
 		g.setColor(Color.black);
 		g.fillRect(0,0,getWidth(),getHeight());
-		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, this );
+		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, null );
 		for (int i = 0; i < actors.size(); i++) {
-			Actor l = (Actor) actors.get(i);
-			if(l.isMarkedForRemoval()==false) {
-				l.paint(g);
-			}
+			Actor l = actors.get(i);
+			l.paint(g);
+		}
+		for (int i = 0; i < explosionlist.size(); i++) {
+			Actor exp = explosionlist.get(i);
+			exp.paint(g);
 		}
 		player.paint(g);
 		ball.paint(g);
@@ -223,6 +226,20 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}
 	}
 	
+	/**
+	 * @return the explosionlist
+	 */
+	public List<Actor> getExplosionlist() {
+		return explosionlist;
+	}
+
+	/**
+	 * @param explosionlist the explosionlist to set
+	 */
+	public void setExplosionlist(List<Actor> explosionlist) {
+		this.explosionlist = explosionlist;
+	}
+
 	/**
 	 * Getter Singleton
 	 * @return

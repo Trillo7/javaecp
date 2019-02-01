@@ -36,7 +36,12 @@ public class Brick extends Actor {
     		lives--;
     	}else {
         	actors.remove(i);
+        	Explosion exp = new Explosion();
+        	exp.setX(this.getX() );
+        	exp.setY(this.getY());
+        	Arkanoid.getInstancia().getExplosionlist().add(exp);
         	PlaySound.getSound().explosionSound();
+        	//Arkanoid.getInstancia().getExplosionlist().remove(i);
     	}
 
     }
