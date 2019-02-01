@@ -168,7 +168,6 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		        if (r1.intersects(playerBounds)) {
 			        ball.vy=-ball.vy;
 		        	a1.remove(actors, i);
-		        	PlaySound.getSonido().crumblingSound();
 		       }
 		   
 		  }

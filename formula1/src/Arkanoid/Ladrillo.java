@@ -2,6 +2,8 @@ package Arkanoid;
 
 import java.util.List;
 
+import Arkanoid.soundUtils.PlaySound;
+
 public class Ladrillo extends Actor {
 	protected int vx;
 	private int lives;
@@ -42,7 +44,7 @@ public class Ladrillo extends Actor {
     		lives--;
     	}else {
         	actors.remove(i);
-
+        	PlaySound.getSonido().crumblingSound();
     	}
 
     }
