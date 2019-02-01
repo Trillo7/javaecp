@@ -9,8 +9,8 @@ public class Player extends Actor {
 	private boolean up,down,left,right;
 		
 	
-	public Player(Stage stage) {
-		super(stage);
+	public Player() {
+		super();
 		setSpriteNames( new String[] {"paddleBlue.png"});
 	}
 	
@@ -20,12 +20,12 @@ public class Player extends Actor {
 		y+=vy;
 		if (x < 0 ) 
 		  x = 0;
-		if (x > Stage.WIDTH - getWidth())
-		  x = Stage.WIDTH - getWidth();
+		if (x > Arkanoid.WIDTH - getWidth())
+		  x = Arkanoid.WIDTH - getWidth();
 		if (y < 0 )
 		  y = 0;
-		if ( y > Stage.PLAY_HEIGHT-getHeight())
-		  y = Stage.PLAY_HEIGHT - getHeight();
+		if ( y > Arkanoid.PLAY_HEIGHT-getHeight())
+		  y = Arkanoid.PLAY_HEIGHT - getHeight();
 	}
 
 	public int getVx() { return vx; }

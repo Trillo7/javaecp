@@ -7,8 +7,8 @@ public class Ball extends Actor {
 	protected int vy;
 
 	
-	public Ball(Stage stage) {
-		super(stage);
+	public Ball() {
+		super();
 		setSpriteNames( new String[] {"ballBlue.png"});
 		setFrameSpeed(35);
 	}
@@ -17,10 +17,10 @@ public class Ball extends Actor {
 		super.act();
 		x+=vx;//aumentamos su posicion para que se mueva
 		y+=vy;
-		if (x < 0 || x > Stage.WIDTH ) { // calcular rebote
+		if (x < 0 || x > Arkanoid.WIDTH ) { // calcular rebote
 			vx = -vx; 	
 		}
-		if (y < 0 || y > Stage.HEIGHT) { // calcular rebote
+		if (y < 0 || y > Arkanoid.HEIGHT) { // calcular rebote
 			vy = -vy; 	
 		}
 		

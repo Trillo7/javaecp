@@ -4,12 +4,12 @@ import java.util.List;
 
 import Arkanoid.soundUtils.PlaySound;
 
-public class Ladrillo extends Actor {
+public class Brick extends Actor {
 	protected int vx;
 	private int lives;
 	
-	public Ladrillo(Stage stage, String color) {
-		super(stage);
+	public Brick(String color) {
+		super();
 		if(color=="blue") {
 			setSpriteNames( new String[] {"element_blue_rectangle.png","element_blue_rectangle_glossy.png"});
 		}
@@ -30,21 +30,13 @@ public class Ladrillo extends Actor {
 		}
 		setFrameSpeed(35);
 	}
-	
-	public void act() {
-		super.act();
-		if (x < 0 || x > Stage.WIDTH) { // calcular rebote
-			vx = -vx; 	
-		}
-		  
-	}
-	
+		
     public void remove(List<Actor> actors, int i) {
     	if(lives>0) {
     		lives--;
     	}else {
         	actors.remove(i);
-        	PlaySound.getSonido().crumblingSound();
+        	PlaySound.getSound().explosionSound();
     	}
 
     }

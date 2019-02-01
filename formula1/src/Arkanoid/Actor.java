@@ -16,7 +16,7 @@ public class Actor {
 	protected boolean markedForRemoval;
 
 	
-	public Actor(Stage stage) {
+	public Actor() {
 		currentFrame = 0;
 		frameSpeed = 1;
 		t=0;

@@ -23,14 +23,14 @@ import javax.swing.JPanel;
 
 import Arkanoid.soundUtils.PlaySound;
 
-public class Arkanoid extends Canvas implements Stage, KeyListener {
+public class Arkanoid extends Canvas implements KeyListener {
 	
 	private BufferStrategy strategy;
 	private long usedTime;
 	private Player player;
 	private Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
-	public static final int WIDTH=700;
+	public static final int WIDTH=701;
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 670; 
 	public static final int SPEED=10;
@@ -90,21 +90,21 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	}
 	
 	public void initWorld() {
-	//Creamos los ladrillos en arraylist
+	//Creamos los Bricks en arraylist
 		//Sonido de fondo
-		PlaySound.getSonido().gameplaybackgroundSound();
+		PlaySound.getSound().background1Sound();
 		// CREAMOS ESTE NIVEL
-		// creamos ladrillos verdes
+		// creamos Bricks verdes
 		for (int i = 0; i < 10; i++){
-		  Ladrillo l = new Ladrillo(this,"green");
+		  Brick l = new Brick("green");
 		  l.setX(3+(i * 70) );
 		  l.setY(10);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
-		// creamos ladrillos azules
+		// creamos Bricks azules
 		for (int i = 0; i < 10; i++){
-		  Ladrillo l = new Ladrillo(this,"blue");
+		  Brick l = new Brick("blue");
 		  l.setX(3+(i * 70) );
 		  l.setY(50);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
@@ -112,40 +112,40 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 		}
 		
 		for (int i = 0; i < 10; i++){
-		  Ladrillo l = new Ladrillo(this,"grey");
+		  Brick l = new Brick("grey");
 		  l.setX(3+(i * 70) );
 		  l.setY(90);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		for (int i = 0; i < 10; i++){
-		  Ladrillo l = new Ladrillo(this,"purple");
+		  Brick l = new Brick("purple");
 		  l.setX(3+(i * 70) );
 		  l.setY(130);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		for (int i = 0; i < 10; i++){
-		  Ladrillo l = new Ladrillo(this,"red");
+		  Brick l = new Brick("red");
 		  l.setX(3+(i * 70) );
 		  l.setY(170);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		for (int i = 0; i < 10; i++){
-		  Ladrillo l = new Ladrillo(this,"yellow");
+		  Brick l = new Brick("yellow");
 		  l.setX(3+(i * 70) );
 		  l.setY(210);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		//Inicializamos al jugador
-		player = new Player(this); 
+		player = new Player(); 
 		player.setX(Arkanoid.WIDTH/2);
 		player.setY(Arkanoid.HEIGHT - 2*player.getHeight());
 		
 		//Inicializamos la bola
-		ball= new Ball(this); 
+		ball= new Ball(); 
 		ball.setX(Arkanoid.WIDTH/2);
 		ball.setY(Arkanoid.WIDTH/2);
 		ball.setVx(3); // velocidad de movimiento lateral
@@ -154,7 +154,7 @@ public class Arkanoid extends Canvas implements Stage, KeyListener {
 	}
 	
 	public void updateWorld() {
-		//actuamos las posiciones y estados de los ladrillos
+		//actuamos las posiciones y estados de los Bricks
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = (Actor)actors.get(i);
 			l.act();
