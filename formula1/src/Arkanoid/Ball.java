@@ -22,6 +22,7 @@ public class Ball extends Actor {
 		}
 		if (y < 0 || y > Arkanoid.HEIGHT) { // calcular rebote
 			vy = -vy; 	
+			//Arkanoid.getInstancia().getInstancia().setMenu(1);
 		}
 		
 		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave

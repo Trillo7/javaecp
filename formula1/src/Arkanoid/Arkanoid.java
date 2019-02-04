@@ -41,7 +41,8 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private static Arkanoid instance = null;
 	private boolean pause=false;
 	private boolean initPause=true;
-
+	public static int menu=1;
+	
 	public Arkanoid() {
 		
 		JFrame ventana = new JFrame("C U S T O M N O I D");
@@ -91,7 +92,18 @@ public class Arkanoid extends Canvas implements KeyListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				initPause=false;
+				if(initPause==true && menu==0) {
+					initPause=false;
+					//pause=false;
+				}
+				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) {
+					System.out.println("click jugar");
+					menu=0;
+				}
+				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
+			//	if((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-55 && e.getY()<Arkanoid.HEIGHT/2-100)) {
+					System.exit(0);
+				}
 			}
 		});
 		//Sensor raton motion
@@ -123,7 +135,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 				// TODO Auto-generated method stub
 				if(e.getKeyCode()==KeyEvent.VK_SPACE || e.getKeyCode()==KeyEvent.VK_ESCAPE) {
 					pause=!pause;
-					initPause=false;
+					//initPause=false;
 					PlaySound.getSound().blasterSound();
 				}
 				if(pause) {
@@ -202,7 +214,10 @@ public class Arkanoid extends Canvas implements KeyListener {
 	}
 	
 	public void updateWorld() {
-		
+		// Para que no cuente los segundos en el menu
+		if(menu==1) {
+			initTime=System.currentTimeMillis();
+		}
 		// Llamamos al act de cada actor
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = actors.get(i);
@@ -228,7 +243,11 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}else {
 			ball.act(player.getY(), player.getX());
 		}
-		
+		if(menu==1) {
+			//pause=true;
+			initPause=true;
+			
+		}
 		player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
 	}
 	  public void checkCollisions() {
@@ -269,8 +288,16 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}else {
 			g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
 		}// pintar pause
-		if(pause || initPause) {
+		if(pause || initPause || menu==1) {
 			g.drawImage( SpriteCache.getInstance().getSprite("pause-youtube.png"), Arkanoid.WIDTH/2-255,Arkanoid.HEIGHT/2-280, null );
+		}
+		// Pintamos menu
+		if(menu==1) {
+			g.drawImage( SpriteCache.getInstance().getSprite("background2.png"), 0,0, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("yellow_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2-60, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2, null );
+
 		}
 		strategy.show();
 		
@@ -298,8 +325,9 @@ public class Arkanoid extends Canvas implements KeyListener {
 			try { 
 				 Thread.sleep(SPEED);
 			} catch (InterruptedException e) {}
-			if(initPause==true && System.currentTimeMillis() - initTime > 5000) {
+			if(initPause==true && menu==0 && System.currentTimeMillis() - initTime > 5000) {
 				initPause=false;
+				pause=false;
 				PlaySound.getSound().blasterSound();
 
 			}
@@ -318,6 +346,14 @@ public class Arkanoid extends Canvas implements KeyListener {
 	 */
 	public void setExplosionlist(List<Actor> explosionlist) {
 		this.explosionlist = explosionlist;
+	}
+
+	public int getMenu() {
+		return menu;
+	}
+
+	public void setMenu(int menu) {
+		this.menu = menu;
 	}
 
 	/**
