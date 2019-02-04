@@ -32,10 +32,13 @@ public class PlaySound {
 		obj.parar();
 	}
 	
-	//sonido de inicio de juego
-	public void startGame() {
-		HiloSonido startGame = new HiloSonido("Arkanoid/soundUtils/megamanBackground.wav");
-		startGame.start();
+	//sonido de inicio de juego del menu
+	public void startMenu() {
+		obj = new HiloSonidoBucle("Arkanoid/soundUtils/megamanBackground.wav");
+		obj.start();
+	}
+	public void stopMenu() {
+		obj.parar();
 	}
 	
 	//sonido explosion

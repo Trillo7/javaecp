@@ -98,8 +98,8 @@ public class Arkanoid extends Canvas implements KeyListener {
 					//pause=false;
 				}
 				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) {
-					System.out.println("click jugar");
 					menu=0;
+					PlaySound.getSound().stopMenu();
 				}
 				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
 			//	if((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-55 && e.getY()<Arkanoid.HEIGHT/2-100)) {
@@ -151,8 +151,9 @@ public class Arkanoid extends Canvas implements KeyListener {
 	
 	public void initWorld() {
 	//Creamos los Bricks en arraylist
+		PlaySound.getSound().startMenu();
 		//Sonido de fondo
-		PlaySound.getSound().background1Sound();
+		//PlaySound.getSound().background1Sound();
 		// CREAMOS ESTE NIVEL
 		// creamos Bricks verdes
 		for (int i = 0; i < 10; i++){
@@ -297,6 +298,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 			g.drawImage( SpriteCache.getInstance().getSprite("background2.png"), 0,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("insert-coin.png"), Arkanoid.WIDTH-200,Arkanoid.HEIGHT/2+200, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("logotrillostudios-75.png"), 50,Arkanoid.HEIGHT/2+200, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("yellow_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2-60, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2, null );
@@ -331,6 +333,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 			if(initPause==true && menu==0 && System.currentTimeMillis() - initTime > 5000) {
 				initPause=false;
 				pause=false;
+				PlaySound.getSound().background1Sound();
 				PlaySound.getSound().blasterSound();
 
 			}
