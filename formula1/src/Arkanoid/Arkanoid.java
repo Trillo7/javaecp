@@ -42,6 +42,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private boolean pause=false;
 	private boolean initPause=true;
 	public static int menu=1;
+	public int gameOver=0;
 	
 	public Arkanoid() {
 		
@@ -295,6 +296,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		if(menu==1) {
 			g.drawImage( SpriteCache.getInstance().getSprite("background2.png"), 0,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("insert-coin.png"), Arkanoid.WIDTH-200,Arkanoid.HEIGHT/2+200, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("yellow_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2-60, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2, null );
@@ -370,8 +372,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 	
 	public static void main(String[] args) {
 		//Bucle del juego, creamos un objeto de esta clase misma
-		Arkanoid arka = new Arkanoid();
-		arka.game();
+		int i=1;
+		while(i==1) {
+			Arkanoid arka = new Arkanoid();
+			arka.game();
+		}
+		
 	
 	}
 }
