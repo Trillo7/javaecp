@@ -34,14 +34,18 @@ public class PlaySound {
 	
 	//sonido de inicio de juego
 	public void startGame() {
-		HiloSonido aceite = new HiloSonido("Arkanoid/soundUtils/megamanBackground.wav");
-		aceite.start();
+		HiloSonido startGame = new HiloSonido("Arkanoid/soundUtils/megamanBackground.wav");
+		startGame.start();
 	}
 	
-	//sonido rampa
+	//sonido explosion
 	public void explosionSound() {
-		HiloSonido rampa = new HiloSonido("Arkanoid/soundUtils/explosionsfx.wav");
-		rampa.start();
+		HiloSonido explosion = new HiloSonido("Arkanoid/soundUtils/explosionsfx.wav");
+		explosion.start();
 	}
-	
+	//sonido bola disparada
+	public void blasterSound() {
+		HiloSonido blaster = new HiloSonido("Arkanoid/soundUtils/blasterhansolo.wav");
+		blaster.start();
+	}
 }

@@ -124,6 +124,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 				if(e.getKeyCode()==KeyEvent.VK_SPACE || e.getKeyCode()==KeyEvent.VK_ESCAPE) {
 					pause=!pause;
 					initPause=false;
+					PlaySound.getSound().blasterSound();
 				}
 				if(pause) {
 					
@@ -297,8 +298,10 @@ public class Arkanoid extends Canvas implements KeyListener {
 			try { 
 				 Thread.sleep(SPEED);
 			} catch (InterruptedException e) {}
-			if(System.currentTimeMillis() - initTime > 5000) {
+			if(initPause==true && System.currentTimeMillis() - initTime > 5000) {
 				initPause=false;
+				PlaySound.getSound().blasterSound();
+
 			}
 		}
 	}
@@ -321,7 +324,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 	 * Getter Singleton
 	 * @return
 	 */
-	public static Arkanoid getInstancia () {
+	public synchronized static Arkanoid getInstancia () {
 		if (instance == null) {
 			instance = new Arkanoid();
 		}
