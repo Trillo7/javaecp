@@ -1,5 +1,4 @@
-package calculadora;
-
+package kk.calculadora;
 public class calculadora {
 private int num1;
 private int num2;

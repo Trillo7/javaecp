@@ -13,7 +13,7 @@ public class Actor {
 	protected int frameSpeed;
 	protected int t;
 
-	protected boolean markedForRemoval;
+	private int markedForRemoval;
 
 	
 	public Actor() {
@@ -57,11 +57,11 @@ public class Actor {
 		if (t % frameSpeed == 0){
 			t=0;
 			currentFrame = (currentFrame + 1) % spriteNames.length;
-			markedForRemoval=true;
+			markedForRemoval++;
 		}
 	}
 	
-	public boolean isMarkedForRemoval() {
+	public int getMarkedForRemoval() {
 		return markedForRemoval;
 	}
 	

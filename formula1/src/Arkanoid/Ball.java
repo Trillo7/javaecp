@@ -9,7 +9,7 @@ public class Ball extends Actor {
 	
 	public Ball() {
 		super();
-		setSpriteNames( new String[] {"ballBlue.png"});
+		setSpriteNames( new String[] {"ballGrey.png"});
 		setFrameSpeed(35);
 	}
 	
@@ -17,14 +17,14 @@ public class Ball extends Actor {
 		super.act();
 		x+=vx;//aumentamos su posicion para que se mueva
 		y+=vy;
-		if (x < 0 || x > Arkanoid.WIDTH ) { // calcular rebote
+		if (x < 0 || x > Arkanoid.WIDTH-18 ) { // calcular rebote
 			vx = -vx; 	
 		}
 		if (y < 0 || y > Arkanoid.HEIGHT) { // calcular rebote
 			vy = -vy; 	
 		}
 		
-		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24);
+		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
 			vy = -vy; 

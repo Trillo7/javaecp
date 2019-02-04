@@ -8,7 +8,7 @@ public class Brick extends Actor {
 	protected int vx;
 	private int lives;
 	
-	public Brick(String color) {
+	public Brick(String color,int lives) {
 		super();
 		if(color=="blue") {
 			setSpriteNames( new String[] {"element_blue_rectangle.png","element_blue_rectangle_glossy.png"});

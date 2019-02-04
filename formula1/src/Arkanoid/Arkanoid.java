@@ -9,7 +9,9 @@ import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
@@ -35,59 +37,102 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 670; 
 	public static final int SPEED=10;
+	public static long initTime=System.currentTimeMillis();
 	private static Arkanoid instance = null;
+	private boolean pause=false;
+	private boolean initPause=true;
 
 	public Arkanoid() {
 		
-		JFrame ventana = new JFrame("Arkanoid HD by Trillo");
+		JFrame ventana = new JFrame("C U S T O M N O I D");
 		JPanel panel = (JPanel)ventana.getContentPane();
 		setBounds(0,0,Arkanoid.WIDTH,Arkanoid.HEIGHT);
 		panel.setPreferredSize(new Dimension(Arkanoid.WIDTH,Arkanoid.HEIGHT));
 		panel.setLayout(null);
 		panel.add(this);
 		ventana.setBounds(0,0,Arkanoid.WIDTH,Arkanoid.HEIGHT);
-		ventana.setVisible(true);		
+		ventana.setVisible(true);
 		ventana.addWindowListener( new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		
-		this.addMouseMotionListener( new MouseMotionAdapter() {
+		ventana.setResizable(false);
+		createBufferStrategy(2);
+		strategy = getBufferStrategy();
+		requestFocus();
+		//SENSOR RATON Botones
+		this.addMouseListener( new MouseAdapter() {
 			
-			@Override 
-			public void mouseMoved(MouseEvent e) { //SENSOR RATON
+			@Override
+			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				player.setX(e.getX());
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				initPause=false;
 			}
 		});
-		
-		this.addKeyListener(new KeyAdapter() {
+		//Sensor raton motion
+		this.addMouseMotionListener( new MouseMotionAdapter() {
+		@Override 
+		public void mouseMoved(MouseEvent e) { 
+			// TODO Auto-generated method stub
+			if(pause) {
+				
+			}else {
+				player.setX(e.getX());
+			}
 			
+		}
+		});
+		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
 				
 			}
-			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
+				player.keyReleased(e);
 				
 			}
-			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
+				if(e.getKeyCode()==KeyEvent.VK_SPACE || e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+					pause=!pause;
+					initPause=false;
+				}
+				if(pause) {
+					
+				}else {
+					player.keyPressed(e);
+				}
 				
 			}
 		});
-		
-		ventana.setResizable(false);
-		createBufferStrategy(2);
-		strategy = getBufferStrategy();
-		requestFocus();
-		addKeyListener(this);
 	}
 	
 	public void initWorld() {
@@ -97,7 +142,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		// CREAMOS ESTE NIVEL
 		// creamos Bricks verdes
 		for (int i = 0; i < 10; i++){
-		  Brick l = new Brick("green");
+		  Brick l = new Brick("green",1);
 		  l.setX(3+(i * 70) );
 		  l.setY(10);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
@@ -105,7 +150,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}
 		// creamos Bricks azules
 		for (int i = 0; i < 10; i++){
-		  Brick l = new Brick("blue");
+		  Brick l = new Brick("blue",1);
 		  l.setX(3+(i * 70) );
 		  l.setY(50);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
@@ -113,28 +158,28 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}
 		
 		for (int i = 0; i < 10; i++){
-		  Brick l = new Brick("grey");
+		  Brick l = new Brick("grey",1);
 		  l.setX(3+(i * 70) );
 		  l.setY(90);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		for (int i = 0; i < 10; i++){
-		  Brick l = new Brick("purple");
+		  Brick l = new Brick("purple",1);
 		  l.setX(3+(i * 70) );
 		  l.setY(130);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		for (int i = 0; i < 10; i++){
-		  Brick l = new Brick("red");
+		  Brick l = new Brick("red",1);
 		  l.setX(3+(i * 70) );
 		  l.setY(170);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		for (int i = 0; i < 10; i++){
-		  Brick l = new Brick("yellow");
+		  Brick l = new Brick("yellow",1);
 		  l.setX(3+(i * 70) );
 		  l.setY(210);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
@@ -143,18 +188,20 @@ public class Arkanoid extends Canvas implements KeyListener {
 		//Inicializamos al jugador
 		player = new Player(); 
 		player.setX(Arkanoid.WIDTH/2);
-		player.setY(Arkanoid.HEIGHT - 2*player.getHeight());
+		player.setY(Arkanoid.HEIGHT - 2*player.getHeight()+50);
 		
 		//Inicializamos la bola
 		ball= new Ball(); 
-		ball.setX(Arkanoid.WIDTH/2);
-		ball.setY(Arkanoid.WIDTH/2);
+		ball.setX(player.getX()+40);
+		ball.setY(player.getY()-128);
 		ball.setVx(3); // velocidad de movimiento lateral
-		ball.setVy(3); // velocidad de mov
+		ball.setVy(3); // velocidad de movimiento vertical
+		
 
 	}
 	
 	public void updateWorld() {
+		
 		// Llamamos al act de cada actor
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = actors.get(i);
@@ -165,11 +212,22 @@ public class Arkanoid extends Canvas implements KeyListener {
 		for (int i = 0; i < explosionlist.size(); i++) {
 			Actor exp = explosionlist.get(i);
 			exp.act();
-			if(exp.markedForRemoval) {
+			if(exp.getMarkedForRemoval()>3) { // decidimos cuantas veces queremos repetir la animacion
 				explosionlist.clear();
 			}
 		}
-		ball.act(player.getY(), player.getX());
+		//que la pelota siga la nave en la pausa inicial
+		if(initPause) {
+			ball.setX(player.getX()+40);
+			ball.setY(player.getY()-20);
+		}
+		//pausemos la pelota
+		if(pause || initPause) {
+	
+		}else {
+			ball.act(player.getY(), player.getX());
+		}
+		
 		player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
 	}
 	  public void checkCollisions() {
@@ -191,12 +249,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 		g.setColor(Color.black);
 		g.fillRect(0,0,getWidth(),getHeight());
 		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, null );
-		//Bucle para pintarse así mismo cada actor
+		//Bucle para pintarse asï¿½ mismo cada actor
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = actors.get(i);
 			l.paint(g);
 		}
-		//BUcle para pintarse así mismo cada explosión
+		//Bucle para pintarse asi mismo cada explosion
 		for (int i = 0; i < explosionlist.size(); i++) {
 			Actor exp = explosionlist.get(i);
 			exp.paint(g);
@@ -209,9 +267,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 			g.drawString(String.valueOf(1000/usedTime)+" fps",0,Arkanoid.HEIGHT-50);
 		}else {
 			g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
+		}// pintar pause
+		if(pause || initPause) {
+			g.drawImage( SpriteCache.getInstance().getSprite("pause-youtube.png"), Arkanoid.WIDTH/2-255,Arkanoid.HEIGHT/2-280, null );
 		}
-
 		strategy.show();
+		
 	}
 	
 	
@@ -236,6 +297,9 @@ public class Arkanoid extends Canvas implements KeyListener {
 			try { 
 				 Thread.sleep(SPEED);
 			} catch (InterruptedException e) {}
+			if(System.currentTimeMillis() - initTime > 5000) {
+				initPause=false;
+			}
 		}
 	}
 	

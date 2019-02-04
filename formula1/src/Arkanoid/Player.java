@@ -11,7 +11,8 @@ public class Player extends Actor {
 	
 	public Player() {
 		super();
-		setSpriteNames( new String[] {"paddleBlue.png"});
+		setSpriteNames( new String[] {"paddleRed.png","paddleBlue.png"});
+		setFrameSpeed(40);
 	}
 	
 	public void act() {
@@ -34,32 +35,32 @@ public class Player extends Actor {
  	public void setVy(int i) {vy = i;	}
   
   
-  protected void updateSpeed() {
-  	vx=0;vy=0;
-  	//if (down) vy = PLAYER_SPEED;
-  	//if (up) vy = -PLAYER_SPEED;
-  	if (left) vx = -PLAYER_SPEED;
-  	if (right) vx = PLAYER_SPEED;
-  }
-  
-  public void keyReleased(KeyEvent e) {
-   	switch (e.getKeyCode()) {
-  		case KeyEvent.VK_DOWN : down = false;break;
-		  case KeyEvent.VK_UP : up = false; break;
-		  case KeyEvent.VK_LEFT : left = false; break; 
-		  case KeyEvent.VK_RIGHT : right = false;break;
-   	}
-   	updateSpeed();
-  }
-  
-  public void keyPressed(KeyEvent e) {
-  	switch (e.getKeyCode()) {
-		  case KeyEvent.VK_UP : up = true; break;
-		  case KeyEvent.VK_LEFT : left = true; break;
-		  case KeyEvent.VK_RIGHT : right = true; break;
-		  case KeyEvent.VK_DOWN : down = true;break;
-  	}
-  	updateSpeed();
-  }
-  
+	protected void updateSpeed() {
+	  	vx=0;vy=0;
+	  	//if (down) vy = PLAYER_SPEED;
+	  	//if (up) vy = -PLAYER_SPEED;
+	  	if (left) vx = -PLAYER_SPEED;
+	  	if (right) vx = PLAYER_SPEED;
+	}
+	  
+	public void keyReleased(KeyEvent e) {
+	   	switch (e.getKeyCode()) {
+	  		case KeyEvent.VK_DOWN : down = false;break;
+			case KeyEvent.VK_UP : up = false; break;
+			case KeyEvent.VK_LEFT : left = false; break; 
+			case KeyEvent.VK_RIGHT : right = false;break;
+	   	}
+	   	updateSpeed();
+	}
+	  
+	public void keyPressed(KeyEvent e) {
+	  	switch (e.getKeyCode()) {
+	  		case KeyEvent.VK_UP : up = true; break;
+			case KeyEvent.VK_LEFT : left = true; break;
+			case KeyEvent.VK_RIGHT : right = true; break;
+			case KeyEvent.VK_DOWN : down = true;break;
+	  	}
+	  	updateSpeed();
+	}
+ 
 }
