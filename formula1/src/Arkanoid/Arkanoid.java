@@ -294,6 +294,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		// Pintamos menu
 		if(menu==1) {
 			g.drawImage( SpriteCache.getInstance().getSprite("background2.png"), 0,0, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("yellow_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2-60, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2, null );
