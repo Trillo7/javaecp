@@ -288,7 +288,8 @@ public class Arkanoid extends Canvas implements KeyListener {
 			g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
 		}// pintar pause
 		if(pause || initPause || menu==1) {
-			g.drawImage( SpriteCache.getInstance().getSprite("pause-youtube.png"), Arkanoid.WIDTH/2-255,Arkanoid.HEIGHT/2-280, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr75.png"), 10,Arkanoid.HEIGHT/2-360, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("gnome-pause.png"), Arkanoid.WIDTH/2-255,Arkanoid.HEIGHT/2-280, null );
 		}
 		// Pintamos menu
 		if(menu==1) {
