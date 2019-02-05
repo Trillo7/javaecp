@@ -93,16 +93,14 @@ public class Arkanoid extends Canvas implements KeyListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if(initPause==true && menu==0) {
-					initPause=false;
-					//pause=false;
+				if(initPause==true && menu==0) { //Para al hacer click en initPause antes de los 5 segundos
+					endPausesRoundstart();
 				}
-				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) {
+				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su música
 					menu=0;
 					PlaySound.getSound().stopMenu();
 				}
 				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
-			//	if((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-55 && e.getY()<Arkanoid.HEIGHT/2-100)) {
 					System.exit(0);
 				}
 			}
@@ -136,7 +134,6 @@ public class Arkanoid extends Canvas implements KeyListener {
 				// TODO Auto-generated method stub
 				if(e.getKeyCode()==KeyEvent.VK_SPACE || e.getKeyCode()==KeyEvent.VK_ESCAPE) {
 					pause=!pause;
-					//initPause=false;
 					PlaySound.getSound().blasterSound();
 				}
 				if(pause) {
@@ -318,6 +315,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 	}
 	public void keyTyped(KeyEvent e) {}
 	
+	public void endPausesRoundstart() {
+		initPause=false;
+		pause=false;
+		PlaySound.getSound().background1Sound();
+		PlaySound.getSound().blasterSound();
+	}
 	public void game() {
 		usedTime=1000;
 		initWorld();
@@ -331,10 +334,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 				 Thread.sleep(SPEED);
 			} catch (InterruptedException e) {}
 			if(initPause==true && menu==0 && System.currentTimeMillis() - initTime > 5000) {
-				initPause=false;
-				pause=false;
-				PlaySound.getSound().background1Sound();
-				PlaySound.getSound().blasterSound();
+				endPausesRoundstart();
 
 			}
 		}
