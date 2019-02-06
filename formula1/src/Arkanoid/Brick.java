@@ -40,6 +40,7 @@ public class Brick extends Actor {
         	exp.setX(this.getX()+10);
         	exp.setY(this.getY());
         	Arkanoid.explosionlist.add(exp);
+        //	Arkanoid.getInstance().getExplosionlist().add(exp);
         	PlaySound.getSound().explosionSound();
     	}
 

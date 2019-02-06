@@ -32,18 +32,31 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private Player player;
 	private Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
-	public static List<Actor> explosionlist = new ArrayList<Actor>();
+	static List<Actor> explosionlist = new ArrayList<Actor>();
 	public static final int WIDTH=701;
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 670; 
 	public static final int SPEED=10;
 	public static long initTime=System.currentTimeMillis();
-	private static Arkanoid instance = null;
+	
 	private boolean pause=false;
 	private boolean initPause=true;
 	public static int menu=1;
 	public int gameOver=0;
+	private boolean showFPS=false;
 	
+	// Variable para patrón Singleton
+	private static Arkanoid instancia = null;
+	/**
+	 * Getter Singleton
+	 * @return
+	 */
+	public synchronized static Arkanoid getInstance () {
+		if (instancia == null) {
+			instancia = new Arkanoid();
+		}
+		return instancia;
+	}
 	public Arkanoid() {
 		
 		JFrame ventana = new JFrame("C U S T O M N O I D");
@@ -282,11 +295,15 @@ public class Arkanoid extends Canvas implements KeyListener {
 		player.paint(g);
 		ball.paint(g);
 		g.setColor(Color.white);
-		if (usedTime > 0) { //contador de fps
-			g.drawString(String.valueOf(1000/usedTime)+" fps",0,Arkanoid.HEIGHT-50);
-		}else {
-			g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
-		}// pintar pause
+		//contador de fps
+		if(showFPS) {
+			if (usedTime > 0) { 
+				g.drawString(String.valueOf(1000/usedTime)+" fps",0,Arkanoid.HEIGHT-50);
+			}else {
+				g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
+			}
+		}
+		// pintar pause
 		if(pause || initPause || menu==1) {
 			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr75.png"), 10,Arkanoid.HEIGHT/2-360, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("gnome-pause.png"), Arkanoid.WIDTH/2-255,Arkanoid.HEIGHT/2-280, null );
@@ -320,6 +337,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		initPause=false;
 		pause=false;
 		PlaySound.getSound().background1Sound();
+		//CacheRecursos.getInstancia().loopSonido("fairytail-theme.wav");
 		PlaySound.getSound().blasterSound();
 	}
 	public void game() {
@@ -362,25 +380,14 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public void setMenu(int menu) {
 		this.menu = menu;
 	}
-
-	/**
-	 * Getter Singleton
-	 * @return
-	 */
-	public synchronized static Arkanoid getInstancia () {
-		if (instance == null) {
-			instance = new Arkanoid();
-		}
-		return instance;
-	}
 	
 	public static void main(String[] args) {
 		//Bucle del juego, creamos un objeto de esta clase misma
-		int i=1;
-		while(i==1) {
-			Arkanoid arka = new Arkanoid();
-			arka.game();
-		}
+		CacheRecursos.getInstancia().cargarRecursosEnMemoria();
+		Arkanoid arka = new Arkanoid();
+		
+		arka.game();
+		
 		
 	
 	}

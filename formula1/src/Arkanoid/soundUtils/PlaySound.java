@@ -3,17 +3,9 @@ package Arkanoid.soundUtils;
 public class PlaySound {
 
 	
-	//variables usadas
-	HiloSonidoBucle obj = null;
-	public static PlaySound sonido = null;
-	
-	//singletone
-	public static PlaySound getSound() {
-		if (sonido == null) {
-			sonido = new PlaySound();
-		}
-		return sonido;
-	}
+	// Variables de sonido
+	public static PlaySound soundclass = null;
+	static HiloSonidoBucle s1 = null;
 
 	//constructor
 	public PlaySound() {
@@ -23,32 +15,54 @@ public class PlaySound {
 	
 	//sonido de fondo ronda 1
 	public void background1Sound() {
-		obj = new HiloSonidoBucle("Arkanoid/soundUtils/megamanNebulaBackground.wav");
-		obj.start();
+		s1 = new HiloSonidoBucle("Arkanoid/soundUtils/fairytail-theme.wav");
+		s1.start();
+	}
+	public void background2Sound() {
+		s1= new HiloSonidoBucle("Arkanoid/soundUtils/megamanNebulaBackground.wav");
+		s1.start();
+	}
+	//sonido de inicio de juego del menu
+	public void startMenu() {
+		s1 = new HiloSonidoBucle("Arkanoid/soundUtils/megamanBackground.wav");
+		s1.start();
 	}
 	
 	//sonido de fondo para
 	public void background1Stop() {
-		obj.parar();
+		s1.parar();
 	}
-	
-	//sonido de inicio de juego del menu
-	public void startMenu() {
-		obj = new HiloSonidoBucle("Arkanoid/soundUtils/megamanBackground.wav");
-		obj.start();
+	//sonido de fondo para
+	public void background2Stop() {
+		s1.parar();
 	}
 	public void stopMenu() {
-		obj.parar();
+		s1.parar();
+	}
+	
+    // Sonidos
+	public void wooshSound() {
+		HiloSonido woosh = new HiloSonido("Arkanoid/soundUtils/woosh.wav");
+		woosh.start();
 	}
 	
 	//sonido explosion
 	public void explosionSound() {
-		HiloSonido explosion = new HiloSonido("Arkanoid/soundUtils/explosionsfx.wav");
-		explosion.start();
+		HiloSonido explosionsfx = new HiloSonido("Arkanoid/soundUtils/kboom.wav");
+		explosionsfx.start();
 	}
 	//sonido bola disparada
 	public void blasterSound() {
 		HiloSonido blaster = new HiloSonido("Arkanoid/soundUtils/blasterhansolo.wav");
 		blaster.start();
 	}
+	
+	// Single-ton
+	public static PlaySound getSound() {
+		if (soundclass == null) {
+			soundclass = new PlaySound();
+		}
+		return soundclass;
+	}
+
 }
