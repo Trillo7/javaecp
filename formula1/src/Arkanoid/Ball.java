@@ -29,7 +29,7 @@ public class Ball extends Actor {
 			// BUG 2 PORQUE GETINSTANCE CREA OTRA VENTANA
 			// Bug 1 sonido file java
 			//Arkanoid.getInstance().setMenu(1);
-			Arkanoid.menu=1;
+			Arkanoid.getInstance().setMenu(1);
 		}
 		
 		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave

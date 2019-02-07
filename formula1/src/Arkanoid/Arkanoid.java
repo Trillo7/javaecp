@@ -32,7 +32,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private Player player;
 	private Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
-	static List<Actor> explosionlist = new ArrayList<Actor>();
+	private List<Actor> explosionlist = new ArrayList<Actor>();
 	public static final int WIDTH=701;
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 670; 
@@ -41,11 +41,11 @@ public class Arkanoid extends Canvas implements KeyListener {
 	
 	private boolean pause=false;
 	private boolean initPause=true;
-	public static int menu=1;
+	private int menu=1;
 	public int gameOver=0;
 	private boolean showFPS=false;
 	
-	// Variable para patrón Singleton
+	// Variable para patrï¿½n Singleton
 	private static Arkanoid instancia = null;
 	/**
 	 * Getter Singleton
@@ -57,8 +57,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}
 		return instancia;
 	}
-	public Arkanoid() {
-		
+	public Arkanoid() {		
 		JFrame ventana = new JFrame("C U S T O M N O I D");
 		JPanel panel = (JPanel)ventana.getContentPane();
 		setBounds(0,0,Arkanoid.WIDTH,Arkanoid.HEIGHT);
@@ -109,7 +108,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 				if(initPause==true && menu==0) { //Para al hacer click en initPause antes de los 5 segundos
 					endPausesRoundstart();
 				}
-				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su música
+				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su mï¿½sica
 					menu=0;
 					PlaySound.getSound().stopMenu();
 				}
@@ -384,9 +383,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public static void main(String[] args) {
 		//Bucle del juego, creamos un objeto de esta clase misma
 		CacheRecursos.getInstancia().cargarRecursosEnMemoria();
-		Arkanoid arka = new Arkanoid();
-		
-		arka.game();
+		Arkanoid.getInstance().game();
 		
 		
 	
