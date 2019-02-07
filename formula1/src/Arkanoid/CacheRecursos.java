@@ -14,95 +14,98 @@ import javax.imageio.ImageIO;
  *
  */
 public class CacheRecursos {
-	// HashMap que actúa como almacén de imágenes
+	// HashMap que actï¿½a como almacï¿½n de imï¿½genes
 	private HashMap<String, Object> hmRecursos = new HashMap<String, Object>();
 	// Carpetas en la que se encuentran todos los recursos
-	private String nombreCarpetaParaFile = "src";
-	private String nombreCarpetaParaURL = "Arkanoid/soundUtils/";
+	private String nombreCarpetaParaFile = "src/Arkanoid/soundUtils"; //para linux
+	private String nombreCarpetaParaURL = "/Arkanoid/soundUtils/"; // para linux
 
 	
 	
 	// Instancia Singleton
-	private static CacheRecursos instancia= null;
-	
-	
-	/**
-	 * Getter Singleton
-	 * @return
-	 */
-	public static CacheRecursos getInstancia () {
-		if (instancia == null) {
-			instancia = new CacheRecursos();
-		}
-		return instancia;
-	}
-
-
-	/**
-	 * 
-	 */
-	public void cargarRecursosEnMemoria () {
-		File carpeta = new File(nombreCarpetaParaFile);
-		for (File fichero : carpeta.listFiles()) {
-	        if (fichero.isFile()) {
-	        	cargarFicheroEnHashMap(fichero.getName());
-	        }
-	    }
-	}
-
-	
-	/**
-	 * 
-	 * @param nombreFichero
-	 */
-	private void cargarFicheroEnHashMap (String nombreFichero) {
+		private static CacheRecursos instancia= null;
 		
-		// Obtengo un objeto URL para localizar el recurso
-		URL url = null;
-		url = getClass().getResource(nombreCarpetaParaURL + nombreFichero);
-		// Discriminaré el caso de que intento cargar un sonido del caso de cargar imágenes
-		try {
-			if (nombreFichero.endsWith(".wav") || nombreFichero.endsWith(".mp3")) {
-				this.hmRecursos.put(nombreFichero, Applet.newAudioClip(url));
+		
+		/**
+		 * Getter Singleton
+		 * @return
+		 */
+		public static CacheRecursos getInstancia () {
+			if (instancia == null) {
+				instancia = new CacheRecursos();
+			}
+			return instancia;
+		}
 
-			} 
-			else { // Si no es un sonido entiendo que se trata de una imagen
-				this.hmRecursos.put(nombreFichero, ImageIO.read(url));
+
+		/**
+		 * 
+		 */
+		public void cargarRecursosEnMemoria () {
+			File carpeta = new File(nombreCarpetaParaFile);
+			for (File fichero : carpeta.listFiles()) {
+				System.out.println("fichero encontrado: " + fichero);
+		        if (fichero.isFile()) {
+		        	cargarFicheroEnHashMap(fichero.getName());
+		        }
+		    }
+		}
+
+		
+		/**
+		 * 
+		 * @param nombreFichero
+		 */
+		private void cargarFicheroEnHashMap (String nombreFichero) {
+			// Obtengo un objeto URL para localizar el recurso
+			URL url = null;
+			System.out.println("cargarFicheroEnHashMap: " + nombreCarpetaParaURL + nombreFichero);
+			url = getClass().getResource(nombreCarpetaParaURL + nombreFichero);
+			// Discriminarï¿½ el caso de que intento cargar un sonido del caso de cargar imï¿½genes
+			try {
+				if (nombreFichero.endsWith(".wav") || nombreFichero.endsWith(".mp3")) {
+					this.hmRecursos.put(nombreFichero, Applet.newAudioClip(url));
+				} 
+				else { // Si no es un sonido entiendo que se trata de una imagen
+					this.hmRecursos.put(nombreFichero, ImageIO.read(url));
+				}
+			}
+			catch (Exception ex) {
+				System.out.println("No se pudo cargar el recurso " + nombreFichero);
+				ex.printStackTrace();
 			}
 		}
-		catch (Exception ex) {
-			System.out.println("No se pudo cargar el recurso " + nombreFichero);
-			ex.printStackTrace();
+
+		
+		
+		/**
+		 * Mediante este mï¿½todo casteamos a imagen el recurso que nos proporciona el supertipo
+		 * @param name
+		 * @return
+		 */
+		public BufferedImage getImagen(String nombreFichero) {
+			return (BufferedImage) hmRecursos.get(nombreFichero);
 		}
-	}
 
-	
-	
-	/**
-	 * Mediante este método casteamos a imagen el recurso que nos proporciona el supertipo
-	 * @param name
-	 * @return
-	 */
-	public BufferedImage getImagen(String nombreFichero) {
-		return (BufferedImage) hmRecursos.get(nombreFichero);
-	}
+		
+		/**
+		 * Ejecuta un archivo de sonido de forma aislada
+		 * @param name
+		 */
+		public void playSonido(String nombreFichero) {
+			((AudioClip)hmRecursos.get(nombreFichero)).play();
+		}
+		
+		/**
+		 * Reproduce un archivo de sonido en bucle
+		 * @param name
+		 */
+		public void loopSonido(final String nombreFichero) {
+			System.out.println("hmRecursos: " + hmRecursos);
+			System.out.println("nombreFichero: " + nombreFichero);
+			System.out.println("mRecursos.get(nombreFichero): " + hmRecursos.get(nombreFichero));
+			((AudioClip)hmRecursos.get(nombreFichero)).loop();
+		}
 
-	
-	/**
-	 * Ejecuta un archivo de sonido de forma aislada
-	 * @param name
-	 */
-	public void playSonido(String nombreFichero) {
-		((AudioClip)hmRecursos.get(nombreFichero)).play();
+		
 	}
-	
-	/**
-	 * Reproduce un archivo de sonido en bucle
-	 * @param name
-	 */
-	public void loopSonido(final String nombreFichero) {
-		((AudioClip)hmRecursos.get(nombreFichero)).loop();
-	}
-
-	
-}

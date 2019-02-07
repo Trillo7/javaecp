@@ -46,16 +46,16 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private boolean showFPS=false;
 	
 	// Variable para patr�n Singleton
-	private static Arkanoid instancia = null;
+	private static Arkanoid instance = null;
 	/**
 	 * Getter Singleton
 	 * @return
 	 */
 	public synchronized static Arkanoid getInstance () {
-		if (instancia == null) {
-			instancia = new Arkanoid();
+		if (instance == null) {
+			instance = new Arkanoid();
 		}
-		return instancia;
+		return instance;
 	}
 	public Arkanoid() {		
 		JFrame ventana = new JFrame("C U S T O M N O I D");
@@ -335,8 +335,8 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public void endPausesRoundstart() {
 		initPause=false;
 		pause=false;
-		PlaySound.getSound().background1Sound();
-		//CacheRecursos.getInstancia().loopSonido("fairytail-theme.wav");
+		//PlaySound.getSound().background1Sound();
+		CacheRecursos.getInstancia().loopSonido("fairytail-theme.wav");
 		PlaySound.getSound().blasterSound();
 	}
 	public void game() {

@@ -21,14 +21,12 @@ public class Ball extends Actor {
 		y+=vy;
 		if (x < 0 || x > Arkanoid.WIDTH-18 ) { // calcular rebote
 			vx = -vx; 
-			PlaySound.getSound().wooshSound();
-			//CacheRecursos.getInstancia().playSonido("woosh.wav");
+			//PlaySound.getSound().wooshSound();
+			CacheRecursos.getInstancia().playSonido("woosh.wav");
+			
 		}
-		if (y < 0 || y > Arkanoid.HEIGHT) { // calcular rebote
+		if (y < 0 || y > Arkanoid.HEIGHT) { // calcular rebote abajo
 			vy = -vy; 	
-			// BUG 2 PORQUE GETINSTANCE CREA OTRA VENTANA
-			// Bug 1 sonido file java
-			//Arkanoid.getInstance().setMenu(1);
 			Arkanoid.getInstance().setMenu(1);
 		}
 		
@@ -36,8 +34,8 @@ public class Ball extends Actor {
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
 			vy = -vy; 
-			PlaySound.getSound().wooshSound();
-			//CacheRecursos.getInstancia().playSonido("woosh.wav");
+			//PlaySound.getSound().wooshSound();
+			CacheRecursos.getInstancia().playSonido("woosh.wav");
 
 		}
 	}
