@@ -112,6 +112,28 @@ public class TrayectoriaRecta {
 	}
 	
 	
+	
+	public void reflejarHaciaAbajo (PuntoAltaPrecision p) {
+		this.setPendiente(-this.m, p);
+		this.direccionCreciente = (this.m < 0)? false : true;
+	}
+	
+	public void reflejarHaciaArriba (PuntoAltaPrecision p) {
+		this.setPendiente(-this.m, p);
+		this.direccionCreciente = (this.m < 0)? true : false;
+	}
+	
+	public void reflejarHaciaDerecha (PuntoAltaPrecision p) {
+		this.setPendiente(-this.m, p);
+		this.direccionCreciente = true;
+	}
+	
+	public void reflejarHaciaIzquierda (PuntoAltaPrecision p) {
+		this.setPendiente(-this.m, p);
+		this.direccionCreciente = false;
+	}
+	
+	
 	/**
 	 * M�todo para modificar la pendiente por una nueva pendiente, adem�s tambi�n es necesario calcular
 	 * el nuevo punto de corte del eje de abcisas. Cuando se cambia la trayectoria siempre es necesario
@@ -119,8 +141,8 @@ public class TrayectoriaRecta {
 	 * @param nuevaPendiente
 	 * @param puntoDePivote
 	 */
-	public void modificarPendiente (float nuevaPendiente, PuntoAltaPrecision puntoDePivote) {
-		modificarPendiente(nuevaPendiente, puntoDePivote, this.direccionCreciente);
+	public void setPendiente (float nuevaPendiente, PuntoAltaPrecision puntoDePivote) {
+		setPendiente(nuevaPendiente, puntoDePivote, this.direccionCreciente);
 	}
 	
 	/**
@@ -130,7 +152,7 @@ public class TrayectoriaRecta {
 	 * @param nuevaPendiente
 	 * @param puntoDePivote
 	 */
-	public void modificarPendiente (float nuevaPendiente, PuntoAltaPrecision puntoDePivote, boolean direccionCreciente) {
+	public void setPendiente (float nuevaPendiente, PuntoAltaPrecision puntoDePivote, boolean direccionCreciente) {
 		this.m = nuevaPendiente;
 		this.o = puntoDePivote.y - this.m * puntoDePivote.x;
 		this.direccionCreciente = direccionCreciente;
@@ -141,6 +163,28 @@ public class TrayectoriaRecta {
 	 */
 	@Override	
 	public String toString () {
-		return "y = " + this.m + "x + " + this.o;
+		return "y = " + this.m + "x + " + this.o + " - direcci�n creciente: " + this.direccionCreciente;
+	}
+	
+	
+	
+	
+	
+	
+	public float getPendiente() {
+		return m;
+	}
+
+	public void setPendiente(float pendiente) {
+		this.m = m;
+	}
+
+	public static void main (String args[]) {
+		PuntoAltaPrecision coordenadas = new PuntoAltaPrecision(200, 450);
+		TrayectoriaRecta trayectoria = new TrayectoriaRecta(-2.8f, coordenadas, false);
+		for (int i = 0; i < 100; i++) {
+			coordenadas = trayectoria.getPuntoADistanciaDePunto(coordenadas, 3);
+			System.out.println("x: " + coordenadas.x + " y: " + coordenadas.y);
+		}
 	}
 }

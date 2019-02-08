@@ -46,6 +46,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public static int gameOver=0;
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
+
 	
 	// Variable para patr�n Singleton
 	private static Arkanoid instance = null;
@@ -173,7 +174,8 @@ public class Arkanoid extends Canvas implements KeyListener {
 	}
 	
 	public void initWorld() {
-	//Creamos los Bricks en arraylist
+		//Creamos la trayectoria
+		//Creamos los Bricks en arraylist
 		PlaySound.getSound().startMenu();
 		//Sonido de fondo
 		//PlaySound.getSound().background1Sound();
@@ -229,9 +231,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		player.setY(Arkanoid.HEIGHT - 2*player.getHeight()+50);
 		
 		//Inicializamos la bola
-		ball= new Ball(); 
-		ball.setX(player.getX()+40);
-		ball.setY(player.getY()-130);
+		ball= new Ball(player.getX()+40,player.getY()-130); 
 		ball.setVx(3); // velocidad de movimiento lateral
 		ball.setVy(3); // velocidad de movimiento vertical
 		
@@ -257,37 +257,36 @@ public class Arkanoid extends Canvas implements KeyListener {
 				explosionlist.clear();
 			}
 		}
-		//que la pelota siga la nave en la pausa inicial
+		// Que la pelota siga a la nave en la pausa inicial
 		if(initPause) {
 			ball.setX(player.getX()+40);
 			ball.setY(player.getY()-22);
 		}
-		//pausemos la pelota
+		// Pausemos la pelota
 		if(pause || initPause) {
 	
 		}else {
 			ball.act(player.getY(), player.getX());
 		}
-		// cuando es el menu en el inicio del juego activamos initpause, si no solo pause ya que es el menu de escapada
+		// Cuando el menu es el inicio del juego activamos initpause, si no solo pause ya que es el menu de escapada
 		if(menu==1 && esc==false) {
 				initPause=true;
 		}else if(menu==1&&esc) {
 			pause=true;
 		}
-		player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
+		player.act();//actuamos la nave
 	}
-	  public void checkCollisions() {
-		  Rectangle playerBounds = ball.getBounds();
-		  for (int i = 0; i < actors.size(); i++) {
-		        Actor a1 = actors.get(i);
-		        Rectangle r1 = a1.getBounds();
-		        if (r1.intersects(playerBounds)) {
-			        ball.vy=-ball.vy;
-		        	a1.remove(actors, i);
-		       }
-		   
-		  }
-     }
+	public void checkCollisions() {
+		Rectangle playerBounds = ball.getBounds();
+		for (int i = 0; i < actors.size(); i++) {
+			Actor a1 = actors.get(i);
+			Rectangle r1 = a1.getBounds();
+		    if (r1.intersects(playerBounds)) {
+		    	ball.collisioned();
+		        a1.remove(actors, i);
+		    }
+		}
+	}
 	public void paintWorld() {
 		Graphics2D g = (Graphics2D)strategy.getDrawGraphics();
 		Toolkit.getDefaultToolkit().sync(); //toolkit linux ubuntu java
