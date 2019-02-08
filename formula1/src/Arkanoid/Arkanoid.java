@@ -38,11 +38,13 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public static final int PLAY_HEIGHT = 670; 
 	public static final int SPEED=10;
 	public static long initTime=System.currentTimeMillis();
-	
+	private int cursorx=0;
+	private int cursory=0;
 	private boolean pause=false;
 	private boolean initPause=true;
 	private int menu=1;
-	public int gameOver=0;
+	public static int gameOver=0;
+	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
 	
 	// Variable para patr�n Singleton
@@ -71,6 +73,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 				System.exit(0);
 			}
 		});
+		
 		ventana.setResizable(false);
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
@@ -108,10 +111,14 @@ public class Arkanoid extends Canvas implements KeyListener {
 				if(initPause==true && menu==0) { //Para al hacer click en initPause antes de los 5 segundos
 					endPausesRoundstart();
 				}
+				// Boton Jugar
 				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
 					menu=0;
+					pause=false;
+					gameOver=0;
 					PlaySound.getSound().stopMenu();
 				}
+				// Boton salir
 				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
 					System.exit(0);
 				}
@@ -122,10 +129,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 		@Override 
 		public void mouseMoved(MouseEvent e) { 
 			// TODO Auto-generated method stub
+			cursorx=e.getX();
+			cursory=e.getY();
 			if(pause) {
 				
 			}else {
-				player.setX(e.getX());
+				player.setX(e.getX()-50);
 			}
 			
 		}
@@ -144,8 +153,13 @@ public class Arkanoid extends Canvas implements KeyListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				if(e.getKeyCode()==KeyEvent.VK_SPACE || e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+				if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 					pause=!pause;
+					PlaySound.getSound().blasterSound();
+				}
+				if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+					menu=1;
+					esc=true;
 					PlaySound.getSound().blasterSound();
 				}
 				if(pause) {
@@ -217,7 +231,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		//Inicializamos la bola
 		ball= new Ball(); 
 		ball.setX(player.getX()+40);
-		ball.setY(player.getY()-128);
+		ball.setY(player.getY()-130);
 		ball.setVx(3); // velocidad de movimiento lateral
 		ball.setVy(3); // velocidad de movimiento vertical
 		
@@ -246,7 +260,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		//que la pelota siga la nave en la pausa inicial
 		if(initPause) {
 			ball.setX(player.getX()+40);
-			ball.setY(player.getY()-20);
+			ball.setY(player.getY()-22);
 		}
 		//pausemos la pelota
 		if(pause || initPause) {
@@ -254,10 +268,11 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}else {
 			ball.act(player.getY(), player.getX());
 		}
-		if(menu==1) {
-			//pause=true;
-			initPause=true;
-			
+		// cuando es el menu en el inicio del juego activamos initpause, si no solo pause ya que es el menu de escapada
+		if(menu==1 && esc==false) {
+				initPause=true;
+		}else if(menu==1&&esc) {
+			pause=true;
 		}
 		player.act();//actuamos, tenemos cosas como comprobar el rebote en su act
 	}
@@ -313,11 +328,17 @@ public class Arkanoid extends Canvas implements KeyListener {
 			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("insert-coin.png"), Arkanoid.WIDTH-200,Arkanoid.HEIGHT/2+200, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logotrillostudios-75.png"), 50,Arkanoid.HEIGHT/2+200, null );
+			if(gameOver==1) {
+				g.drawImage( SpriteCache.getInstance().getSprite("goverbg2.jpg"), -150,0, null );
+				//g.drawImage( SpriteCache.getInstance().getSprite("game-over.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
+			}
 			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("yellow_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2-60, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2, null );
-
+			//pintamos cursor
+			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
 		}
+
 		strategy.show();
 		
 	}

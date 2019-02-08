@@ -39,7 +39,7 @@ public class Brick extends Actor {
         	Explosion exp = new Explosion();
         	exp.setX(this.getX()+10);
         	exp.setY(this.getY());
-        //	Arkanoid.explosionlist.add(exp);
+        	CacheRecursos.getInstancia().playSonido("woosh.wav");
         	Arkanoid.getInstance().getExplosionlist().add(exp);
         	PlaySound.getSound().explosionSound();
     	}

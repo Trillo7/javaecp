@@ -25,9 +25,13 @@ public class Ball extends Actor {
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
 			
 		}
+		if (y < 0) { // calcular rebote arriba
+			vy = -vy; 	
+		}
 		if (y < 0 || y > Arkanoid.HEIGHT) { // calcular rebote abajo
 			vy = -vy; 	
 			Arkanoid.getInstance().setMenu(1);
+			Arkanoid.gameOver=1;
 		}
 		
 		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave
