@@ -9,7 +9,6 @@ public class Ball extends Actor {
 	protected int vy;
 	PuntoAltaPrecision coordenadas=new PuntoAltaPrecision(this.x,this.y);
 	private TrayectoriaRecta trayectoria = null;
-
 	
 	public Ball(int x, int y) {
 		super();
@@ -42,19 +41,15 @@ public class Ball extends Actor {
 		if(rectball.intersects(rectplayer)) {
 			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
-
 		}
 	}
+	
 	//Colisiona (con ladrillos)
 	public void collisioned() {
 		trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 		CacheRecursos.getInstancia().playSonido("woosh.wav");
-
 	}
     
-	
-	
-	
 	/* (non-Javadoc)
 	 * @see Arkanoid.Actor#setX(int)
 	 */
@@ -73,7 +68,7 @@ public class Ball extends Actor {
 		this.coordenadas.y = i;
 	}
 
-	//getter and setters
+	// Getter and setters
 	public int getVx() { return vx; }
 	public void setVx(int i) {vx = i;	}
 	public int getVy() { return vy; }
