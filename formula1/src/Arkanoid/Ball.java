@@ -35,7 +35,7 @@ public class Ball extends Actor {
 			Arkanoid.getInstance().setMenu(1);
 			Arkanoid.gameOver=1;
 		}
-		//Colision de la bola con la nave
+		// Colision de la bola con la nave
 		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
@@ -48,6 +48,9 @@ public class Ball extends Actor {
 	public void collisioned() {
 		trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 		CacheRecursos.getInstancia().playSonido("woosh.wav");
+		// Para detectar donde hemos colisionado
+		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
+		
 	}
     
 	/* (non-Javadoc)

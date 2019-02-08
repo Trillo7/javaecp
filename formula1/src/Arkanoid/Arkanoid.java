@@ -154,9 +154,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
-				if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+				if(e.getKeyCode()==KeyEvent.VK_SPACE&&menu==0) {
 					pause=!pause;
 					PlaySound.getSound().blasterSound();
+				}
+				if(initPause==true && menu==0 && e.getKeyCode()==KeyEvent.VK_SPACE) {
+					endPausesRoundstart();
 				}
 				if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
 					menu=1;
@@ -271,14 +274,18 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}else if(menu==1&&esc) {
 			pause=true;
 		}
-		player.act();//actuamos la nave
+		//actuamos la nave
+		player.act();
 	}
 	public void checkCollisions() {
-		Rectangle playerBounds = ball.getBounds();
+		Rectangle ballRect = ball.getBounds();
 		for (int i = 0; i < actors.size(); i++) {
 			Actor a1 = actors.get(i);
 			Rectangle r1 = a1.getBounds();
-		    if (r1.intersects(playerBounds)) {
+		    if (r1.intersects(ballRect)) {
+		    	
+		    	
+		    	
 		    	ball.collisioned();
 		        a1.remove(actors, i);
 		    }
