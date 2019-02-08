@@ -283,8 +283,8 @@ public class Arkanoid extends Canvas implements KeyListener {
 			Actor a1 = actors.get(i);
 			Rectangle r1 = a1.getBounds();
 		    if (r1.intersects(ballRect)) {
-		    	
-		    	
+		    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),2);
+		    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+22,a1.getWidth(),2);
 		    	
 		    	ball.collisioned();
 		        a1.remove(actors, i);
