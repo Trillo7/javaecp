@@ -174,13 +174,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 	}
 	
 	public void initWorld() {
-		//Creamos la trayectoria
 		//Creamos los Bricks en arraylist
 		PlaySound.getSound().startMenu();
 		//Sonido de fondo
 		//PlaySound.getSound().background1Sound();
-		// CREAMOS ESTE NIVEL
-		// creamos Bricks verdes
+		// CREAMOS ESTE NIVEL - Separacion de fase
+		// Creamos Bricks verdes
 		for (int i = 0; i < 10; i++){
 		  Brick l = new Brick("green",1);
 		  l.setX(3+(i * 70) );
