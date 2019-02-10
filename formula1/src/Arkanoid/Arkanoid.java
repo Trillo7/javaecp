@@ -231,7 +231,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		player.setY(Arkanoid.HEIGHT - 2*player.getHeight()+50);
 		
 		//Inicializamos la bola
-		ball= new Ball(player.getX()+40,player.getY()-130); 
+		ball= new Ball(player.getX()+40,player.getY()-130,(float) 2.5); 
 		ball.setVx(3); // velocidad de movimiento lateral
 		ball.setVy(3); // velocidad de movimiento vertical
 		
