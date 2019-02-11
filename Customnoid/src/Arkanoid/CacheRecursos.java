@@ -17,10 +17,12 @@ public class CacheRecursos {
 	// HashMap que act�a como almac�n de im�genes
 	private HashMap<String, Object> hmRecursos = new HashMap<String, Object>();
 	// Carpetas en la que se encuentran todos los recursos
-	private String nombreCarpetaParaFile = "src/Arkanoid/soundUtils"; //para linux
-	private String nombreCarpetaParaURL = "/Arkanoid/soundUtils/"; // para linux
-
-	
+	// Rutas desarrollo
+//	private String nombreCarpetaParaFile = "src/Arkanoid/soundUtils"; 
+//	private String nombreCarpetaParaURL = "/Arkanoid/soundUtils/"; 
+	//Rutas compilado
+	private String nombreCarpetaParaFile = "./soundUtils"; 
+	private String nombreCarpetaParaURL = "/Arkanoid/soundUtils/"; 
 	
 	// Instancia Singleton
 		private static CacheRecursos instancia= null;
@@ -42,13 +44,18 @@ public class CacheRecursos {
 		 * 
 		 */
 		public void cargarRecursosEnMemoria () {
-			File carpeta = new File(nombreCarpetaParaFile);
-			for (File fichero : carpeta.listFiles()) {
-				System.out.println("fichero encontrado: " + fichero);
-		        if (fichero.isFile()) {
-		        	cargarFicheroEnHashMap(fichero.getName());
-		        }
-		    }
+			try {
+				File carpeta = new File(nombreCarpetaParaFile);
+				for (File fichero : carpeta.listFiles()) {
+					System.out.println("fichero encontrado: " + fichero);
+			        if (fichero.isFile()) {
+			        	cargarFicheroEnHashMap(fichero.getName());
+			        }
+			    }
+			}catch(Exception ex){
+				System.out.println("ruta incorrecta");
+
+			}
 		}
 
 		
