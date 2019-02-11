@@ -7,13 +7,14 @@ import java.awt.Color;
  * @author R
  *
  */
-public class Fase02 extends Fase {
+public class Fase03 extends Fase {
 	// Propiedades est�ticas de la fase
-	public static final int[][]  arraymap={	{1,0,1,2,0,2,4,4,4,2,2,2},
-											{1,0,1,2,0,2,4,0,4,2,0,0},
-											{1,1,1,2,0,2,4,4,4,2,2,0},
-											{1,1,1,2,0,2,4,0,4,2,0,0},
-											{1,0,1,0,2,0,4,4,4,2,2,2}};
+	public static final int[][]  arraymap={	{1,1,0,2,0,2,4,4,4,2,2,2},
+											{1,1,1,2,0,2,4,0,4,2,2,0},
+											{1,0,1,0,2,2,4,4,4,2,2,2},
+											{0,0,0,0,5,2,1,2,3,5,6,0},
+											{0,0,0,4,0,0,0,0,0,0,4,0},
+											{0,0,3,0,0,0,0,0,2,0,2,5}};
 	private int initX=7;
 	private int initY=7;
 	private int lcount=0;

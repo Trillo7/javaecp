@@ -19,10 +19,7 @@ public class Ball extends Actor {
 	}
 	
 	public void act(int yplayer, int xplayer) {
-		super.act();
-		
-		System.out.println("Ball: " + this);
-		
+		super.act();		
 		if(vspeed <= 10) {
 			vspeed+=0.002;
 		}
