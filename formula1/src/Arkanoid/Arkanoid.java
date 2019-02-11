@@ -186,8 +186,6 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public void initWorld() {
 		//Creamos los Bricks en arraylist
 		PlaySound.getSound().startMenu();
-		// CREAMOS ESTE NIVEL - Separacion de fase
-		// Preparaci�n de la primera fase
 	
 		// Agregamos los actores de la primera fase a nuestro juego
 		this.actors.clear();
@@ -211,8 +209,6 @@ public class Arkanoid extends Canvas implements KeyListener {
 			System.out.println("LADRILLOS VACIOS");
 			initTime=System.currentTimeMillis();
 			initPause=true;
-			System.out.println("init pause: "+initPause);
-			System.out.println(gamelevel);
 			System.out.println("siguiente fase:"+gamelevel);
 			this.ball.trayectoria = null;
 			switch (gamelevel) {
@@ -223,8 +219,6 @@ public class Arkanoid extends Canvas implements KeyListener {
 					gamelevel++;
 					break;
 				case 2:
-					ball.setY(player.getY()-24);
-
 					this.faseActiva=new Fase02();
 					this.faseActiva.inicializaFase();
 					this.actors.addAll(this.faseActiva.getActores());
@@ -357,8 +351,6 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public void keyTyped(KeyEvent e) {}
 	
 	public void endPausesRoundstart() {
-		ball.setY(player.getY()-22);
-		System.out.println("BOLA AJUSTADA");
 		initPause=false;
 		pause=false;
 		CacheRecursos.getInstancia().loopSonido("fairytail-theme.wav");

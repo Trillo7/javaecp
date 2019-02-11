@@ -5,8 +5,6 @@ import java.awt.Rectangle;
 import Arkanoid.soundUtils.PlaySound;
 
 public class Ball extends Actor {
-	protected int vx;
-	protected int vy;
 	private float vspeed;
 	PuntoAltaPrecision coordenadas=new PuntoAltaPrecision(this.x,this.y);
 	public TrayectoriaRecta trayectoria = null;
@@ -44,7 +42,7 @@ public class Ball extends Actor {
 		}
 		// calcular rebote con fin del juego abajo
 		if (y > Arkanoid.HEIGHT) { 
-			//Arkanoid.getInstance().setMenu(1);
+		//	Arkanoid.getInstance().setMenu(1);
 		//	Arkanoid.gameOver=true;
 			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 		}
@@ -63,8 +61,6 @@ public class Ball extends Actor {
 			}
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
 		}
-		
-		System.out.println("Coordenadas Ball x " + this.coordenadas.x + " y: " + this.coordenadas.y);
 	}
 	
 	//Colisiona (con ladrillos)
@@ -94,9 +90,4 @@ public class Ball extends Actor {
 		this.coordenadas.y = i;
 	}
 
-	// Getter and setters
-	public int getVx() { return vx; }
-	public void setVx(int i) {vx = i;	}
-	public int getVy() { return vy; }
-	public void setVy(int i) {vy = i;	}
 }
