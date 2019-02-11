@@ -47,8 +47,9 @@ public class Arkanoid extends Canvas implements KeyListener {
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
 	public static long hitTime=System.currentTimeMillis();
-
-	
+	public static int gamelevel=1;
+	// Fase activa en el juego
+	Fase faseActiva = null;
 	// Variable para patr�n Singleton
 	private static Arkanoid instance = null;
 	/**
@@ -186,65 +187,63 @@ public class Arkanoid extends Canvas implements KeyListener {
 		//Creamos los Bricks en arraylist
 		PlaySound.getSound().startMenu();
 		// CREAMOS ESTE NIVEL - Separacion de fase
-		// Creamos Bricks verdes
-		for (int i = 0; i < 12; i++){
-		  Brick l = new Brick("green",1);
-		  l.setX(5+(i * 58) );
-		  l.setY(10);
-		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-		  actors.add(l);
-		}
-		// creamos Bricks azules
-		for (int i = 0; i < 12; i++){
-		  Brick l = new Brick("blue",1);
-		  l.setX(5+(i * 58) );
-		  l.setY(50);
-		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-		  actors.add(l);
-		}
+		// Preparaci�n de la primera fase
+	
+		// Agregamos los actores de la primera fase a nuestro juego
+		this.actors.clear();
 		
-		for (int i = 0; i < 12; i++){
-		  Brick l = new Brick("grey",1);
-		  l.setX(5+(i * 58) );
-		  l.setY(90);
-		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-		  actors.add(l);
-		}
-		for (int i = 0; i < 12; i++){
-		  Brick l = new Brick("purple",1);
-		  l.setX(5+(i * 58) );
-		  l.setY(130);
-		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-		  actors.add(l);
-		}
-		for (int i = 0; i < 12; i++){
-		  Brick l = new Brick("red",1);
-		  l.setX(5+(i * 58) );
-		  l.setY(170);
-		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-		  actors.add(l);
-		}
-		for (int i = 0; i < 12; i++){
-		  Brick l = new Brick("yellow",2);
-		  l.setX(5+(i * 58) );
-		  l.setY(210);
-		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-		  actors.add(l);
-		}
 		//Inicializamos al jugador
 		player = new Player(3); 
 		player.setX(Arkanoid.WIDTH/2);
 		player.setY(Arkanoid.HEIGHT - 2*player.getHeight()+50);
 		
 		//Inicializamos la bola
-		ball= new Ball(player.getX()+40,player.getY()-130,(float) 2.5); 
-		ball.setVx(3); // velocidad de movimiento lateral
-		ball.setVy(3); // velocidad de movimiento vertical
+		ball= new Ball(player.getX()+40,player.getY()-130,(float) 2.5);
+		
 		
 
 	}
 	
 	public void updateWorld() {
+		//INICIO SISTEMA DE NIVELES
+
+		if(actors.isEmpty()) {
+			System.out.println("LADRILLOS VACIOS");
+			initTime=System.currentTimeMillis();
+			initPause=true;
+			System.out.println("init pause: "+initPause);
+			System.out.println(gamelevel);
+			System.out.println("siguiente fase:"+gamelevel);
+			this.ball.trayectoria = null;
+			switch (gamelevel) {
+				case 1:
+					this.faseActiva=new Fase01();
+					this.faseActiva.inicializaFase();
+					this.actors.addAll(this.faseActiva.getActores());
+					gamelevel++;
+					break;
+				case 2:
+					ball.setY(player.getY()-24);
+
+					this.faseActiva=new Fase02();
+					this.faseActiva.inicializaFase();
+					this.actors.addAll(this.faseActiva.getActores());
+					gamelevel++;
+					break;
+				default:
+					System.out.println("FIN DEL JUEGO. TODAS LAS FASES ACABADAS");
+					gameOver=true;
+					menu=1;
+					break;
+			}
+		}
+		//FIN SISTEMA DE NIVELES
+		// Que la pelota siga a la nave en la pausa inicial
+		if(initPause) {
+		//	System.out.println("COLOCAMOS BOLA EN LA NAVE");
+			ball.setX(player.getX()+40);
+			ball.setY(player.getY()-24);
+		}
 		// Para que no cuente los segundos en el menu
 		if(menu==1) {
 			initTime=System.currentTimeMillis();
@@ -263,11 +262,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 				explosionlist.clear();
 			}
 		}
-		// Que la pelota siga a la nave en la pausa inicial
-		if(initPause) {
-			ball.setX(player.getX()+40);
-			ball.setY(player.getY()-22);
-		}
+
 		// Pausemos la pelota
 		if(pause || initPause) {
 	
@@ -362,11 +357,13 @@ public class Arkanoid extends Canvas implements KeyListener {
 	public void keyTyped(KeyEvent e) {}
 	
 	public void endPausesRoundstart() {
+		ball.setY(player.getY()-22);
+		System.out.println("BOLA AJUSTADA");
 		initPause=false;
 		pause=false;
-		//PlaySound.getSound().background1Sound();
 		CacheRecursos.getInstancia().loopSonido("fairytail-theme.wav");
 		PlaySound.getSound().blasterSound();
+
 	}
 	public void game() {
 		usedTime=1000;
@@ -384,8 +381,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 				endPausesRoundstart();
 
 			}
-			System.out.println(System.currentTimeMillis()-hitTime);
-			if(System.currentTimeMillis()-hitTime>700) {
+			if(System.currentTimeMillis()-hitTime>300) { // para que la nave cambie de color al rebotar
 				Player.hit=false;
 			}
 		}

@@ -9,7 +9,7 @@ public class Ball extends Actor {
 	protected int vy;
 	private float vspeed;
 	PuntoAltaPrecision coordenadas=new PuntoAltaPrecision(this.x,this.y);
-	private TrayectoriaRecta trayectoria = null;
+	public TrayectoriaRecta trayectoria = null;
 	
 	public Ball(int x, int y, float vspeed) {
 		super();
@@ -22,6 +22,9 @@ public class Ball extends Actor {
 	
 	public void act(int yplayer, int xplayer) {
 		super.act();
+		
+		System.out.println("Ball: " + this);
+		
 		if(vspeed <= 10) {
 			vspeed+=0.002;
 		}
@@ -41,14 +44,15 @@ public class Ball extends Actor {
 		}
 		// calcular rebote con fin del juego abajo
 		if (y > Arkanoid.HEIGHT) { 
-			Arkanoid.getInstance().setMenu(1);
-			Arkanoid.gameOver=true;
+			//Arkanoid.getInstance().setMenu(1);
+		//	Arkanoid.gameOver=true;
+			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 		}
 		// Colision de la bola con la nave
 		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
-			Player.hit=true;
+			Player.hit=true;// para que la nave cambie de color al rebotar
 			Arkanoid.hitTime=System.currentTimeMillis();
 
 			if(this.x>=(xplayer+104)-1) {
@@ -59,6 +63,8 @@ public class Ball extends Actor {
 			}
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
 		}
+		
+		System.out.println("Coordenadas Ball x " + this.coordenadas.x + " y: " + this.coordenadas.y);
 	}
 	
 	//Colisiona (con ladrillos)
