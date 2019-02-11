@@ -43,9 +43,10 @@ public class Arkanoid extends Canvas implements KeyListener {
 	private boolean pause=false;
 	private boolean initPause=true;
 	private int menu=1;
-	public static int gameOver=0;
+	public static boolean gameOver=false;
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
+	public static long hitTime=System.currentTimeMillis();
 
 	
 	// Variable para patr�n Singleton
@@ -116,7 +117,12 @@ public class Arkanoid extends Canvas implements KeyListener {
 				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
 					menu=0;
 					pause=false;
-					gameOver=0;
+					//Reiniciamos juego si hemos muerto
+					if(gameOver) {
+						gameOver=false;
+						actors.clear();
+						Arkanoid.getInstance().initWorld();
+					}
 					PlaySound.getSound().stopMenu();
 				}
 				// Boton salir
@@ -181,52 +187,52 @@ public class Arkanoid extends Canvas implements KeyListener {
 		PlaySound.getSound().startMenu();
 		// CREAMOS ESTE NIVEL - Separacion de fase
 		// Creamos Bricks verdes
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 12; i++){
 		  Brick l = new Brick("green",1);
-		  l.setX(3+(i * 70) );
+		  l.setX(5+(i * 58) );
 		  l.setY(10);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		// creamos Bricks azules
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 12; i++){
 		  Brick l = new Brick("blue",1);
-		  l.setX(3+(i * 70) );
+		  l.setX(5+(i * 58) );
 		  l.setY(50);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 12; i++){
 		  Brick l = new Brick("grey",1);
-		  l.setX(3+(i * 70) );
+		  l.setX(5+(i * 58) );
 		  l.setY(90);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 12; i++){
 		  Brick l = new Brick("purple",1);
-		  l.setX(3+(i * 70) );
+		  l.setX(5+(i * 58) );
 		  l.setY(130);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 12; i++){
 		  Brick l = new Brick("red",1);
-		  l.setX(3+(i * 70) );
+		  l.setX(5+(i * 58) );
 		  l.setY(170);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
-		for (int i = 0; i < 10; i++){
-		  Brick l = new Brick("yellow",1);
-		  l.setX(3+(i * 70) );
+		for (int i = 0; i < 12; i++){
+		  Brick l = new Brick("yellow",2);
+		  l.setX(5+(i * 58) );
 		  l.setY(210);
 		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
 		  actors.add(l);
 		}
 		//Inicializamos al jugador
-		player = new Player(); 
+		player = new Player(3); 
 		player.setX(Arkanoid.WIDTH/2);
 		player.setY(Arkanoid.HEIGHT - 2*player.getHeight()+50);
 		
@@ -270,7 +276,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 		}
 		// Cuando el menu es el inicio del juego activamos initpause, si no solo pause ya que es el menu de escapada
 		if(menu==1 && esc==false) {
-				initPause=true;
+			initPause=true;
 		}else if(menu==1&&esc) {
 			pause=true;
 		}
@@ -285,9 +291,10 @@ public class Arkanoid extends Canvas implements KeyListener {
 		    if (r1.intersects(ballRect)) {
 		    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),2);
 		    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+22,a1.getWidth(),2);
-		    	
+		  
 		    	ball.collisioned();
 		        a1.remove(actors, i);
+		        break;
 		    }
 		}
 	}
@@ -331,7 +338,7 @@ public class Arkanoid extends Canvas implements KeyListener {
 			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("insert-coin.png"), Arkanoid.WIDTH-200,Arkanoid.HEIGHT/2+200, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logotrillostudios-75.png"), 50,Arkanoid.HEIGHT/2+200, null );
-			if(gameOver==1) {
+			if(gameOver) {
 				g.drawImage( SpriteCache.getInstance().getSprite("goverbg2.jpg"), -150,0, null );
 				//g.drawImage( SpriteCache.getInstance().getSprite("game-over.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			}
@@ -341,11 +348,9 @@ public class Arkanoid extends Canvas implements KeyListener {
 			//pintamos cursor
 			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
 		}
-
 		strategy.show();
 		
 	}
-	
 	
 	public void keyPressed(KeyEvent e) {
 		player.keyPressed(e);
@@ -379,6 +384,10 @@ public class Arkanoid extends Canvas implements KeyListener {
 				endPausesRoundstart();
 
 			}
+			System.out.println(System.currentTimeMillis()-hitTime);
+			if(System.currentTimeMillis()-hitTime>700) {
+				Player.hit=false;
+			}
 		}
 	}
 	
@@ -408,8 +417,5 @@ public class Arkanoid extends Canvas implements KeyListener {
 		//Bucle del juego, creamos un objeto de esta clase misma
 		CacheRecursos.getInstancia().cargarRecursosEnMemoria();
 		Arkanoid.getInstance().game();
-		
-		
-	
 	}
 }

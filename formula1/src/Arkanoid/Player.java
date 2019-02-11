@@ -3,20 +3,28 @@ package Arkanoid;
 import java.awt.event.KeyEvent;
 
 public class Player extends Actor {
-	protected static final int PLAYER_SPEED = 4;
+	protected static final int PLAYER_SPEED = 6;
 	protected int vx;
 	protected int vy;
+	public static boolean hit=false;
+	private int lives;
 	private boolean up,down,left,right;
 		
 	
-	public Player() {
+	public Player(int lives) {
 		super();
-		setSpriteNames( new String[] {"paddleRed.png","paddleBlue.png"});
+		this.lives=lives;
+		setSpriteNames( new String[] {"paddleBlue.png"});
 		setFrameSpeed(40);
 	}
 	
 	public void act() {
 		super.act();
+		if(hit) {
+			setSpriteNames( new String[] {"paddleRed.png"});
+		}else {
+			setSpriteNames( new String[] {"paddleBlue.png"});
+		}
 		x+=vx;
 		y+=vy;
 		if (x < 0 ) 

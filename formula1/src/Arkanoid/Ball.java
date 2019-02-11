@@ -22,10 +22,9 @@ public class Ball extends Actor {
 	
 	public void act(int yplayer, int xplayer) {
 		super.act();
-		if(vspeed < 10) {
+		if(vspeed <= 10) {
 			vspeed+=0.002;
 		}
-		System.out.println(vspeed);
 		if (trayectoria == null) {
 			trayectoria = new TrayectoriaRecta(2.8f,coordenadas,false);
 		}
@@ -43,13 +42,21 @@ public class Ball extends Actor {
 		// calcular rebote con fin del juego abajo
 		if (y > Arkanoid.HEIGHT) { 
 			Arkanoid.getInstance().setMenu(1);
-			Arkanoid.gameOver=1;
+			Arkanoid.gameOver=true;
 		}
 		// Colision de la bola con la nave
 		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
-			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+			Player.hit=true;
+			Arkanoid.hitTime=System.currentTimeMillis();
+
+			if(this.x>=(xplayer+104)-1) {
+				trayectoria.reflejarHaciaDerecha(coordenadas);
+				System.out.println("golpe derecha");
+			}else {
+				trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+			}
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
 		}
 	}
