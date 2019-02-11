@@ -8,27 +8,33 @@ public class Brick extends Actor {
 	protected int vx;
 	private int lives;
 	
-	public Brick(String color,int lives) {
+	public Brick(int lid) {
 		super();
-		if(color=="blue") {
-			setSpriteNames( new String[] {"lazul.png","lazul-glossy.png"});
-		}
-		if(color=="purple") {
-			setSpriteNames( new String[] {"lmorado.png","lmorado-glossy.png"});
-		}
-		if(color=="green") {
+		if(lid==1) {
 			setSpriteNames( new String[] {"lverde.png","lverde-glossy.png"});
+			this.lives=1;
 		}
-		if(color=="grey") {
-			setSpriteNames( new String[] {"lgris.png","lgris-glossy.png"});
+		if(lid==2) {
+			setSpriteNames( new String[] {"lazul.png","lazul-glossy.png"});
+			this.lives=1;
 		}
-		if(color=="red") {
+		if(lid==3) {
 			setSpriteNames( new String[] {"lrojo.png","lrojo-glossy.png"});
+			this.lives=1;
 		}
-		if(color=="yellow") {
+		if(lid==4) {
 			setSpriteNames( new String[] {"lamarillo.png","lamarillo-glossy.png"});
+			this.lives=2;
 		}
-		this.lives=lives;
+		if(lid==5) {
+			setSpriteNames( new String[] {"lmorado.png","lmorado-glossy.png"});
+			this.lives=3;
+		}
+	
+		if(lid==6) {
+			setSpriteNames( new String[] {"lgris.png","lgris-glossy.png"});
+			this.lives=4;
+		}
 		setFrameSpeed(35);
 	}
 		

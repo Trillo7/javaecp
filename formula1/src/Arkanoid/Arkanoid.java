@@ -47,7 +47,7 @@ public class Arkanoid extends Canvas {
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
 	public static long hitTime=System.currentTimeMillis();
-	public static int gamelevel=1;
+	public static int gamelevel=2;
 	// Fase activa en el juego
 	Fase faseActiva = null;
 	// Variable para patr�n Singleton
@@ -364,7 +364,7 @@ public class Arkanoid extends Canvas {
 				endPausesRoundstart();
 
 			}
-			if(System.currentTimeMillis()-hitTime>300) { // para que la nave cambie de color al rebotar
+			if(System.currentTimeMillis()-hitTime>170) { // para que la nave cambie de color al rebotar
 				Player.hit=false;
 			}
 		}
