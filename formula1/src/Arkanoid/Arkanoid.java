@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 
 import Arkanoid.soundUtils.PlaySound;
 
-public class Arkanoid extends Canvas implements KeyListener {
+public class Arkanoid extends Canvas {
 	
 	private BufferStrategy strategy;
 	private long usedTime;
@@ -340,15 +340,6 @@ public class Arkanoid extends Canvas implements KeyListener {
 		strategy.show();
 		
 	}
-	
-	public void keyPressed(KeyEvent e) {
-		player.keyPressed(e);
-	}
-	
-	public void keyReleased(KeyEvent e) {
-		player.keyReleased(e);
-	}
-	public void keyTyped(KeyEvent e) {}
 	
 	public void endPausesRoundstart() {
 		initPause=false;
