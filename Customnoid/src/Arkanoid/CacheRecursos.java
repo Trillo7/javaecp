@@ -18,11 +18,11 @@ public class CacheRecursos {
 	private HashMap<String, Object> hmRecursos = new HashMap<String, Object>();
 	// Carpetas en la que se encuentran todos los recursos
 	// Rutas desarrollo
-//	private String nombreCarpetaParaFile = "src/Arkanoid/soundUtils"; 
-//	private String nombreCarpetaParaURL = "/Arkanoid/soundUtils/"; 
-	//Rutas compilado
-	private String nombreCarpetaParaFile = "./soundUtils"; 
+	private String nombreCarpetaParaFile = "src/Arkanoid/soundUtils"; 
 	private String nombreCarpetaParaURL = "/Arkanoid/soundUtils/"; 
+	//Rutas compilado
+//	private String nombreCarpetaParaFile = "./soundUtils"; 
+//	private String nombreCarpetaParaURL = "/Arkanoid/soundUtils/"; 
 	
 	// Instancia Singleton
 		private static CacheRecursos instancia= null;
