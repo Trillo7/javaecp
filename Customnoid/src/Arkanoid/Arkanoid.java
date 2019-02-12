@@ -236,6 +236,12 @@ public class Arkanoid extends Canvas {
 					ball.setSpriteNames(new String[] {"ballindepe.png"});
 					gamelevel++;
 					break;
+				case 5:
+					this.faseActiva=new Fase05();
+					this.faseActiva.inicializaFase();
+					this.actors.addAll(this.faseActiva.getActores());
+					gamelevel++;
+					break;					
 				default:
 					System.out.println("FIN DEL JUEGO. TODAS LAS FASES ACABADAS");
 					gameOver=true;
