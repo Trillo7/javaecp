@@ -24,23 +24,6 @@ public class Fase03 extends Fase {
 	 */
 	@Override
 	public void inicializaFase() {
-
-		// Creamos Bricks verdes
-//		for (int i = 0; i < 12; i++){
-//		  Brick l = new Brick(3);
-//		  l.setX(5+(i * 58) );
-//		  l.setY(10);
-//		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-//		  actors.add(l);
-//		}
-//		// creamos Bricks azules
-//		for (int i = 0; i < 12; i++){
-//		  Brick l = new Brick(5);
-//		  l.setX(5+(i * 58) );
-//		  l.setY(50);
-//		  l.setVx((int) (Math.random() * 20-10)); // velocidad de movimiento
-//		  actors.add(l);
-//		}
 		
 		for (int i = 0; i < arraymap.length; i++) {
 		    for (int j = 0; j < arraymap[i].length; j++) {
@@ -56,6 +39,19 @@ public class Fase03 extends Fase {
 		    initY+=38;
 		}
 		
+	}
+	
+	@Override
+	public String getGameplaySound() {
+		// TODO Auto-generated method stub
+		return super.getGameplaySound();
+	}
+
+
+	@Override
+	public String getBackgroundImg() {
+		// TODO Auto-generated method stub
+		return super.getBackgroundImg();
 	}
 
 }

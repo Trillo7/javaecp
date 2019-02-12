@@ -8,6 +8,7 @@ import java.awt.Color;
  *
  */
 public class Fase01 extends Fase {
+	public static String levelBackground="background1.jpg";
 	// Propiedades est�ticas de la fase
 	public static final int[][]  arraymap={	{0,0,0,4,5,6,6,6,6,4,5,0,0},
 											{0,2,3,4,1,2,3,5,5,5,0,0,0},
@@ -15,9 +16,6 @@ public class Fase01 extends Fase {
 											{0,0,0,0,5,2,1,2,3,5,6,0,0},
 											{0,0,0,4,0,0,0,0,0,0,4,0,0},
 											{0,0,3,0,0,0,0,0,2,0,2,5,6}};
-
-
-
 	
 	/**
 	 * Inicializaci�n de la fase, es la implementaci�n de un m�todo abstracto en el supertipo
@@ -33,5 +31,5 @@ public class Fase01 extends Fase {
 		  actors.add(l);
 		}
 	}
-
+	
 }

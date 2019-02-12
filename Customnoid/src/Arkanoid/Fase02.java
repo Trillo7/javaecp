@@ -2,6 +2,8 @@ package Arkanoid;
 
 import java.awt.Color;
 
+import Arkanoid.Brick;
+
 /**
  * Clase que implementa la primera fase del juego
  * @author R
@@ -56,5 +58,18 @@ public class Fase02 extends Fase {
 		}
 		
 	}
+	
+	@Override
+	public String getGameplaySound() {
+		// TODO Auto-generated method stub
+		return super.getGameplaySound();
+	}
 
+
+	@Override
+	public String getBackgroundImg() {
+		// TODO Auto-generated method stub
+		return super.getBackgroundImg();
+	}
+	
 }

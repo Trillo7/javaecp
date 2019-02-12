@@ -3,6 +3,8 @@ package Arkanoid;
 import java.util.ArrayList;
 import java.util.List;
 
+import Arkanoid.Actor;
+
 /**
  * Todas las fases deber�n extender esta clase abstracta y personalizar la apariencia y el comportamiento
  * @author R
@@ -20,7 +22,11 @@ public abstract class Fase {
 	public List<Actor> getActores() { return actors; }
 	
 	// Archivo de sonido del principio de la fase
-	public String getNombreSonidoInicio () {
-		return "Arkanoid-start-of-stage.wav";
+	public String getGameplaySound () {
+		return "fairytail-theme.wav";
 	}
+	public String getBackgroundImg() {
+		return "background1.jpg";
+	}
+
 }

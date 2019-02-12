@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Arkanoid.soundUtils.PlaySound;
@@ -30,7 +31,7 @@ public class Arkanoid extends Canvas {
 	private BufferStrategy strategy;
 	private long usedTime;
 	private Player player;
-	private Ball ball;
+	public static Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
 	private List<Actor> explosionlist = new ArrayList<Actor>();
 	public static final int WIDTH=701;
@@ -47,7 +48,7 @@ public class Arkanoid extends Canvas {
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
 	public static long hitTime=System.currentTimeMillis();
-	public static int gamelevel=2;
+	public static int gamelevel=1;
 	// Fase activa en el juego
 	Fase faseActiva = null;
 	// Variable para patrï¿½n Singleton
@@ -178,7 +179,10 @@ public class Arkanoid extends Canvas {
 				}else {
 					player.keyPressed(e);
 				}
-				
+				if(e.getKeyCode()==KeyEvent.VK_CAPS_LOCK) {
+					gamelevel=Integer.parseInt(JOptionPane.showInputDialog("TRUCASO. ¿Que nivel quieres acceder?"));
+					actors.clear();
+				}
 			}
 		});
 	}
@@ -211,6 +215,7 @@ public class Arkanoid extends Canvas {
 			initPause=true;
 			System.out.println("siguiente fase:"+gamelevel);
 			this.ball.trayectoria = null;
+			ball.setSpriteNames(new String[] {"ballGrey.png"});
 			switch (gamelevel) {
 				case 1:
 					this.faseActiva=new Fase01();
@@ -224,12 +229,20 @@ public class Arkanoid extends Canvas {
 					this.actors.addAll(this.faseActiva.getActores());
 					gamelevel++;
 					break;
+				case 4:
+					this.faseActiva=new Fase04();
+					this.faseActiva.inicializaFase();
+					this.actors.addAll(this.faseActiva.getActores());
+					ball.setSpriteNames(new String[] {"ballindepe.png"});
+					gamelevel++;
+					break;
 				default:
 					System.out.println("FIN DEL JUEGO. TODAS LAS FASES ACABADAS");
 					gameOver=true;
 					menu=1;
 					break;
 			}
+			
 		}
 		//FIN SISTEMA DE NIVELES
 		// Que la pelota siga a la nave en la pausa inicial
@@ -293,7 +306,7 @@ public class Arkanoid extends Canvas {
 		//Fondo
 		g.setColor(Color.black);
 		g.fillRect(0,0,getWidth(),getHeight());
-		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, null );
+		g.drawImage( SpriteCache.getInstance().getSprite(this.faseActiva.getBackgroundImg()), 0,0, null );
 		//Bucle para pintarse asï¿½ mismo cada actor
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = actors.get(i);
@@ -344,7 +357,7 @@ public class Arkanoid extends Canvas {
 	public void endPausesRoundstart() {
 		initPause=false;
 		pause=false;
-		CacheRecursos.getInstancia().loopSonido("fairytail-theme.wav");
+		CacheRecursos.getInstancia().loopSonido(this.faseActiva.getGameplaySound());
 		PlaySound.getSound().blasterSound();
 
 	}
