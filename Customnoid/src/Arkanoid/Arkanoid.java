@@ -208,7 +208,6 @@ public class Arkanoid extends Canvas {
 	
 	public void updateWorld() {
 		//INICIO SISTEMA DE NIVELES
-
 		if(actors.isEmpty()) {
 			System.out.println("LADRILLOS VACIOS");
 			initTime=System.currentTimeMillis();
