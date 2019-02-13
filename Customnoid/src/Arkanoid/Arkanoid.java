@@ -378,18 +378,19 @@ public class Arkanoid extends Canvas {
 		}
 		// Pintamos menu
 		if(menu==1) {
-			g.drawImage( SpriteCache.getInstance().getSprite("background2.png"), 0,0, null );
-			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), -100,0, null );
+		//	g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("background2-original.png"), -620,-180, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("insert-coin.png"), Arkanoid.WIDTH-200,Arkanoid.HEIGHT/2+200, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logotrillostudios-75.png"), 50,Arkanoid.HEIGHT/2+200, null );
 			if(gameOver) {
-				g.drawImage( SpriteCache.getInstance().getSprite("goverbg2.jpg"), -150,0, null );
+				//g.drawImage( SpriteCache.getInstance().getSprite("goverbg2.jpg"), -150,0, null );
+				g.drawImage( SpriteCache.getInstance().getSprite("gameover2bg.png"), -150,0, null );
 				g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			}else {
-				g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
+				g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-50.png"), Arkanoid.WIDTH/2-185,Arkanoid.HEIGHT/2-370, null );
 			}
-			g.drawImage( SpriteCache.getInstance().getSprite("yellow_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2-60, null );
-			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2, null );
+			if(!gameOver) {g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );}
+			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2+25, null );
 			//pintamos cursor
 			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
 		}
