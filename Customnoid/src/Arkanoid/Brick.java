@@ -10,6 +10,7 @@ public class Brick extends Actor {
 	
 	public Brick(int lid) {
 		super();
+		this.lid=lid;
 		if(lid==1) {
 			setSpriteNames( new String[] {"lverde.png","lverde-glossy.png"});
 			this.lives=1;
@@ -33,14 +34,16 @@ public class Brick extends Actor {
 	
 		if(lid==6) {
 			setSpriteNames( new String[] {"lgris.png","lgris-glossy.png"});
-			this.lives=4;
+			this.lives=9;
 		}
 		setFrameSpeed(35);
 	}
 		
     public void remove(List<Actor> actors, int i) {
     	if(lives>1) {
-    		lives--;
+    		if(this.lid!=6) {
+        		lives--;
+    		}
     		CacheRecursos.getInstancia().playSonido("chirrido-arka.wav");
     	}else {
         	actors.remove(i);

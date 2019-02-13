@@ -11,7 +11,7 @@ import Arkanoid.Actor;
  *
  */
 public abstract class Fase {
-	
+	public int numIrrompibles=0;
 	// Lista de actores a colocar en cualquier fase
 	protected List<Actor> actors = new ArrayList<Actor>();
 	

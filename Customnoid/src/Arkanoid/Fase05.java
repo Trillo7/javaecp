@@ -12,8 +12,8 @@ import Arkanoid.Brick;
 public class Fase05 extends Fase {
 	// Propiedades est�ticas de la fase
 	public static final int[][]  arraymap={	{0,0,0,0,0,0,0,0,0,0,0,0},
-											{2,5,5,2,0,0,0,0,2,5,5,2},
-											{2,5,5,2,0,0,0,0,2,5,5,2},
+											{6,5,5,6,0,0,0,0,6,5,5,6},
+											{6,5,5,6,0,0,0,0,6,5,5,6},
 											{0,0,0,0,4,4,4,4,0,0,0,0},
 											{0,0,0,0,4,4,4,4,0,0,0,0}};
 	private int initX=7;
@@ -33,6 +33,9 @@ public class Fase05 extends Fase {
 			    	l.setX(initX);
 			    	l.setY(initY);
 					actors.add(l);
+					if(arraymap[i][j]==6) {
+						numIrrompibles++;
+					}
 		    	}
 		    	initX+=57;
 		    }
@@ -52,7 +55,7 @@ public class Fase05 extends Fase {
 	@Override
 	public String getBackgroundImg() {
 		// TODO Auto-generated method stub
-		return super.getBackgroundImg();
+		return "ducksimg.jpg";
 	}
 	
 }

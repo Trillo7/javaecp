@@ -33,6 +33,9 @@ public class Fase04 extends Fase {
 			    	l.setX(initX);
 			    	l.setY(initY);
 					actors.add(l);
+					if(arraymap[i][j]==6) {
+						numIrrompibles++;
+					}
 		    	}
 		    	initX+=57;
 		    }

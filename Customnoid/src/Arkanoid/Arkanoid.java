@@ -36,7 +36,7 @@ public class Arkanoid extends Canvas {
 	private List<Actor> explosionlist = new ArrayList<Actor>();
 	public static final int WIDTH=701;
 	public static final int HEIGHT=750;
-	public static final int PLAY_HEIGHT = 670; 
+	public static final int PLAY_HEIGHT = 640; 
 	public static final int SPEED=10;
 	public static long initTime=System.currentTimeMillis();
 	private int cursorx=0;
@@ -180,7 +180,7 @@ public class Arkanoid extends Canvas {
 					player.keyPressed(e);
 				}
 				if(e.getKeyCode()==KeyEvent.VK_CAPS_LOCK) {
-					gamelevel=Integer.parseInt(JOptionPane.showInputDialog("TRUCASO. ¿Que nivel quieres acceder?"));
+					gamelevel=Integer.parseInt(JOptionPane.showInputDialog("TRUCASO. ï¿½Que nivel quieres acceder?"));
 					actors.clear();
 				}
 			}
@@ -265,7 +265,10 @@ public class Arkanoid extends Canvas {
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = actors.get(i);
 			l.act();
-			
+		}
+		// Limpiamos los actores cuando solo quedan bloques irrompibles
+		if(actors.size()==this.faseActiva.numIrrompibles) {
+			actors.clear();
 		}
 		//Llamamos al act de cada explosion
 		for (int i = 0; i < explosionlist.size(); i++) {
@@ -312,6 +315,7 @@ public class Arkanoid extends Canvas {
 		//Fondo
 		g.setColor(Color.black);
 		g.fillRect(0,0,getWidth(),getHeight());
+		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, null );
 		g.drawImage( SpriteCache.getInstance().getSprite(this.faseActiva.getBackgroundImg()), 0,0, null );
 		//Bucle para pintarse asï¿½ mismo cada actor
 		for (int i = 0; i < actors.size(); i++) {
@@ -335,6 +339,10 @@ public class Arkanoid extends Canvas {
 				g.drawString("---- fps",0,Arkanoid.HEIGHT-50);
 			}
 		}
+		// Barra de estadisticas
+		g.drawImage( SpriteCache.getInstance().getSprite("lives-cut.png"), 10,this.HEIGHT-95, null );
+		g.drawImage( SpriteCache.getInstance().getSprite("urscore-cut.png"), 235,this.HEIGHT-105, null );
+
 		// pintar pause
 		if(pause || initPause || menu==1) {
 			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr75.png"), 10,Arkanoid.HEIGHT/2-360, null );
@@ -343,7 +351,7 @@ public class Arkanoid extends Canvas {
 		// Pintamos menu
 		if(menu==1) {
 			g.drawImage( SpriteCache.getInstance().getSprite("background2.png"), 0,0, null );
-			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), -100,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("insert-coin.png"), Arkanoid.WIDTH-200,Arkanoid.HEIGHT/2+200, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logotrillostudios-75.png"), 50,Arkanoid.HEIGHT/2+200, null );
 			if(gameOver) {
@@ -356,6 +364,7 @@ public class Arkanoid extends Canvas {
 			//pintamos cursor
 			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
 		}
+
 		strategy.show();
 		
 	}

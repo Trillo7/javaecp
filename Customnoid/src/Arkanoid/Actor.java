@@ -14,6 +14,7 @@ public class Actor {
 	protected int t;
 
 	private int markedForRemoval;
+	public int lid;
 
 	
 	public Actor() {
@@ -69,7 +70,10 @@ public class Actor {
      public Rectangle getBounds() {
     	 return new Rectangle(x,y,width,height);
      }
-		    
+		 
+     public int getLid() {
+    	 return lid;
+     }
      public void remove(List<Actor> actors, int i) {
 		      
 	}
