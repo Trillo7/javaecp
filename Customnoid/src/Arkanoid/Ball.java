@@ -38,10 +38,14 @@ public class Ball extends Actor {
 			trayectoria.reflejarHaciaAbajo(coordenadas);
 		}
 		// calcular rebote con fin del juego abajo
+		// FIN DEL JUEGO
 		if (y > Arkanoid.HEIGHT) { 
 			if(player.lives<=0) {
 				Arkanoid.getInstance().setMenu(1);
 				Arkanoid.gameOver=true;
+				PlaySound.getSound().startSound("long-bowser.wav");
+				PlaySound.getSound().stopcustomLoop();
+				PlaySound.getSound().customLoop("rex-nosferatu.wav");
 			}else {
 				player.lives--;
         		player.myscore+=-25;

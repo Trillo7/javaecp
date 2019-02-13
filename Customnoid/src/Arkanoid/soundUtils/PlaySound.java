@@ -21,7 +21,10 @@ public class PlaySound {
 	public void stopcustomLoop() {
 		s1.parar();
 	}
-	
+	public void startSound(String songname) {
+		HiloSonido scustom = new HiloSonido("Arkanoid/soundUtils/"+songname);
+		scustom.start();
+	}
 	//Sonidos predefinidos
 	
 	//sonido de fondo ronda 1

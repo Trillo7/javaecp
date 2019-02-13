@@ -231,7 +231,6 @@ public class Arkanoid extends Canvas {
 	public void updateWorld() {
 		//INICIO SISTEMA DE NIVELES
 		if(actors.isEmpty()) {
-			System.out.println("LADRILLOS VACIOS");
 			initTime=System.currentTimeMillis();
 			initPause=true;
 			System.out.println("siguiente fase:"+gamelevel);
@@ -372,8 +371,9 @@ public class Arkanoid extends Canvas {
 
 
 		// pintar pause
-		if(pause || initPause || menu==1) {
-			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr75.png"), 10,Arkanoid.HEIGHT/2-360, null );
+		if(pause || initPause) {
+			//Logos ESQUINAS
+			g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-75.png"), 10,Arkanoid.HEIGHT/2-360, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("gnome-pause.png"), Arkanoid.WIDTH/2-255,Arkanoid.HEIGHT/2-280, null );
 		}
 		// Pintamos menu
@@ -384,9 +384,10 @@ public class Arkanoid extends Canvas {
 			g.drawImage( SpriteCache.getInstance().getSprite("logotrillostudios-75.png"), 50,Arkanoid.HEIGHT/2+200, null );
 			if(gameOver) {
 				g.drawImage( SpriteCache.getInstance().getSprite("goverbg2.jpg"), -150,0, null );
-				//g.drawImage( SpriteCache.getInstance().getSprite("game-over.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
+				g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
+			}else {
+				g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			}
-			g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("yellow_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2-60, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2, null );
 			//pintamos cursor
