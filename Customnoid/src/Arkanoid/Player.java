@@ -7,7 +7,8 @@ public class Player extends Actor {
 	protected int vx;
 	protected int vy;
 	public static boolean hit=false;
-	private int lives;
+	public int lives;
+	public int myscore;
 	private boolean up,down,left,right;
 		
 	

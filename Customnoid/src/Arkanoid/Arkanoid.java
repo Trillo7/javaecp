@@ -3,6 +3,7 @@ package Arkanoid;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -30,6 +31,8 @@ public class Arkanoid extends Canvas {
 	
 	private BufferStrategy strategy;
 	private long usedTime;
+	// Ventana
+	JFrame ventana = null;
 	private Player player;
 	public static Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
@@ -72,13 +75,20 @@ public class Arkanoid extends Canvas {
 		panel.add(this);
 		ventana.setBounds(0,0,Arkanoid.WIDTH,Arkanoid.HEIGHT);
 		ventana.setVisible(true);
+		ventana.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		ventana.addWindowListener( new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				closeApplication();
 			}
 		});
-		
+		// Con ignoreRepaint le decimos al JFrame que no debe repintarse cuando el Sistema Operativo se lo indique,
+		// nosotros nos ocupamos totalmente del refresco de la pantalla
+		ventana.setIgnoreRepaint(true);
+		// La ventana no podrá redimensionarse
 		ventana.setResizable(false);
+		// Hacemos que el Canvas obtenga automáticamente el foco del programa para que, si se pulsa una tecla, la pulsación
+		// se transmita directamente al Canvas.
+		this.requestFocus();
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
 		requestFocus();
@@ -186,7 +196,19 @@ public class Arkanoid extends Canvas {
 			}
 		});
 	}
-	
+
+	/**
+	 * Al cerrar la aplicación preguntaremos al usuario si está seguro de que desea salir.
+	 */
+	private void closeApplication() {
+		String [] opciones ={"Aceptar","Cancelar"};
+		int eleccion = JOptionPane.showOptionDialog(ventana,"¿Desea cerrar la aplicación?","Salir de la aplicación",
+		JOptionPane.YES_NO_OPTION,
+		JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
+		if (eleccion == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
 	public void initWorld() {
 		//Creamos los Bricks en arraylist
 		PlaySound.getSound().startMenu();
@@ -282,7 +304,7 @@ public class Arkanoid extends Canvas {
 		if(pause || initPause) {
 	
 		}else {
-			ball.act(player.getY(), player.getX());
+			ball.act(player);
 		}
 		// Cuando el menu es el inicio del juego activamos initpause, si no solo pause ya que es el menu de escapada
 		if(menu==1 && esc==false) {
@@ -303,7 +325,7 @@ public class Arkanoid extends Canvas {
 		    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+22,a1.getWidth(),2);
 		  
 		    	ball.collisioned();
-		        a1.remove(actors, i);
+		        a1.removeActor(actors, i,player);
 		        break;
 		    }
 		}
@@ -330,7 +352,7 @@ public class Arkanoid extends Canvas {
 		player.paint(g);
 		ball.paint(g);
 		g.setColor(Color.white);
-		//contador de fps
+		// Contador de fps
 		if(showFPS) {
 			if (usedTime > 0) { 
 				g.drawString(String.valueOf(1000/usedTime)+" fps",0,Arkanoid.HEIGHT-50);
@@ -339,8 +361,15 @@ public class Arkanoid extends Canvas {
 			}
 		}
 		// Barra de estadisticas
-		g.drawImage( SpriteCache.getInstance().getSprite("lives-cut.png"), 10,this.HEIGHT-95, null );
-		g.drawImage( SpriteCache.getInstance().getSprite("urscore-cut.png"), 235,this.HEIGHT-105, null );
+		Font myFont = new Font ("Segoe UI", 1, 27);
+		g.setFont (myFont);
+		g.drawImage( SpriteCache.getInstance().getSprite("livesbox-cut.png"), 10,this.HEIGHT-107, null );
+		g.drawString (""+player.lives, 135,this.HEIGHT-60);
+		g.drawImage( SpriteCache.getInstance().getSprite("urscore-cut.png"), 260,this.HEIGHT-105, null );
+		g.drawString (""+player.myscore, 300,this.HEIGHT-63);
+		g.drawImage( SpriteCache.getInstance().getSprite("level-cut.png"), this.WIDTH-235,this.HEIGHT-100, null );
+		g.drawString (""+(gamelevel-1), this.WIDTH-55,this.HEIGHT-67);
+
 
 		// pintar pause
 		if(pause || initPause || menu==1) {
@@ -371,9 +400,10 @@ public class Arkanoid extends Canvas {
 	public void endPausesRoundstart() {
 		initPause=false;
 		pause=false;
-		CacheRecursos.getInstancia().loopSonido(this.faseActiva.getGameplaySound());
+		PlaySound.getSound().stopcustomLoop();
+		//CacheRecursos.getInstancia().loopSonido(this.faseActiva.getGameplaySound());
 		PlaySound.getSound().blasterSound();
-
+		PlaySound.getSound().customLoop(faseActiva.getGameplaySound());
 	}
 	public void game() {
 		usedTime=1000;

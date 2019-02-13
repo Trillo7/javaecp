@@ -12,6 +12,17 @@ public class PlaySound {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	// Sonido por argumento
+	
+	public void customLoop(String songname) {
+		s1 = new HiloSonidoBucle("Arkanoid/soundUtils/"+songname);
+		s1.start();
+	}
+	public void stopcustomLoop() {
+		s1.parar();
+	}
+	
+	//Sonidos predefinidos
 	
 	//sonido de fondo ronda 1
 	public void background1Sound() {

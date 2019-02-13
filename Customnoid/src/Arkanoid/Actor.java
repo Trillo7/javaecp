@@ -74,7 +74,10 @@ public class Actor {
      public int getLid() {
     	 return lid;
      }
-     public void remove(List<Actor> actors, int i) {
+     public void removeActor(List<Actor> actors, int i) {
 		      
+	}
+     public void removeActor(List<Actor> actors, int i, Player player) {
+	      
 	}
 }

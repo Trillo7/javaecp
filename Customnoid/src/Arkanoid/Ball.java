@@ -18,7 +18,7 @@ public class Ball extends Actor {
 		this.vspeed=vspeed;
 	}
 	
-	public void act(int yplayer, int xplayer) {
+	public void act(Player player) {
 		super.act();		
 		if(vspeed <= 10) {
 			vspeed+=0.002;
@@ -39,18 +39,24 @@ public class Ball extends Actor {
 		}
 		// calcular rebote con fin del juego abajo
 		if (y > Arkanoid.HEIGHT) { 
-		//	Arkanoid.getInstance().setMenu(1);
-		//	Arkanoid.gameOver=true;
-			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+			if(player.lives<=0) {
+				Arkanoid.getInstance().setMenu(1);
+				Arkanoid.gameOver=true;
+			}else {
+				player.lives--;
+        		player.myscore+=-25;
+				trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+			}
+		
 		}
 		// Colision de la bola con la nave
-		Rectangle rectplayer = new Rectangle(xplayer,yplayer, 104, 24); // dimension nave
+		Rectangle rectplayer = new Rectangle(player.x,player.y, 104, 24); // dimension nave
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
 			Player.hit=true;// para que la nave cambie de color al rebotar
 			Arkanoid.hitTime=System.currentTimeMillis();
 
-			if(this.x>=(xplayer+104)-1) {
+			if(this.x>=(player.x+104)-1) {
 				trayectoria.reflejarHaciaDerecha(coordenadas);
 				System.out.println("golpe derecha");
 			}else {
