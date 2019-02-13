@@ -44,6 +44,8 @@ public class Arkanoid extends Canvas {
 	public static long initTime=System.currentTimeMillis();
 	private int cursorx=0;
 	private int cursory=0;
+	boolean mouseInPlay=false;
+	boolean mouseInExit=false;
 	private boolean pause=false;
 	private boolean initPause=true;
 	private int menu=1;
@@ -155,7 +157,18 @@ public class Arkanoid extends Canvas {
 			}else {
 				player.setX(e.getX()-50);
 			}
-			
+			// Si el raton esta encima del play
+			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su mï¿½sica
+				mouseInPlay=true;
+			}else {
+				mouseInPlay=false;
+			}
+			// Si el raton esta encima del exit
+			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
+				mouseInExit=true;
+			}else {
+				mouseInExit=false;
+			}
 		}
 		});
 		this.addKeyListener(new KeyAdapter() {
@@ -364,13 +377,13 @@ public class Arkanoid extends Canvas {
 		g.setFont (myFont);
 		g.drawImage( SpriteCache.getInstance().getSprite("livesbox-cut.png"), 10,this.HEIGHT-107, null );
 		g.drawString (""+player.lives, 135,this.HEIGHT-60);
-		g.drawImage( SpriteCache.getInstance().getSprite("urscore-cut.png"), 260,this.HEIGHT-105, null );
-		g.drawString (""+player.myscore, 300,this.HEIGHT-63);
+		g.drawImage( SpriteCache.getInstance().getSprite("urscore-cut.png"), 260,this.HEIGHT-103, null );
+		g.drawString (""+player.myscore, 310,this.HEIGHT-60);
 		g.drawImage( SpriteCache.getInstance().getSprite("level-cut.png"), this.WIDTH-235,this.HEIGHT-100, null );
 		g.drawString (""+(gamelevel-1), this.WIDTH-55,this.HEIGHT-67);
 
 
-		// pintar pause
+		// Pintar pause
 		if(pause || initPause) {
 			//Logos ESQUINAS
 			g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-75.png"), 10,Arkanoid.HEIGHT/2-360, null );
@@ -378,20 +391,34 @@ public class Arkanoid extends Canvas {
 		}
 		// Pintamos menu
 		if(menu==1) {
-		//	g.drawImage( SpriteCache.getInstance().getSprite("background2-test.jpg"), 0,0, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("background2-original.png"), -620,-180, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("insert-coin.png"), Arkanoid.WIDTH-200,Arkanoid.HEIGHT/2+200, null );
 			g.drawImage( SpriteCache.getInstance().getSprite("logotrillostudios-75.png"), 50,Arkanoid.HEIGHT/2+200, null );
 			if(gameOver) {
-				//g.drawImage( SpriteCache.getInstance().getSprite("goverbg2.jpg"), -150,0, null );
 				g.drawImage( SpriteCache.getInstance().getSprite("gameover2bg.png"), -150,0, null );
 				g.drawImage( SpriteCache.getInstance().getSprite("logo-customnoid-tr-50.png"), Arkanoid.WIDTH/2-195,Arkanoid.HEIGHT/2-370, null );
 			}else {
 				g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-50.png"), Arkanoid.WIDTH/2-185,Arkanoid.HEIGHT/2-370, null );
 			}
-			if(!gameOver) {g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );}
-			g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-110,Arkanoid.HEIGHT/2+25, null );
-			//pintamos cursor
+			// Si el juego ha acabado game over no mostramos el botond de Play, y añadimos efecto de un boton u otra si pasamos el raton por el boton
+			if(!gameOver) {
+				if(!mouseInPlay) {
+					g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
+
+				}else {
+					g.drawImage( SpriteCache.getInstance().getSprite("playbutton-2.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
+
+				}
+				
+			}
+			if(!mouseInExit) {
+				g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2+25, null );
+
+			}else {
+				g.drawImage( SpriteCache.getInstance().getSprite("red_button02.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2+25, null );
+			}
+
+			// Pintamos cursor
 			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
 		}
 
