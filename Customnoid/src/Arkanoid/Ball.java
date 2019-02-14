@@ -59,14 +59,23 @@ public class Ball extends Actor {
 		if(rectball.intersects(rectplayer)) {
 			Player.hit=true;// para que la nave cambie de color al rebotar
 			Arkanoid.hitTime=System.currentTimeMillis();
+			// Detector de colision en que lado
 			Rectangle playersup = new Rectangle(player.x,player.y, player.width, 2); // dimension nave
 			Rectangle playerder = new Rectangle(player.x+player.width,player.y, 2, player.height); 
 			Rectangle playerizq = new Rectangle(player.x,player.y, 2, player.height); 
 			Rectangle playerinf = new Rectangle(player.x,player.y+player.height, player.width, 2); 
+			if(rectball.intersects(playersup)) {
+				trayectoria.reflejarHaciaArriba(coordenadas);
+			}else if(rectball.intersects(playerder)) {
+				trayectoria.reflejarHaciaDerecha(coordenadas);
+			}else if(rectball.intersects(playerizq)) {
+				trayectoria.reflejarHaciaIzquierda(coordenadas);
+			}else if(rectball.intersects(playerinf)) {
+				trayectoria.reflejarHaciaAbajo(coordenadas);
+			}
 			
 			
-			
-			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+			//trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 		
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
 		}
