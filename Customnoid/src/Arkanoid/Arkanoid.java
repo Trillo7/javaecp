@@ -86,9 +86,9 @@ public class Arkanoid extends Canvas {
 		// Con ignoreRepaint le decimos al JFrame que no debe repintarse cuando el Sistema Operativo se lo indique,
 		// nosotros nos ocupamos totalmente del refresco de la pantalla
 		ventana.setIgnoreRepaint(true);
-		// La ventana no podrá redimensionarse
+		// La ventana no podrï¿½ redimensionarse
 		ventana.setResizable(false);
-		// Hacemos que el Canvas obtenga automáticamente el foco del programa para que, si se pulsa una tecla, la pulsación
+		// Hacemos que el Canvas obtenga automï¿½ticamente el foco del programa para que, si se pulsa una tecla, la pulsaciï¿½n
 		// se transmita directamente al Canvas.
 		this.requestFocus();
 		createBufferStrategy(2);
@@ -211,11 +211,11 @@ public class Arkanoid extends Canvas {
 	}
 
 	/**
-	 * Al cerrar la aplicación preguntaremos al usuario si está seguro de que desea salir.
+	 * Al cerrar la aplicaciï¿½n preguntaremos al usuario si estï¿½ seguro de que desea salir.
 	 */
 	private void closeApplication() {
 		String [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(ventana,"¿Desea cerrar la aplicación?","Salir de la aplicación",
+		int eleccion = JOptionPane.showOptionDialog(ventana,"ï¿½Desea cerrar la aplicaciï¿½n?","Salir de la aplicaciï¿½n",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE, null, opciones, "Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION) {
@@ -333,10 +333,26 @@ public class Arkanoid extends Canvas {
 			Actor a1 = actors.get(i);
 			Rectangle r1 = a1.getBounds();
 		    if (r1.intersects(ballRect)) {
+		    	// Rectangles de ladrillos (Detector de lado golpeado)
+		    	String hitSide=null;
 		    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),2);
-		    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+22,a1.getWidth(),2);
-		  
-		    	ball.collisioned();
+		    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+a1.getHeight(),a1.getWidth(),2);
+		    	Rectangle izqrect=new Rectangle(a1.getX(),a1.getY(),2,a1.getHeight());
+		    	Rectangle derrect=new Rectangle(a1.getX()+a1.getWidth(),a1.getY(),2,a1.getHeight());
+		    	if(ballRect.intersects(superiorrect)) {
+		    		System.out.println("toca techo");
+		    		hitSide="sup";
+		    	}else if(ballRect.intersects(derrect)) {
+		    		System.out.println("toca derecha");
+		    		hitSide="der";
+		    	}else if(ballRect.intersects(izqrect)) {
+		    		System.out.println("toca izquierda");
+		    		hitSide="izq";
+		    	}else if(ballRect.intersects(inferiorrect)) {
+		    		System.out.println("toca suelo");
+		    		hitSide="inf";
+		    	}
+		    	ball.collisioned(hitSide);
 		        a1.removeActor(actors, i,player);
 		        break;
 		    }
@@ -355,7 +371,7 @@ public class Arkanoid extends Canvas {
 			Actor l = actors.get(i);
 			l.paint(g);
 		}
-		//Bucle para pintarse asi mismo cada explosion
+		//Bucle para pintarse asi mism}o cada explosion
 		for (int i = 0; i < explosionlist.size(); i++) {
 			Actor exp = explosionlist.get(i);
 			exp.paint(g);
@@ -400,7 +416,7 @@ public class Arkanoid extends Canvas {
 			}else {
 				g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-50.png"), Arkanoid.WIDTH/2-185,Arkanoid.HEIGHT/2-370, null );
 			}
-			// Si el juego ha acabado game over no mostramos el botond de Play, y añadimos efecto de un boton u otra si pasamos el raton por el boton
+			// Si el juego ha acabado game over no mostramos el botond de Play, y aï¿½adimos efecto de un boton u otra si pasamos el raton por el boton
 			if(!gameOver) {
 				if(!mouseInPlay) {
 					g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
@@ -417,7 +433,7 @@ public class Arkanoid extends Canvas {
 			}else {
 				g.drawImage( SpriteCache.getInstance().getSprite("red_button02.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2+25, null );
 			}
-
+			//Hacer pantalla de victoria
 			// Pintamos cursor
 			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
 		}

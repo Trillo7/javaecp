@@ -32,13 +32,13 @@ public class Brick extends Actor {
 		if(lid==4) {
 			setSpriteNames( new String[] {"lamarillo.png","lamarillo-glossy.png"});
 			this.lives=2;
-			this.lscore=5;
+			this.lscore=6;
 
 		}
 		if(lid==5) {
 			setSpriteNames( new String[] {"lmorado.png","lmorado-glossy.png"});
 			this.lives=3;
-			this.lscore=8;
+			this.lscore=9;
 		}
 	
 		if(lid==6) {

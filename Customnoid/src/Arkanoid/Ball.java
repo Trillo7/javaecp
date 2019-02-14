@@ -54,28 +54,37 @@ public class Ball extends Actor {
 		
 		}
 		// Colision de la bola con la nave
-		Rectangle rectplayer = new Rectangle(player.x,player.y, 104, 24); // dimension nave
+		Rectangle rectplayer = new Rectangle(player.x,player.y, player.width, player.height); // dimension nave
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
 			Player.hit=true;// para que la nave cambie de color al rebotar
 			Arkanoid.hitTime=System.currentTimeMillis();
-
-			if(this.x>=(player.x+104)-1) {
-				trayectoria.reflejarHaciaDerecha(coordenadas);
-				System.out.println("golpe derecha");
-			}else {
-				trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
-			}
+			Rectangle playersup = new Rectangle(player.x,player.y, player.width, 2); // dimension nave
+			Rectangle playerder = new Rectangle(player.x+player.width,player.y, 2, player.height); 
+			Rectangle playerizq = new Rectangle(player.x,player.y, 2, player.height); 
+			Rectangle playerinf = new Rectangle(player.x,player.y+player.height, player.width, 2); 
+			
+			
+			
+			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+		
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
 		}
 	}
 	
 	//Colisiona (con ladrillos)
-	public void collisioned() {
-		trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+	public void collisioned(String hitSide) {
 		CacheRecursos.getInstancia().playSonido("woosh.wav");
 		// Para detectar donde hemos colisionado
-		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
+		if(hitSide=="sup") {
+			trayectoria.reflejarHaciaArriba(coordenadas);
+		}else if(hitSide=="der") {
+			trayectoria.reflejarHaciaDerecha(coordenadas);
+		}else if(hitSide=="izq") {
+			trayectoria.reflejarHaciaIzquierda(coordenadas);
+		}else if(hitSide=="inf") {
+			trayectoria.reflejarHaciaAbajo(coordenadas);
+		}
 		
 	}
     
