@@ -433,6 +433,8 @@ public class Arkanoid extends Canvas {
 			}else {
 				g.drawImage( SpriteCache.getInstance().getSprite("red_button02.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2+25, null );
 			}
+			// Pintamos loading y next level
+			
 			//Hacer pantalla de victoria
 			// Pintamos cursor
 			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
