@@ -6,7 +6,6 @@ import Arkanoid.soundUtils.PlaySound;
 
 public class Brick extends Actor {
 	protected int vx;
-	private int lives;
 	private int lscore;
 	
 	public Brick(int lid) {
@@ -67,7 +66,7 @@ public class Brick extends Actor {
         	// Generamos pildora
         	if(Arkanoid.getInstance().faseActiva.maxPills>Arkanoid.getInstance().faseActiva.actualPills) {
         	  int pillPercentage = (int) (Math.random()*10+1);
-        	  int randomPill = (int) (Math.random()*2+1);
+        	  int randomPill = (int) (Math.random()*3+1);
         	  if(pillPercentage>2&& pillPercentage<6) {
         		  PowerPill pp=new PowerPill(randomPill);
       	  		  pp.setX(this.x);

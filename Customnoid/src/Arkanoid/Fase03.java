@@ -61,7 +61,7 @@ public class Fase03 extends Fase {
 	@Override
 	public String getBackgroundImg() {
 		// TODO Auto-generated method stub
-		return super.getBackgroundImg();
+		return "dogbg.jpg";
 	}
 
 }

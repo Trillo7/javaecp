@@ -49,6 +49,7 @@ public class Arkanoid extends Canvas {
 	private boolean pause=false;
 	private boolean initPause=true;
 	private int menu=1;
+	private boolean victory=false;
 	public static boolean gameOver=false;
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
@@ -56,6 +57,7 @@ public class Arkanoid extends Canvas {
 	public static long godTime=System.currentTimeMillis();
 	public static int gamelevel=1;
 	public boolean godmode=false;
+	public static boolean harderBricks=false;
 	// Fase activa en el juego
 	Fase faseActiva = null;
 	// Variable para patrï¿½n Singleton
@@ -248,10 +250,12 @@ public class Arkanoid extends Canvas {
 		if(actors.isEmpty()) {
 			initTime=System.currentTimeMillis();
 			initPause=true;
-			System.out.println("Siguiente fase:"+gamelevel);
-			this.ball.trayectoria = null;
-			ball.setSpriteNames(new String[] {"ballGrey.png"});
+			ball.trayectoria = null;
 			ball.setVspeed(3);
+			ball.setSpriteNames(new String[] {"ballGrey.png"});
+			harderBricks=false;
+			godmode=false;
+			System.out.println("Siguiente fase: "+gamelevel);
 			switch (gamelevel) {
 				case 1:
 					this.faseActiva=new Fase01();
@@ -269,6 +273,7 @@ public class Arkanoid extends Canvas {
 					this.faseActiva=new Fase03();
 					this.faseActiva.inicializaFase();
 					this.actors.addAll(this.faseActiva.getActores());
+					ball.setSpriteNames(new String[] {"dogball.png"});
 					gamelevel++;
 					break;					
 				case 4:
@@ -284,10 +289,17 @@ public class Arkanoid extends Canvas {
 					this.actors.addAll(this.faseActiva.getActores());
 					gamelevel++;
 					break;					
-				default:
+				case 6:
 					System.out.println("FIN DEL JUEGO. TODAS LAS FASES ACABADAS");
-					gameOver=true;
+					pause=true;
 					menu=1;
+					victory=true;
+					actors.add(player);// Lo añadimos a actores para que no se repita el switch todo el rato mientras esta en victoria
+					PlaySound.getSound().stopcustomLoop();
+					PlaySound.getSound().customLoop("victoryfree.wav");
+					break;
+				default:
+					this.gamelevel=6;
 					break;
 			}
 			
@@ -295,7 +307,6 @@ public class Arkanoid extends Canvas {
 		//FIN SISTEMA DE NIVELES
 		// Que la pelota siga a la nave en la pausa inicial
 		if(initPause) {
-		//	System.out.println("COLOCAMOS BOLA EN LA NAVE");
 			ball.setX(player.getX()+40);
 			ball.setY(player.getY()-24);
 		}
@@ -308,6 +319,8 @@ public class Arkanoid extends Canvas {
 			Actor l = actors.get(i);
 			l.act();
 		}
+		// Ponemos harder a 0 para que no les ponga siempre 2 vidas
+		harderBricks=false;
 		// Limpiamos los actores cuando solo quedan bloques irrompibles
 		if(actors.size()==this.faseActiva.numIrrompibles) {
 			actors.clear();
@@ -461,7 +474,11 @@ public class Arkanoid extends Canvas {
 			}
 			// Pintamos loading y next level
 			
-			//Hacer pantalla de victoria
+			// Pintamos pantalla de victoria
+			if(victory) {
+				g.drawImage( SpriteCache.getInstance().getSprite("victorybg.jpg"), -100,0, null );
+				
+			}
 			// Pintamos cursor
 			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
 		}
@@ -474,7 +491,6 @@ public class Arkanoid extends Canvas {
 		initPause=false;
 		pause=false;
 		PlaySound.getSound().stopcustomLoop();
-		//CacheRecursos.getInstancia().loopSonido(this.faseActiva.getGameplaySound());
 		PlaySound.getSound().blasterSound();
 		PlaySound.getSound().customLoop(faseActiva.getGameplaySound());
 	}

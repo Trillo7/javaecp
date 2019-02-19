@@ -29,11 +29,14 @@ public class Ball extends Actor {
 		coordenadas = trayectoria.getPuntoADistanciaDePunto(coordenadas, vspeed);
 		x=(int) coordenadas.x;
 		y=(int) coordenadas.y;
-		// calcular rebote lados
-		if (x < 0 || x > Arkanoid.WIDTH-18 ) { 
-			trayectoria.reflejarHorizontalmenteRespectoAPunto(coordenadas);
+		// Calcular rebote lados
+		if (x < 0 ) { 
+			trayectoria.reflejarHaciaDerecha(coordenadas);
 		}
-		// calcular rebote techo
+		if (x > Arkanoid.WIDTH-18 ) { 
+			trayectoria.reflejarHaciaIzquierda(coordenadas);
+		}
+		// Calcular rebote techo
 		if (y < 0) { 
 			trayectoria.reflejarHaciaAbajo(coordenadas);
 		}

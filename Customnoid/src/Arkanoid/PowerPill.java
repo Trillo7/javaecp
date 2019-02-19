@@ -21,7 +21,7 @@ public class PowerPill extends Actor {
 
 		}
 		if(lid==3) {
-			setSpriteNames( new String[] {"lrojo.png","lrojo-glossy.png"});
+			setSpriteNames( new String[] {"hardenpkm.png"});
 
 
 		}
@@ -64,11 +64,12 @@ public class PowerPill extends Actor {
 			Arkanoid.getInstance().godmode=true;
 			Arkanoid.godTime=System.currentTimeMillis();
 		}
+		if(lid==3) {
+			Arkanoid.harderBricks=true;
+		}
 	}
-	// Cada ladrillo da puntos
-	// Cada fase dara puntos 
-	// Cada vida menos quita puntos
-	//getter and setters
+
+	// Getter and setters
 	public int getVx() { return vy; }
 	public void setVx(int i) {vy = i;	}
 }

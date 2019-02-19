@@ -12,12 +12,13 @@ public class Actor {
 	protected int currentFrame;
 	protected int frameSpeed;
 	protected int t;
-
+	public int lives;
 	private int markedForRemoval;
 	public int lid;
 
 	
 	public Actor() {
+		lives=0;
 		currentFrame = 0;
 		frameSpeed = 1;
 		t=0;
@@ -59,6 +60,14 @@ public class Actor {
 			t=0;
 			currentFrame = (currentFrame + 1) % spriteNames.length;
 			markedForRemoval++;
+		}
+		// Endurecemos los ladrillos por la pildora
+		if(this instanceof Brick) {
+			if(Arkanoid.harderBricks) {
+				this.setSpriteNames( new String[] {"lamarillo.png","lamarillo-glossy.png"});
+				this.lid=4;
+				this.lives=2;
+			}
 		}
 	}
 	

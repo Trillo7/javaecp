@@ -12,10 +12,10 @@ import Arkanoid.Brick;
 public class Fase05 extends Fase {
 	// Propiedades est�ticas de la fase
 	public static final int[][]  arraymap={	{0,0,0,0,0,0,0,0,0,0,0,0},
-											{6,5,5,6,0,0,0,0,6,5,5,6},
-											{6,5,5,6,0,0,0,0,6,5,5,6},
-											{0,0,0,0,4,4,4,4,0,0,0,0},
-											{0,0,0,0,4,4,4,4,0,0,0,0}};
+											{4,5,5,4,0,0,0,0,4,5,5,4},
+											{4,5,5,4,0,0,0,0,4,5,5,4},
+											{0,0,0,0,6,4,4,6,0,0,0,0},
+											{0,0,0,0,6,4,4,6,0,0,0,0}};
 	private int initX=7;
 	private int initY=7;
 
@@ -38,7 +38,7 @@ public class Fase05 extends Fase {
 		    	}
 		    	initX+=57;
 		    }
-		    initX=7;
+		    initX=8;
 		    initY+=38;
 		}
 		
