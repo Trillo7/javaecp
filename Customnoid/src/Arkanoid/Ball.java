@@ -19,8 +19,8 @@ public class Ball extends Actor {
 	}
 	
 	public void act(Player player) {
-		super.act();		
-		if(vspeed <= 10) {
+		super.act();		//Velocidad maxima, que va aumentando
+		if(vspeed <= 7) {
 			vspeed+=0.002;
 		}
 		if (trayectoria == null) {
@@ -100,10 +100,19 @@ public class Ball extends Actor {
 	/* (non-Javadoc)
 	 * @see Arkanoid.Actor#setX(int)
 	 */
+	
 	@Override
 	public void setX(int i) {
 		super.setX(i);
 		this.coordenadas.x = i;
+	}
+
+	public float getVspeed() {
+		return vspeed;
+	}
+
+	public void setVspeed(float vspeed) {
+		this.vspeed = vspeed;
 	}
 
 	/* (non-Javadoc)

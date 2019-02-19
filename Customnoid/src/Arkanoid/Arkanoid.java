@@ -246,9 +246,10 @@ public class Arkanoid extends Canvas {
 		if(actors.isEmpty()) {
 			initTime=System.currentTimeMillis();
 			initPause=true;
-			System.out.println("siguiente fase:"+gamelevel);
+			System.out.println("Siguiente fase:"+gamelevel);
 			this.ball.trayectoria = null;
 			ball.setSpriteNames(new String[] {"ballGrey.png"});
+			ball.setVspeed(3);
 			switch (gamelevel) {
 				case 1:
 					this.faseActiva=new Fase01();
@@ -262,6 +263,12 @@ public class Arkanoid extends Canvas {
 					this.actors.addAll(this.faseActiva.getActores());
 					gamelevel++;
 					break;
+				case 3:
+					this.faseActiva=new Fase03();
+					this.faseActiva.inicializaFase();
+					this.actors.addAll(this.faseActiva.getActores());
+					gamelevel++;
+					break;					
 				case 4:
 					this.faseActiva=new Fase04();
 					this.faseActiva.inicializaFase();
