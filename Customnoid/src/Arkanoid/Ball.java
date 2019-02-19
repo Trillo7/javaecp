@@ -47,8 +47,12 @@ public class Ball extends Actor {
 				PlaySound.getSound().stopcustomLoop();
 				PlaySound.getSound().customLoop("rex-nosferatu.wav");
 			}else {
-				player.lives--;
-        		player.myscore+=-25;
+				if(Arkanoid.getInstance().godmode) {
+					PlaySound.getSound().startSound("holy-soundcut.wav");
+				}else {
+					player.lives--;
+	        		player.myscore+=-25;
+				}
 				trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 			}
 		
@@ -57,7 +61,8 @@ public class Ball extends Actor {
 		Rectangle rectplayer = new Rectangle(player.x,player.y, player.width, player.height); // dimension nave
 		Rectangle rectball = new Rectangle(this.x, this.y, 22,22);
 		if(rectball.intersects(rectplayer)) {
-			Player.hit=true;// para que la nave cambie de color al rebotar
+			// Para que la nave cambie de color al rebotar en ella
+			Player.hit=true;
 			Arkanoid.hitTime=System.currentTimeMillis();
 			// Detector de colision en que lado
 			Rectangle playersup = new Rectangle(player.x,player.y, player.width, 2); // dimension nave
@@ -72,13 +77,10 @@ public class Ball extends Actor {
 				trayectoria.reflejarHaciaIzquierda(coordenadas);
 			}else if(rectball.intersects(playerinf)) {
 				trayectoria.reflejarHaciaAbajo(coordenadas);
-			}
-			
-			
-			//trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
-		
+			}		
 			CacheRecursos.getInstancia().playSonido("woosh.wav");
 		}
+		// Fin colision de bola con nave
 	}
 	
 	//Colisiona (con ladrillos)

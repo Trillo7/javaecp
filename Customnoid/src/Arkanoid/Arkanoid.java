@@ -53,7 +53,9 @@ public class Arkanoid extends Canvas {
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
 	public static long hitTime=System.currentTimeMillis();
+	public static long godTime=System.currentTimeMillis();
 	public static int gamelevel=1;
+	public boolean godmode=false;
 	// Fase activa en el juego
 	Fase faseActiva = null;
 	// Variable para patr�n Singleton
@@ -339,30 +341,43 @@ public class Arkanoid extends Canvas {
 		for (int i = 0; i < actors.size(); i++) {
 			Actor a1 = actors.get(i);
 			Rectangle r1 = a1.getBounds();
-		    if (r1.intersects(ballRect)) {
-		    	// Rectangles de ladrillos (Detector de lado golpeado)
-		    	String hitSide=null;
-		    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),2);
-		    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+a1.getHeight(),a1.getWidth(),2);
-		    	Rectangle izqrect=new Rectangle(a1.getX(),a1.getY(),2,a1.getHeight());
-		    	Rectangle derrect=new Rectangle(a1.getX()+a1.getWidth(),a1.getY(),2,a1.getHeight());
-		    	if(ballRect.intersects(superiorrect)) {
-		    		System.out.println("toca techo");
-		    		hitSide="sup";
-		    	}else if(ballRect.intersects(derrect)) {
-		    		System.out.println("toca derecha");
-		    		hitSide="der";
-		    	}else if(ballRect.intersects(izqrect)) {
-		    		System.out.println("toca izquierda");
-		    		hitSide="izq";
-		    	}else if(ballRect.intersects(inferiorrect)) {
-		    		System.out.println("toca suelo");
-		    		hitSide="inf";
-		    	}
-		    	ball.collisioned(hitSide);
-		        a1.removeActor(actors, i,player);
-		        break;
-		    }
+			if(a1 instanceof PowerPill) {
+				// Si es una pildora Colisionamos con nave
+				Rectangle playerRect=player.getBounds();
+				if(r1.intersects(playerRect)) {
+			        a1.removeActor(actors, i,player); // Para todos los efectos de eliminar la pildora y llamar a sus efectos
+				}
+				// Eliminamos pildora si se pasa de la y
+				if(a1.y>Arkanoid.getInstance().getHeight()) {
+					actors.remove(i);
+				}
+			}else {
+			    if (r1.intersects(ballRect)) {
+			    	// Rectangles de ladrillos (Detector de lado golpeado)
+			    	String hitSide=null;
+			    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),2);
+			    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+a1.getHeight(),a1.getWidth(),2);
+			    	Rectangle izqrect=new Rectangle(a1.getX(),a1.getY(),2,a1.getHeight());
+			    	Rectangle derrect=new Rectangle(a1.getX()+a1.getWidth(),a1.getY(),2,a1.getHeight());
+			    	if(ballRect.intersects(superiorrect)) {
+			    		System.out.println("toca techo");
+			    		hitSide="sup";
+			    	}else if(ballRect.intersects(derrect)) {
+			    		System.out.println("toca derecha");
+			    		hitSide="der";
+			    	}else if(ballRect.intersects(izqrect)) {
+			    		System.out.println("toca izquierda");
+			    		hitSide="izq";
+			    	}else if(ballRect.intersects(inferiorrect)) {
+			    		System.out.println("toca suelo");
+			    		hitSide="inf";
+			    	}
+			    	ball.collisioned(hitSide); // Para el rebote
+			        a1.removeActor(actors, i,player); // Para todos los efectos de eliminar(vidas, generar pildora etc)
+			        break;
+			    }
+			}
+
 		}
 	}
 	public void paintWorld() {
@@ -373,6 +388,10 @@ public class Arkanoid extends Canvas {
 		g.fillRect(0,0,getWidth(),getHeight());
 		g.drawImage( SpriteCache.getInstance().getSprite("background1.jpg"), 0,0, null );
 		g.drawImage( SpriteCache.getInstance().getSprite(this.faseActiva.getBackgroundImg()), 0,0, null );
+		// Fondo godmode
+		if(godmode) {
+			g.drawImage( SpriteCache.getInstance().getSprite("godmode-background.png"), 0,0, null );
+		}
 		//Bucle para pintarse as� mismo cada actor
 		for (int i = 0; i < actors.size(); i++) {
 			Actor l = actors.get(i);

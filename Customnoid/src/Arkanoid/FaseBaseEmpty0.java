@@ -24,7 +24,7 @@ public class FaseBaseEmpty0 extends Fase {
 	 */
 	@Override
 	public void inicializaFase() {
-		
+		maxPills=5;
 		for (int i = 0; i < arraymap.length; i++) {
 		    for (int j = 0; j < arraymap[i].length; j++) {
 		    	if(arraymap[i][j]!=0) {

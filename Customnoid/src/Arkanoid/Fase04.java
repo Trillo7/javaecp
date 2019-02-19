@@ -18,14 +18,13 @@ public class Fase04 extends Fase {
 											{3,3,3,3,3,3,3,3,3,3,3,3}};
 	private int initX=7;
 	private int initY=7;
-	private int lcount=0;
-	
+
 	/**
 	 * Inicializaci�n de la fase, es la implementaci�n de un m�todo abstracto en el supertipo
 	 */
 	@Override
 	public void inicializaFase() {
-		
+		maxPills=5;
 		for (int i = 0; i < arraymap.length; i++) {
 		    for (int j = 0; j < arraymap[i].length; j++) {
 		    	if(arraymap[i][j]!=0) {

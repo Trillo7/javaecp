@@ -64,8 +64,23 @@ public class Brick extends Actor {
         	CacheRecursos.getInstancia().playSonido("woosh.wav");
         	Arkanoid.getInstance().getExplosionlist().add(exp);
         	PlaySound.getSound().explosionSound();
-    	}
-
+        	// Generamos pildora
+        	if(Arkanoid.getInstance().faseActiva.maxPills>Arkanoid.getInstance().faseActiva.actualPills) {
+        	  int pillPercentage = (int) (Math.random()*9+1);
+        	  int randomPill = (int) (Math.random()*2+1);
+        	  if(pillPercentage>2&& pillPercentage<6) {
+        		  PowerPill pp=new PowerPill(randomPill);
+      	  		  pp.setX(this.x);
+      	  		  pp.setY(this.y);
+      	  		  actors.add(pp);
+      	  		  Arkanoid.getInstance().faseActiva.actualPills++;
+        	  }
+        	  System.out.println("Porcentaje pildora: "+pillPercentage);
+        	  System.out.println("Pildoras maximas en esta fase: "+Arkanoid.getInstance().faseActiva.maxPills+" Numero de pildoras generadas: "+Arkanoid.getInstance().faseActiva.actualPills);
+        	}
+        	//Fin sistema pildora
+	    }
+    	
     }
 	// Cada ladrillo da puntos
 	// Cada fase dara puntos 

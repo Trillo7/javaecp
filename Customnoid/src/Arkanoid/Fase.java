@@ -17,7 +17,8 @@ public abstract class Fase {
 	
 	// M�todo que debe implementar cada Fase
 	public abstract void inicializaFase ();
-
+	public int maxPills=0;
+	public int actualPills=0;
 	// Getter de la lista de actores
 	public List<Actor> getActores() { return actors; }
 	

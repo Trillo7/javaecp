@@ -22,7 +22,7 @@ public class Fase01 extends Fase {
 	 */
 	@Override
 	public void inicializaFase() {
-
+		maxPills=1;
 		for (int i = 0; i < 1; i++){
 		  Brick l = new Brick(4);
 		  l.setX(195+(i * 58) );
