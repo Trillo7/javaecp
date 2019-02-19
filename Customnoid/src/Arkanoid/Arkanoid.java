@@ -494,8 +494,13 @@ public class Arkanoid extends Canvas {
 				endPausesRoundstart();
 
 			}
-			if(System.currentTimeMillis()-hitTime>170) { // para que la nave cambie de color al rebotar
+			// Para que la nave cambie de color al rebotar (realizado en la clase ball)
+			if(System.currentTimeMillis()-hitTime>170) { 
 				Player.hit=false;
+			}
+			// Para que acabe el god mode al pasar el tiempo
+			if(System.currentTimeMillis()-godTime>15000) { 
+				godmode=false;
 			}
 		}
 	}
