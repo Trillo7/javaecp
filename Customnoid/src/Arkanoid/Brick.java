@@ -68,7 +68,7 @@ public class Brick extends Actor {
         	  int pillPercentage = (int) Math.round(Math.random() * ((18) - 1) + 1);
         	  if(pillPercentage==2 || pillPercentage==6 || pillPercentage==11   ) {
             	  int randomPill = (int) Math.round(Math.random() * ((4) - 1) + 1);
-        		  PowerPill pp=new PowerPill(2);
+        		  PowerPill pp=new PowerPill(randomPill);
       	  		  pp.setX(this.x);
       	  		  pp.setY(this.y);
       	  		  actors.add(pp);
