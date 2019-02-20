@@ -370,7 +370,7 @@ public class Arkanoid extends Canvas {
 			    	// Rectangles de ladrillos (Detector de lado golpeado)
 			    	String hitSide=null;
 			    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),1);
-			    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+a1.getHeight(),a1.getWidth(),1);
+			    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+a1.getHeight(),a1.getWidth()+2,1);
 			    	Rectangle izqrect=new Rectangle(a1.getX(),a1.getY(),1,a1.getHeight());
 			    	Rectangle derrect=new Rectangle(a1.getX()+a1.getWidth(),a1.getY(),1,a1.getHeight());
 			    	if(ballRect.intersects(superiorrect)) {
