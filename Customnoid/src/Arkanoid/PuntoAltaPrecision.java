@@ -1,7 +1,7 @@
 package Arkanoid;
 
 /**
- * Clase interna que nos aporta precisiï¿½n en el cï¿½lculo de la coordenada que ocupa la bola
+ * Clase interna que nos aporta precisión en el cálculo de la coordenada que ocupa la bola
  * @author R
  *
  */
@@ -21,7 +21,7 @@ public class PuntoAltaPrecision {
 	}
 
 	/**
-	 * Tï¿½pico toString()
+	 * Típico toString()
 	 */
 	@Override
 	public String toString() {

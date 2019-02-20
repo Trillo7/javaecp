@@ -6,13 +6,19 @@ import Arkanoid.soundUtils.PlaySound;
 
 public class Ball extends Actor {
 	private float vspeed;
-	PuntoAltaPrecision coordenadas=new PuntoAltaPrecision(this.x,this.y);
+	// La bola se moverá en una determinada recta (trayectoria) con una determinada velocidad
 	public TrayectoriaRecta trayectoria = null;
-	
+	// Para el control preciso del aumento de la velocidad de la bola constante utilizo unas coordenadas flotantes
+	// aunque eso no quita que sigan existiendo las coordenades x e y del supertipo Actor. De hecho, cada vez que
+	// actualizamos las coordenadas flotantes también actualizaré las coordenadas enteras.
+	private PuntoAltaPrecision coordenadas = null;
+	private static final float maxSpeed = 7.3f;
+
 	public Ball(int x, int y, float vspeed) {
 		super();
 		setSpriteNames( new String[] {"ballGrey.png"});
 		setFrameSpeed(35);
+		this.coordenadas = new PuntoAltaPrecision(x, y);
 		this.x=x;
 		this.y=y;
 		this.vspeed=vspeed;
@@ -20,16 +26,21 @@ public class Ball extends Actor {
 	
 	public void act(Player player) {
 		super.act();		//Velocidad maxima, que va aumentando
-		if(vspeed <= 7) {
+		if(vspeed <= maxSpeed) {
 			vspeed+=0.002;
 		}
 		if (trayectoria == null) {
-			trayectoria = new TrayectoriaRecta(2.8f,coordenadas,false);
+			this.iniciarMovimiento(-1, -1);
 		}
 		//System.out.println("ball speed: "+vspeed);
-		coordenadas = trayectoria.getPuntoADistanciaDePunto(coordenadas, vspeed);
-		x=(int) coordenadas.x;
-		y=(int) coordenadas.y;
+		// Calculo del nuevo punto de la trayectoria de la bola
+		PuntoAltaPrecision nuevoPuntoEnLaTrayectoria = this.trayectoria.getPuntoADistanciaDePunto(this.coordenadas, this.vspeed);
+		this.coordenadas = nuevoPuntoEnLaTrayectoria;
+		// Actualizo las coordenadas enteras del supertipo Actor, ya que es conforme a estas con las que se pinta en pantalla
+		// y se detectan las colisiones.
+		this.x = Math.round(this.coordenadas.x);
+		this.y = Math.round(this.coordenadas.y);
+		
 		// Calcular rebote LADOS
 		if (x < 0 ) { 
 			trayectoria.reflejarHaciaDerecha(coordenadas);
@@ -109,6 +120,43 @@ public class Ball extends Actor {
 		
 	}
     
+	/**
+	 * Principio del movimiento de la bola
+	 * @param xDestino
+	 * @param yDestino
+	 */
+	private void iniciarMovimiento (int xDestino, int yDestino) {
+		if (trayectoria == null) {
+			// Si los valores del punto de destino son "-1" indica ue debemos hacer una trayectoria por defecto
+			if (xDestino == -1 && yDestino == -1) {
+				this.trayectoria = new TrayectoriaRecta(-3f, this.coordenadas, true);
+			}
+			// En caso contrario debemos trazar la trayectoria desde el punto actual de la bola hasta el punto
+			// que nos indican
+			else {
+				// Establecemos una mínima distancia en el eje X entre la situación de la bola y el punto que nos
+				// indican. De esa manera evitamos que la pelota se pueda poner completamente vertical
+				int minimaDistanciamientoEntreX = 20;
+				if (Math.abs(xDestino - this.getX()) < minimaDistanciamientoEntreX) {
+					// Trayectoria a derecha
+					if (xDestino < this.getX()) {
+						xDestino = this.getX() - minimaDistanciamientoEntreX;
+					}
+					else {
+						// Trayectoria a izquierda
+						xDestino = this.getX() + minimaDistanciamientoEntreX;
+					}
+				}
+				// Determinamos la dirección a seguir en la trayectoria en función del signo de la pendiente que 
+				// esperamos
+				boolean direccionCreciente = (xDestino > this.getX())? true : false;
+				// Creamos la trayectoria.
+				this.trayectoria = new TrayectoriaRecta(new PuntoAltaPrecision(this.x, this.y), new PuntoAltaPrecision(xDestino, yDestino), direccionCreciente);
+			}
+		}
+	}
+	
+
 	/* (non-Javadoc)
 	 * @see Arkanoid.Actor#setX(int)
 	 */
@@ -135,5 +183,4 @@ public class Ball extends Actor {
 		super.setY(i);
 		this.coordenadas.y = i;
 	}
-
 }

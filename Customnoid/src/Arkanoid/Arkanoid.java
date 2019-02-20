@@ -244,7 +244,7 @@ public class Arkanoid extends Canvas {
 		player.setY(Arkanoid.HEIGHT - 2*player.getHeight()+50);
 		
 		//Inicializamos la bola
-		ball= new Ball(player.getX()+40,player.getY()-130,(float) 2.5);
+		ball= new Ball(player.getX()+40,player.getY()-130,(float) 2.5f);
 	}
 	
 	public void updateWorld() {
