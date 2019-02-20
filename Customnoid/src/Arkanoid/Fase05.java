@@ -47,14 +47,14 @@ public class Fase05 extends Fase {
 	@Override
 	public String getGameplaySound() {
 		// TODO Auto-generated method stub
-		return super.getGameplaySound();
+		return "quacking90s.wav";
 	}
 
 
 	@Override
 	public String getBackgroundImg() {
 		// TODO Auto-generated method stub
-		return "ducksimg.jpg";
+		return "ducksbg.jpg";
 	}
 	
 }

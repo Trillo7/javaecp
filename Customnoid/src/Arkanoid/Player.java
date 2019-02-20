@@ -3,11 +3,10 @@ package Arkanoid;
 import java.awt.event.KeyEvent;
 
 public class Player extends Actor {
-	protected static final int PLAYER_SPEED = 6;
+	protected static final int PLAYER_SPEED = 8;
 	protected int vx;
 	protected int vy;
 	public static boolean hit=false;
-	public int lives;
 	public int myscore;
 	private boolean up,down,left,right;
 		

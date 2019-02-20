@@ -31,7 +31,7 @@ public class Fase03 extends Fase {
 	 */
 	@Override
 	public void inicializaFase() {
-		maxPills=5;
+		maxPills=7;
 		for (int i = 0; i < arraymap.length; i++) {
 		    for (int j = 0; j < arraymap[i].length; j++) {
 		    	if(arraymap[i][j]!=0) {
@@ -54,14 +54,14 @@ public class Fase03 extends Fase {
 	@Override
 	public String getGameplaySound() {
 		// TODO Auto-generated method stub
-		return super.getGameplaySound();
+		return "havana-dog.wav";
 	}
 
 
 	@Override
 	public String getBackgroundImg() {
 		// TODO Auto-generated method stub
-		return "dogbg.jpg";
+		return "nintendogs-bg.jpg";
 	}
 
 }

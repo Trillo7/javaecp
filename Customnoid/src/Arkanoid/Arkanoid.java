@@ -139,9 +139,15 @@ public class Arkanoid extends Canvas {
 					if(gameOver) {
 						gameOver=false;
 						actors.clear();
-						Arkanoid.getInstance().initWorld();
+						PlaySound.getSound().background3Stop();
+						player.lives=3;
+						System.out.println("reiniciamos nivel");
+						gamelevel=1;
 					}
-					PlaySound.getSound().stopMenu();
+					if(!esc) { // paramos el sonido solo si no le damos a escapada, si no para la musica de fondo por error
+						PlaySound.getSound().stopMenu();
+
+					}
 				}
 				// Boton salir
 				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
@@ -149,7 +155,7 @@ public class Arkanoid extends Canvas {
 				}
 			}
 		});
-		//Sensor raton motion
+		// Sensor raton motion
 		this.addMouseMotionListener( new MouseMotionAdapter() {
 		@Override 
 		public void mouseMoved(MouseEvent e) { 
@@ -206,7 +212,7 @@ public class Arkanoid extends Canvas {
 				}else {
 					player.keyPressed(e);
 				}
-				if(e.getKeyCode()==KeyEvent.VK_CAPS_LOCK) {
+				if(e.getKeyCode()==KeyEvent.VK_SHIFT) {
 					gamelevel=Integer.parseInt(JOptionPane.showInputDialog("TRUCASO. �Que nivel quieres acceder?"));
 					actors.clear();
 				}
@@ -229,7 +235,6 @@ public class Arkanoid extends Canvas {
 	public void initWorld() {
 		//Creamos los Bricks en arraylist
 		PlaySound.getSound().startMenu();
-	
 		// Agregamos los actores de la primera fase a nuestro juego
 		this.actors.clear();
 		
@@ -240,9 +245,6 @@ public class Arkanoid extends Canvas {
 		
 		//Inicializamos la bola
 		ball= new Ball(player.getX()+40,player.getY()-130,(float) 2.5);
-		
-		
-
 	}
 	
 	public void updateWorld() {
@@ -333,7 +335,6 @@ public class Arkanoid extends Canvas {
 				explosionlist.clear();
 			}
 		}
-
 		// Pausemos la pelota
 		if(pause || initPause) {
 	
@@ -346,7 +347,7 @@ public class Arkanoid extends Canvas {
 		}else if(menu==1&&esc) {
 			pause=true;
 		}
-		//actuamos la nave
+		// Actuamos la nave
 		player.act();
 	}
 	public void checkCollisions() {
@@ -368,21 +369,17 @@ public class Arkanoid extends Canvas {
 			    if (r1.intersects(ballRect)) {
 			    	// Rectangles de ladrillos (Detector de lado golpeado)
 			    	String hitSide=null;
-			    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),2);
-			    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+a1.getHeight(),a1.getWidth(),2);
-			    	Rectangle izqrect=new Rectangle(a1.getX(),a1.getY(),2,a1.getHeight());
-			    	Rectangle derrect=new Rectangle(a1.getX()+a1.getWidth(),a1.getY(),2,a1.getHeight());
+			    	Rectangle superiorrect=new Rectangle(a1.getX(),a1.getY(),a1.getWidth(),1);
+			    	Rectangle inferiorrect=new Rectangle(a1.getX(),a1.getY()+a1.getHeight(),a1.getWidth(),1);
+			    	Rectangle izqrect=new Rectangle(a1.getX(),a1.getY(),1,a1.getHeight());
+			    	Rectangle derrect=new Rectangle(a1.getX()+a1.getWidth(),a1.getY(),1,a1.getHeight());
 			    	if(ballRect.intersects(superiorrect)) {
-			    		System.out.println("toca techo");
 			    		hitSide="sup";
 			    	}else if(ballRect.intersects(derrect)) {
-			    		System.out.println("toca derecha");
 			    		hitSide="der";
 			    	}else if(ballRect.intersects(izqrect)) {
-			    		System.out.println("toca izquierda");
 			    		hitSide="izq";
 			    	}else if(ballRect.intersects(inferiorrect)) {
-			    		System.out.println("toca suelo");
 			    		hitSide="inf";
 			    	}
 			    	ball.collisioned(hitSide); // Para el rebote
@@ -403,7 +400,7 @@ public class Arkanoid extends Canvas {
 		g.drawImage( SpriteCache.getInstance().getSprite(this.faseActiva.getBackgroundImg()), 0,0, null );
 		// Fondo godmode
 		if(godmode) {
-			g.drawImage( SpriteCache.getInstance().getSprite("godmode-background.png"), 0,0, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("godmode-background.png"), 50,0, null );
 		}
 		//Bucle para pintarse as� mismo cada actor
 		for (int i = 0; i < actors.size(); i++) {
@@ -430,10 +427,18 @@ public class Arkanoid extends Canvas {
 		// Barra de estadisticas
 		Font myFont = new Font ("Segoe UI", 1, 27);
 		g.setFont (myFont);
+		// Vidas
 		g.drawImage( SpriteCache.getInstance().getSprite("livesbox-cut.png"), 10,this.HEIGHT-107, null );
-		g.drawString (""+player.lives, 135,this.HEIGHT-60);
+		// Si estamos en godmode dibujamos los segundos en vez de las vidas
+		if(godmode) {
+			g.drawString (""+(System.currentTimeMillis()-godTime)/1000, 135,this.HEIGHT-60);
+		}else {
+			g.drawString (""+player.lives, 135,this.HEIGHT-60);
+		}
+		// Puntuacion
 		g.drawImage( SpriteCache.getInstance().getSprite("urscore-cut.png"), 260,this.HEIGHT-103, null );
 		g.drawString (""+player.myscore, 310,this.HEIGHT-60);
+		// Fase
 		g.drawImage( SpriteCache.getInstance().getSprite("level-cut.png"), this.WIDTH-235,this.HEIGHT-100, null );
 		g.drawString (""+(gamelevel-1), this.WIDTH-55,this.HEIGHT-67);
 
@@ -456,15 +461,12 @@ public class Arkanoid extends Canvas {
 				g.drawImage( SpriteCache.getInstance().getSprite("newcustomnoid-50.png"), Arkanoid.WIDTH/2-185,Arkanoid.HEIGHT/2-370, null );
 			}
 			// Si el juego ha acabado game over no mostramos el botond de Play, y a�adimos efecto de un boton u otra si pasamos el raton por el boton
-			if(!gameOver) {
-				if(!mouseInPlay) {
-					g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
+			if(!mouseInPlay) {
+				g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
 
-				}else {
-					g.drawImage( SpriteCache.getInstance().getSprite("playbutton-2.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
+			}else {
+				g.drawImage( SpriteCache.getInstance().getSprite("playbutton-2.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
 
-				}
-				
 			}
 			if(!mouseInExit) {
 				g.drawImage( SpriteCache.getInstance().getSprite("red_button00.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2+25, null );
@@ -487,11 +489,22 @@ public class Arkanoid extends Canvas {
 		
 	}
 	
+	public void startGameOver() {
+		System.out.println("llamamos a gameover");
+		Arkanoid.getInstance().setMenu(1);
+		Arkanoid.gameOver=true;
+		gamelevel=-1;
+		PlaySound.getSound().startSound("long-bowser.wav");
+		PlaySound.getSound().stopcustomLoop();
+		PlaySound.getSound().customLoop("creepy1.wav");
+
+	}
 	public void endPausesRoundstart() {
 		initPause=false;
 		pause=false;
 		PlaySound.getSound().stopcustomLoop();
 		PlaySound.getSound().blasterSound();
+		PlaySound.getSound().stopcustomLoop();
 		PlaySound.getSound().customLoop(faseActiva.getGameplaySound());
 	}
 	public void game() {
@@ -515,7 +528,7 @@ public class Arkanoid extends Canvas {
 				Player.hit=false;
 			}
 			// Para que acabe el god mode al pasar el tiempo
-			if(System.currentTimeMillis()-godTime>15000) { 
+			if(System.currentTimeMillis()-godTime>15500) { 
 				godmode=false;
 			}
 		}

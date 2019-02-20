@@ -10,7 +10,7 @@ public class PowerPill extends Actor {
 	public PowerPill(int lid) {
 		super();
 		this.lid=lid;
-		this.vy=1;
+		this.vy=2;
 		if(lid==1) {
 			setSpriteNames( new String[] {"heartbox.png"});
 
@@ -26,8 +26,7 @@ public class PowerPill extends Actor {
 
 		}
 		if(lid==4) {
-			setSpriteNames( new String[] {"lamarillo.png","lamarillo-glossy.png"});
-
+			setSpriteNames( new String[] {"bomb1.png","bomb2.png","bomb3.png","bomb4.png"});
 
 		}
 		if(lid==5) {
@@ -39,7 +38,7 @@ public class PowerPill extends Actor {
 			setSpriteNames( new String[] {"lgris.png","lgris-glossy.png"});
 
 		}
-		setFrameSpeed(35);
+		setFrameSpeed(8);
 	}
 	public void act() {
 		super.act();
@@ -66,6 +65,9 @@ public class PowerPill extends Actor {
 		}
 		if(lid==3) {
 			Arkanoid.harderBricks=true;
+		}
+		if(lid==4) {
+			Arkanoid.getInstance().startGameOver();
 		}
 	}
 

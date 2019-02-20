@@ -20,12 +20,13 @@ public class Ball extends Actor {
 	
 	public void act(Player player) {
 		super.act();		//Velocidad maxima, que va aumentando
-		if(vspeed <= 7) {
+		if(vspeed <= 7.3) {
 			vspeed+=0.002;
 		}
 		if (trayectoria == null) {
 			trayectoria = new TrayectoriaRecta(2.8f,coordenadas,false);
 		}
+		//System.out.println("ball speed: "+vspeed);
 		coordenadas = trayectoria.getPuntoADistanciaDePunto(coordenadas, vspeed);
 		x=(int) coordenadas.x;
 		y=(int) coordenadas.y;
@@ -41,14 +42,9 @@ public class Ball extends Actor {
 			trayectoria.reflejarHaciaAbajo(coordenadas);
 		}
 		// calcular rebote con fin del juego abajo
-		// FIN DEL JUEGO
-		if (y > Arkanoid.HEIGHT) { 
+		if (this.y > Arkanoid.HEIGHT) { 
 			if(player.lives<=0) {
-				Arkanoid.getInstance().setMenu(1);
-				Arkanoid.gameOver=true;
-				PlaySound.getSound().startSound("long-bowser.wav");
-				PlaySound.getSound().stopcustomLoop();
-				PlaySound.getSound().customLoop("rex-nosferatu.wav");
+				Arkanoid.getInstance().startGameOver();
 			}else {
 				if(Arkanoid.getInstance().godmode) {
 					PlaySound.getSound().startSound("holy-soundcut.wav");
@@ -56,9 +52,8 @@ public class Ball extends Actor {
 					player.lives--;
 	        		player.myscore+=-25;
 				}
-				trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 			}
-		
+			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);		
 		}
 		// Colision de la bola con la nave
 		Rectangle rectplayer = new Rectangle(player.x,player.y, player.width, player.height); // dimension nave
@@ -92,12 +87,16 @@ public class Ball extends Actor {
 		// Para detectar donde hemos colisionado
 		if(hitSide=="sup") {
 			trayectoria.reflejarHaciaArriba(coordenadas);
+			System.out.println("Hacia arriba");
 		}else if(hitSide=="der") {
 			trayectoria.reflejarHaciaDerecha(coordenadas);
+			System.out.println("Hacia derecha");
 		}else if(hitSide=="izq") {
 			trayectoria.reflejarHaciaIzquierda(coordenadas);
+			System.out.println("Hacia izquierda");
 		}else if(hitSide=="inf") {
 			trayectoria.reflejarHaciaAbajo(coordenadas);
+			System.out.println("Hacia abajo");
 		}
 		
 	}

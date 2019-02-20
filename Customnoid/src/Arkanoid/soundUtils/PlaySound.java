@@ -36,6 +36,10 @@ public class PlaySound {
 		s1= new HiloSonidoBucle("Arkanoid/soundUtils/megamanNebulaBackground.wav");
 		s1.start();
 	}
+	public void background3SoundGameOver() {
+		s1= new HiloSonidoBucle("Arkanoid/soundUtils/rex-nosferatu.wav");
+		s1.start();
+	}
 	//sonido de inicio de juego del menu
 	public void startMenu() {
 		s1 = new HiloSonidoBucle("Arkanoid/soundUtils/megamanBackground.wav");
@@ -48,6 +52,10 @@ public class PlaySound {
 	}
 	//sonido de fondo para
 	public void background2Stop() {
+		s1.parar();
+	}
+	//sonido de fondo para
+	public void background3Stop() {
 		s1.parar();
 	}
 	public void stopMenu() {

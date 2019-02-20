@@ -11,11 +11,11 @@ import Arkanoid.Brick;
  */
 public class Fase02 extends Fase {
 	// Propiedades est�ticas de la fase
-	public static final int[][]  arraymap={	{1,0,1,2,0,2,4,4,4,2,2,2},
-											{1,0,1,2,0,2,4,0,4,2,0,0},
-											{1,1,1,2,0,2,4,4,4,2,2,0},
-											{1,1,1,2,0,2,4,0,4,2,0,0},
-											{1,0,1,0,2,0,4,4,4,2,2,2}};
+	public static final int[][]  arraymap={	{1,0,1,2,0,2,3,3,0,2,2,2},
+											{4,0,1,2,0,2,3,0,3,2,0,0},
+											{1,4,1,2,0,2,3,4,0,2,2,0},
+											{1,0,4,2,0,2,3,0,3,2,0,0},
+											{1,0,1,0,2,0,3,3,3,2,2,2}};
 	private int initX=7;
 	private int initY=7;
 
@@ -50,14 +50,14 @@ public class Fase02 extends Fase {
 	@Override
 	public String getGameplaySound() {
 		// TODO Auto-generated method stub
-		return super.getGameplaySound();
+		return "stormsound.wav";
 	}
 
 
 	@Override
 	public String getBackgroundImg() {
 		// TODO Auto-generated method stub
-		return super.getBackgroundImg();
+		return "skycloudbg.png";
 	}
 	
 }
