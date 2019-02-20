@@ -41,7 +41,7 @@ public class Arkanoid extends Canvas {
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 640; 
 	public static final int SPEED=10;
-	public static long initTime=System.currentTimeMillis();
+	public static long initPauseTime=System.currentTimeMillis();
 	private int cursorx=0;
 	private int cursory=0;
 	boolean mouseInPlay=false;
@@ -250,7 +250,7 @@ public class Arkanoid extends Canvas {
 	public void updateWorld() {
 		//INICIO SISTEMA DE NIVELES
 		if(actors.isEmpty()) {
-			initTime=System.currentTimeMillis();
+			initPauseTime=System.currentTimeMillis();
 			initPause=true;
 			ball.trayectoria = null;
 			ball.setVspeed(3);
@@ -312,9 +312,9 @@ public class Arkanoid extends Canvas {
 			ball.setX(player.getX()+40);
 			ball.setY(player.getY()-24);
 		}
-		// Para que no cuente los segundos en el menu
+		// Para que no cuente los segundos en el menu si no initpause lo quita al instante en game()
 		if(menu==1) {
-			initTime=System.currentTimeMillis();
+			initPauseTime=System.currentTimeMillis();
 		}
 		// Llamamos al act de cada actor
 		for (int i = 0; i < actors.size(); i++) {
@@ -519,9 +519,9 @@ public class Arkanoid extends Canvas {
 			try { 
 				 Thread.sleep(SPEED);
 			} catch (InterruptedException e) {}
-			if(initPause==true && menu==0 && System.currentTimeMillis() - initTime > 5000) {
+			
+			if(initPause==true && menu==0 && System.currentTimeMillis() - initPauseTime > 5000) {
 				endPausesRoundstart();
-
 			}
 			// Para que la nave cambie de color al rebotar (realizado en la clase ball)
 			if(System.currentTimeMillis()-hitTime>170) { 
@@ -556,6 +556,12 @@ public class Arkanoid extends Canvas {
 		this.menu = menu;
 	}
 	
+	public boolean isInitPause() {
+		return initPause;
+	}
+	public void setInitPause(boolean initPause) {
+		this.initPause = initPause;
+	}
 	public static void main(String[] args) {
 		//Bucle del juego, creamos un objeto de esta clase misma
 		CacheRecursos.getInstancia().cargarRecursosEnMemoria();

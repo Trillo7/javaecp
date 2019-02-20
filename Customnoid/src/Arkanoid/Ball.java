@@ -20,7 +20,7 @@ public class Ball extends Actor {
 	
 	public void act(Player player) {
 		super.act();		//Velocidad maxima, que va aumentando
-		if(vspeed <= 7.3) {
+		if(vspeed <= 7) {
 			vspeed+=0.002;
 		}
 		if (trayectoria == null) {
@@ -30,18 +30,18 @@ public class Ball extends Actor {
 		coordenadas = trayectoria.getPuntoADistanciaDePunto(coordenadas, vspeed);
 		x=(int) coordenadas.x;
 		y=(int) coordenadas.y;
-		// Calcular rebote lados
+		// Calcular rebote LADOS
 		if (x < 0 ) { 
 			trayectoria.reflejarHaciaDerecha(coordenadas);
 		}
 		if (x > Arkanoid.WIDTH-18 ) { 
 			trayectoria.reflejarHaciaIzquierda(coordenadas);
 		}
-		// Calcular rebote techo
+		// Calcular rebote TECHO
 		if (y < 0) { 
 			trayectoria.reflejarHaciaAbajo(coordenadas);
 		}
-		// calcular rebote con fin del juego abajo
+		// Calcular fin juego rebote SUELO
 		if (this.y > Arkanoid.HEIGHT) { 
 			if(player.lives<=0) {
 				Arkanoid.getInstance().startGameOver();
@@ -53,7 +53,12 @@ public class Ball extends Actor {
 	        		player.myscore+=-25;
 				}
 			}
-			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);		
+			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);	
+			trayectoria=null;
+			this.setX(player.getX()+40);
+			this.setY(player.getY()-24);
+			Arkanoid.initPauseTime=System.currentTimeMillis(); // Porque si no initPause lo quita al instante
+			Arkanoid.getInstance().setInitPause(true);
 		}
 		// Colision de la bola con la nave
 		Rectangle rectplayer = new Rectangle(player.x,player.y, player.width, player.height); // dimension nave
