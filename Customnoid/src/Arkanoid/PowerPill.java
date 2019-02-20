@@ -13,30 +13,16 @@ public class PowerPill extends Actor {
 		this.vy=2;
 		if(lid==1) {
 			setSpriteNames( new String[] {"heartbox.png"});
-
 		}
 		if(lid==2) {
 			setSpriteNames( new String[] {"godmode-cut.png"});
-
-
 		}
 		if(lid==3) {
 			setSpriteNames( new String[] {"hardenpkm.png"});
 
-
 		}
 		if(lid==4) {
 			setSpriteNames( new String[] {"bomb1.png","bomb2.png","bomb3.png","bomb4.png"});
-
-		}
-		if(lid==5) {
-			setSpriteNames( new String[] {"lmorado.png","lmorado-glossy.png"});
-
-		}
-	
-		if(lid==6) {
-			setSpriteNames( new String[] {"lgris.png","lgris-glossy.png"});
-
 		}
 		setFrameSpeed(8);
 	}
@@ -71,7 +57,4 @@ public class PowerPill extends Actor {
 		}
 	}
 
-	// Getter and setters
-	public int getVx() { return vy; }
-	public void setVx(int i) {vy = i;	}
 }
