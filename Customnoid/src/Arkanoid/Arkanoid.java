@@ -37,7 +37,7 @@ public class Arkanoid extends Canvas {
 	public static Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
 	private List<Actor> explosionlist = new ArrayList<Actor>();
-	public static final int WIDTH=701;
+	public static final int WIDTH=690;
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 640; 
 	public static final int SPEED=10;
@@ -132,7 +132,7 @@ public class Arkanoid extends Canvas {
 					endPausesRoundstart();
 				}
 				// Boton Jugar
-				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su mï¿½sica
+				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-44 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su mï¿½sica
 					menu=0;
 					pause=false;
 					//Reiniciamos juego si hemos muerto
@@ -168,7 +168,7 @@ public class Arkanoid extends Canvas {
 				player.setX(e.getX()-50);
 			}
 			// Si el raton esta encima del play
-			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-60 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su mï¿½sica
+			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-44 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su mï¿½sica
 				mouseInPlay=true;
 			}else {
 				mouseInPlay=false;
@@ -296,7 +296,7 @@ public class Arkanoid extends Canvas {
 					pause=true;
 					menu=1;
 					victory=true;
-					actors.add(player);// Lo añadimos a actores para que no se repita el switch todo el rato mientras esta en victoria
+					actors.add(player);// Lo aï¿½adimos a actores para que no se repita el switch todo el rato mientras esta en victoria
 					PlaySound.getSound().stopcustomLoop();
 					PlaySound.getSound().customLoop("victoryfree.wav");
 					break;
@@ -462,10 +462,10 @@ public class Arkanoid extends Canvas {
 			}
 			// Si el juego ha acabado game over no mostramos el botond de Play, y aï¿½adimos efecto de un boton u otra si pasamos el raton por el boton
 			if(!mouseInPlay) {
-				g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
+				g.drawImage( SpriteCache.getInstance().getSprite("play-squarebutton.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-44, null );
 
 			}else {
-				g.drawImage( SpriteCache.getInstance().getSprite("playbutton-2.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-60, null );
+				g.drawImage( SpriteCache.getInstance().getSprite("playbutton-2.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2-44, null );
 
 			}
 			if(!mouseInExit) {

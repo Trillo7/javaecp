@@ -23,7 +23,7 @@ public class Fase03 extends Fase {
 											{0,0,0,0,2,2,2,2,0,0,0,0}};
 
 
-	private int initX=7;
+	private int initX=5;
 	private int initY=7;
 
 	/**
@@ -45,7 +45,7 @@ public class Fase03 extends Fase {
 		    	}
 		    	initX+=57;
 		    }
-		    initX=7;
+		    initX=5;
 		    initY+=38;
 		}
 		

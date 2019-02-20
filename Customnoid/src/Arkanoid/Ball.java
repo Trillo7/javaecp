@@ -54,11 +54,14 @@ public class Ball extends Actor {
 				}
 			}
 			trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);	
-			trayectoria=null;
-			this.setX(player.getX()+40);
-			this.setY(player.getY()-24);
-			Arkanoid.initPauseTime=System.currentTimeMillis(); // Porque si no initPause lo quita al instante
-			Arkanoid.getInstance().setInitPause(true);
+			if(!Arkanoid.getInstance().godmode) {
+				trayectoria=null;
+				this.setX(player.getX()+40);
+				this.setY(player.getY()-24);
+				Arkanoid.initPauseTime=System.currentTimeMillis(); // Porque si no initPause lo quita al instante
+				Arkanoid.getInstance().setInitPause(true);
+			}
+
 		}
 		// Colision de la bola con la nave
 		Rectangle rectplayer = new Rectangle(player.x,player.y, player.width, player.height); // dimension nave
