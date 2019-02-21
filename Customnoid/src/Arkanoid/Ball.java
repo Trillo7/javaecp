@@ -6,11 +6,11 @@ import Arkanoid.soundUtils.PlaySound;
 
 public class Ball extends Actor {
 	private float vspeed;
-	// La bola se moverá en una determinada recta (trayectoria) con una determinada velocidad
+	// La bola se moverï¿½ en una determinada recta (trayectoria) con una determinada velocidad
 	public TrayectoriaRecta trayectoria = null;
 	// Para el control preciso del aumento de la velocidad de la bola constante utilizo unas coordenadas flotantes
 	// aunque eso no quita que sigan existiendo las coordenades x e y del supertipo Actor. De hecho, cada vez que
-	// actualizamos las coordenadas flotantes también actualizaré las coordenadas enteras.
+	// actualizamos las coordenadas flotantes tambiï¿½n actualizarï¿½ las coordenadas enteras.
 	private PuntoAltaPrecision coordenadas = null;
 	private static final float maxSpeed = 7.3f;
 
@@ -127,6 +127,7 @@ public class Ball extends Actor {
 	 */
 	private void iniciarMovimiento (int xDestino, int yDestino) {
 		if (trayectoria == null) {
+			System.out.println("iniciar movimiento");
 			// Si los valores del punto de destino son "-1" indica ue debemos hacer una trayectoria por defecto
 			if (xDestino == -1 && yDestino == -1) {
 				this.trayectoria = new TrayectoriaRecta(-3f, this.coordenadas, true);
@@ -134,7 +135,7 @@ public class Ball extends Actor {
 			// En caso contrario debemos trazar la trayectoria desde el punto actual de la bola hasta el punto
 			// que nos indican
 			else {
-				// Establecemos una mínima distancia en el eje X entre la situación de la bola y el punto que nos
+				// Establecemos una mï¿½nima distancia en el eje X entre la situaciï¿½n de la bola y el punto que nos
 				// indican. De esa manera evitamos que la pelota se pueda poner completamente vertical
 				int minimaDistanciamientoEntreX = 20;
 				if (Math.abs(xDestino - this.getX()) < minimaDistanciamientoEntreX) {
@@ -147,7 +148,7 @@ public class Ball extends Actor {
 						xDestino = this.getX() + minimaDistanciamientoEntreX;
 					}
 				}
-				// Determinamos la dirección a seguir en la trayectoria en función del signo de la pendiente que 
+				// Determinamos la direcciï¿½n a seguir en la trayectoria en funciï¿½n del signo de la pendiente que 
 				// esperamos
 				boolean direccionCreciente = (xDestino > this.getX())? true : false;
 				// Creamos la trayectoria.
