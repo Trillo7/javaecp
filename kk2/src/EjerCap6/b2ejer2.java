@@ -9,6 +9,8 @@ public class b2ejer2 {
 		
 		while(Math.sqrt(x)!=Math.log(x) || (-Math.log(x)-Math.sqrt(x)<0.001)) {
 			x+=0.001;
+			System.out.println(x);
+
 		}
 		System.out.println(x);
 	}

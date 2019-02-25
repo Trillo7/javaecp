@@ -24,7 +24,8 @@ public class LevelSystem {
 			ball.setSpriteNames(new String[] {"ballGrey.png"});
 			Arkanoid.getInstance().harderBricks=false;
 			Arkanoid.getInstance().godmode=false;
-			System.out.println("Siguiente fase: "+Arkanoid.getInstance().gamelevel);
+			Arkanoid.getInstance().sword=false;
+			System.out.println("Fase: "+Arkanoid.getInstance().gamelevel);
 			switch (Arkanoid.getInstance().gamelevel) {
 				case 1:
 					Arkanoid.getInstance().faseActiva=new Fase01();
