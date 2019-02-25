@@ -1,4 +1,4 @@
-package Arkanoid;
+package Arkanoid.LevelSystem;
 
 import java.util.ArrayList;
 import java.util.List;

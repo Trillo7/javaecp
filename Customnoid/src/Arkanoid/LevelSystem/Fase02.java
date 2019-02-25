@@ -1,37 +1,33 @@
-package Arkanoid;
+package Arkanoid.LevelSystem;
 
 import java.awt.Color;
+
+import Arkanoid.Brick;
 
 /**
  * Clase que implementa la primera fase del juego
  * @author R
  *
  */
-public class Fase03 extends Fase {
+public class Fase02 extends Fase {
 	// Propiedades est�ticas de la fase
-	public static final int[][]  arraymap={	{0,0,0,2,0,0,0,0,2,0,0,0},
-											{0,0,2,3,2,0,0,2,3,2,0,0},
-											{0,2,2,2,2,2,2,2,2,2,2,0},
-											{2,2,0,0,0,0,0,0,0,0,2,2},
-											{2,0,1,1,1,0,0,1,1,1,0,2},
-											{2,0,0,1,0,0,0,0,1,0,0,2},
-											{2,2,0,0,0,6,6,0,0,0,2,2},
-											{0,2,0,0,0,0,0,0,0,0,2,0},
-											{0,0,2,0,0,3,3,0,0,2,0,0},
-											{0,0,2,0,0,3,0,0,0,2,0,0},
-											{0,0,0,2,0,0,0,0,2,0,0,0},
-											{0,0,0,0,2,2,2,2,0,0,0,0}};
-
-
-	private int initX=5;
+	public static final int[][]  arraymap={	{1,0,1,2,0,2,3,3,0,2,2,2},
+											{4,0,1,2,0,2,3,0,3,2,0,0},
+											{1,4,1,2,0,2,3,4,0,2,2,0},
+											{1,0,4,2,0,2,3,0,3,2,0,0},
+											{1,0,1,0,2,0,3,3,3,2,2,2}};
+	private int initX=7;
 	private int initY=7;
 
+	
+	
 	/**
 	 * Inicializaci�n de la fase, es la implementaci�n de un m�todo abstracto en el supertipo
 	 */
 	@Override
 	public void inicializaFase() {
-		maxPills=7;
+		
+		maxPills=5;
 		for (int i = 0; i < arraymap.length; i++) {
 		    for (int j = 0; j < arraymap[i].length; j++) {
 		    	if(arraymap[i][j]!=0) {
@@ -45,7 +41,7 @@ public class Fase03 extends Fase {
 		    	}
 		    	initX+=57;
 		    }
-		    initX=5;
+		    initX=7;
 		    initY+=38;
 		}
 		
@@ -54,14 +50,14 @@ public class Fase03 extends Fase {
 	@Override
 	public String getGameplaySound() {
 		// TODO Auto-generated method stub
-		return "havana-dog.wav";
+		return "stormsound.wav";
 	}
 
 
 	@Override
 	public String getBackgroundImg() {
 		// TODO Auto-generated method stub
-		return "nintendogs-bg.jpg";
+		return "skycloudbg.png";
 	}
-
+	
 }

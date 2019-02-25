@@ -1,6 +1,8 @@
-package Arkanoid;
+package Arkanoid.LevelSystem;
 
 import java.awt.Color;
+
+import Arkanoid.Brick;
 
 /**
  * Clase que implementa la primera fase del juego

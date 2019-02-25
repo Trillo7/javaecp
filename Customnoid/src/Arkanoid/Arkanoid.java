@@ -25,6 +25,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Arkanoid.LevelSystem.Fase;
+import Arkanoid.LevelSystem.LevelSystem;
 import Arkanoid.soundUtils.PlaySound;
 
 public class Arkanoid extends Canvas {
@@ -47,10 +49,10 @@ public class Arkanoid extends Canvas {
 	private int cursory=0;
 	boolean mouseInPlay=false;
 	boolean mouseInExit=false;
-	private boolean pause=false;
-	private boolean initPause=true;
-	private int menu=1;
-	private boolean victory=false;
+	public boolean pause=false;
+	public boolean initPause=true;
+	public int menu=1;
+	public boolean victory=false;
 	public static boolean gameOver=false;
 	boolean esc=false; // para que no active el initPause en el menu si le damos a esc en vez de ser el inicio del juego
 	private boolean showFPS=false;
@@ -63,7 +65,7 @@ public class Arkanoid extends Canvas {
 	int swordPointer=0;
 	public static boolean harderBricks=false;
 	// Fase activa en el juego
-	Fase faseActiva = null;
+	public Fase faseActiva = null;
 	// Variable para patr�n Singleton
 	private static Arkanoid instance = null;
 	/**
@@ -105,39 +107,19 @@ public class Arkanoid extends Canvas {
 		animationList.add(animItem);
 		//SENSOR RATON Botones
 		this.addMouseListener( new MouseAdapter() {
+			@Override public void mouseReleased(MouseEvent e) {}
+			@Override public void mousePressed(MouseEvent e) {}
+			@Override public void mouseExited(MouseEvent e) {}
+			@Override public void mouseEntered(MouseEvent e) {	}
 			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
+			@Override 
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(initPause==true && menu==0) { //Para al hacer click en initPause antes de los 5 segundos
 					endPausesRoundstart();
 				}
 				// Boton Jugar
-				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-44 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
+				if(menu==1&&(mouseInPlay)) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
 					menu=0;
 					pause=false;
 					//Reiniciamos juego si hemos muerto
@@ -155,7 +137,7 @@ public class Arkanoid extends Canvas {
 					}
 				}
 				// Boton salir
-				if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
+				if(menu==1&&(mouseInExit)) {
 					System.exit(0);
 				}
 			}
@@ -175,21 +157,18 @@ public class Arkanoid extends Canvas {
 				player.setX(e.getX()-50);
 			}
 			// Si el raton esta encima del play
-			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-44 && e.getY()<Arkanoid.HEIGHT/2-15))) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
+			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-44 && e.getY()<Arkanoid.HEIGHT/2+15))) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
 				mouseInPlay=true;
 			}else {
 				mouseInPlay=false;
 			}
 			// Si el raton esta encima del exit
-			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2 && e.getY()<Arkanoid.HEIGHT/2+49))) {
+			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-70)&& (e.getY()>Arkanoid.HEIGHT/2+15 && e.getY()<Arkanoid.HEIGHT/2+80))) {
 				mouseInExit=true;
 			}else {
 				mouseInExit=false;
 			}
 			if(sword) {
-				
-
-				
 				animationList.get(0).setX(e.getX());
 				animationList.get(0).setY(e.getY());
 			}
@@ -263,63 +242,8 @@ public class Arkanoid extends Canvas {
 	
 	public void updateWorld() {
 		//INICIO SISTEMA DE NIVELES
-		if(actors.isEmpty()) {
-			initPauseTime=System.currentTimeMillis();
-			initPause=true;
-			ball.trayectoria = null;
-			ball.setVspeed(3);
-			ball.setSpriteNames(new String[] {"ballGrey.png"});
-			harderBricks=false;
-			godmode=false;
-			System.out.println("Siguiente fase: "+gamelevel);
-			switch (gamelevel) {
-				case 1:
-					this.faseActiva=new Fase01();
-					this.faseActiva.inicializaFase();
-					this.actors.addAll(this.faseActiva.getActores());
-					gamelevel++;
-					break;
-				case 2:
-					this.faseActiva=new Fase02();
-					this.faseActiva.inicializaFase();
-					this.actors.addAll(this.faseActiva.getActores());
-					gamelevel++;
-					break;
-				case 3:
-					this.faseActiva=new Fase03();
-					this.faseActiva.inicializaFase();
-					this.actors.addAll(this.faseActiva.getActores());
-					ball.setSpriteNames(new String[] {"dogball.png"});
-					gamelevel++;
-					break;					
-				case 4:
-					this.faseActiva=new Fase04();
-					this.faseActiva.inicializaFase();
-					this.actors.addAll(this.faseActiva.getActores());
-					ball.setSpriteNames(new String[] {"ballindepe.png"});
-					gamelevel++;
-					break;
-				case 5:
-					this.faseActiva=new Fase05();
-					this.faseActiva.inicializaFase();
-					this.actors.addAll(this.faseActiva.getActores());
-					gamelevel++;
-					break;					
-				case 6:
-					System.out.println("FIN DEL JUEGO. TODAS LAS FASES ACABADAS");
-					pause=true;
-					menu=1;
-					victory=true;
-					actors.add(player);// Lo a�adimos a actores para que no se repita el switch todo el rato mientras esta en victoria
-					PlaySound.getSound().stopcustomLoop();
-					PlaySound.getSound().customLoop("victoryfree.wav");
-					break;
-				default:
-					this.gamelevel=6;
-					break;
-			}
-			
-		}
+		LevelSystem.runLevel(actors, ball, player);
+
 		//FIN SISTEMA DE NIVELES
 		// Que la pelota siga a la nave en la pausa inicial
 		if(initPause) {
@@ -517,9 +441,7 @@ public class Arkanoid extends Canvas {
 
 			}else {
 				g.drawImage( SpriteCache.getInstance().getSprite("red_button02.png"), Arkanoid.WIDTH/2-130,Arkanoid.HEIGHT/2+25, null );
-			}
-			// Pintamos loading y next level
-			
+			}			
 			// Pintamos pantalla de victoria
 			if(victory) {
 				g.drawImage( SpriteCache.getInstance().getSprite("victorybg.jpg"), -100,0, null );

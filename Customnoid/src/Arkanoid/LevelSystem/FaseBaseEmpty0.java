@@ -1,4 +1,4 @@
-package Arkanoid;
+package Arkanoid.LevelSystem;
 
 import java.awt.Color;
 
@@ -9,16 +9,18 @@ import Arkanoid.Brick;
  * @author R
  *
  */
-public class Fase05 extends Fase {
+public class FaseBaseEmpty0 extends Fase {
 	// Propiedades est�ticas de la fase
 	public static final int[][]  arraymap={	{0,0,0,0,0,0,0,0,0,0,0,0},
-											{4,5,5,4,0,0,0,0,4,5,5,4},
-											{4,5,5,4,0,0,0,0,4,5,5,4},
-											{0,0,0,0,6,4,4,6,0,0,0,0},
-											{0,0,0,0,6,4,4,6,0,0,0,0}};
+											{0,0,0,0,0,0,0,0,0,0,0,0},
+											{0,0,0,0,0,0,0,0,0,0,0,0},
+											{0,0,0,0,0,0,0,0,0,0,0,0},
+											{0,0,0,0,0,0,0,0,0,0,0,0},
+											{0,0,0,0,0,0,0,0,0,0,0,0}};
 	private int initX=7;
 	private int initY=7;
-
+	private int lcount=0;
+	
 	/**
 	 * Inicializaci�n de la fase, es la implementaci�n de un m�todo abstracto en el supertipo
 	 */
@@ -38,7 +40,7 @@ public class Fase05 extends Fase {
 		    	}
 		    	initX+=57;
 		    }
-		    initX=8;
+		    initX=7;
 		    initY+=38;
 		}
 		
@@ -47,14 +49,14 @@ public class Fase05 extends Fase {
 	@Override
 	public String getGameplaySound() {
 		// TODO Auto-generated method stub
-		return "quacking90s.wav";
+		return super.getGameplaySound();
 	}
 
 
 	@Override
 	public String getBackgroundImg() {
 		// TODO Auto-generated method stub
-		return "ducksbg.jpg";
+		return super.getBackgroundImg();
 	}
-	
+
 }
