@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import Arkanoid.soundUtils.PlaySound;
+
 public class Actor {
 	protected int x,y;
 	protected int width, height;
@@ -46,6 +48,7 @@ public class Actor {
 			BufferedImage image = SpriteCache.getInstance().getSprite(spriteNames[i]);
 	  		height = Math.max(height,image.getHeight());
 	  		width = Math.max(width,image.getWidth());
+	  		
 		}
 	}			
 	
@@ -64,9 +67,9 @@ public class Actor {
 		// Endurecemos los ladrillos por la pildora
 		if(this instanceof Brick) {
 			if(Arkanoid.harderBricks) {
-				this.setSpriteNames( new String[] {"lamarillo.png","lamarillo-glossy.png"});
 				this.lid=4;
 				this.lives=2;
+				this.setSpriteNames( new String[] {"lamarillo.png","lamarillo-glossy.png"});
 			}
 		}
 	}

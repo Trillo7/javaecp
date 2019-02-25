@@ -24,6 +24,9 @@ public class PowerPill extends Actor {
 		if(lid==4) {
 			setSpriteNames( new String[] {"bomb1.png","bomb2.png","bomb3.png","bomb4.png"});
 		}
+		if(lid==5) {
+			setSpriteNames( new String[] {"cursor1.png"});
+		}
 		setFrameSpeed(8);
 	}
 	public void act() {
@@ -37,11 +40,12 @@ public class PowerPill extends Actor {
         	Explosion exp = new Explosion();
         	exp.setX(this.getX()+10);
         	exp.setY(this.getY());
-        	Arkanoid.getInstance().getExplosionlist().add(exp);
+        	Arkanoid.getInstance().getAnimationlist().add(exp);
         	PlaySound.getSound().explosionSound();
         	enablePower(lid, player);
     }
 	private void enablePower(int lid, Player player) {
+		System.out.println("Espada status"+Arkanoid.getInstance().sword);
 		if(lid==1) {
 			player.lives++;
 		}
@@ -54,6 +58,16 @@ public class PowerPill extends Actor {
 		}
 		if(lid==4) {
 			Arkanoid.getInstance().startGameOver();
+		}
+		if(lid==5) {
+			Arkanoid.swordTime=System.currentTimeMillis();
+			if(Arkanoid.getInstance().sword==false) {
+				Arkanoid.getInstance().sword=true;
+	        	Arkanoid.getInstance().animItem.setX(5);
+	        	Arkanoid.getInstance().animItem.setY(5);
+	        	
+			}
+			
 		}
 	}
 

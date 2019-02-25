@@ -61,13 +61,13 @@ public class Brick extends Actor {
         	exp.setX(this.getX()+10);
         	exp.setY(this.getY());
         	CacheRecursos.getInstancia().playSonido("woosh.wav");
-        	Arkanoid.getInstance().getExplosionlist().add(exp);
+        	Arkanoid.getInstance().getAnimationlist().add(exp);
         	PlaySound.getSound().explosionSound();
         	// Generamos pildora
         	if(Arkanoid.getInstance().faseActiva.maxPills>Arkanoid.getInstance().faseActiva.actualPills) {
         	  int pillPercentage = (int) Math.round(Math.random() * ((18) - 1) + 1);
         	  if(pillPercentage==2 || pillPercentage==6 || pillPercentage==11   ) {
-            	  int randomPill = (int) Math.round(Math.random() * ((4) - 1) + 1);
+            	  int randomPill = (int) Math.round(Math.random() * ((5) - 1) + 1);
         		  PowerPill pp=new PowerPill(randomPill);
       	  		  pp.setX(this.x);
       	  		  pp.setY(this.y);

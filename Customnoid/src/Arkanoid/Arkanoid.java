@@ -36,7 +36,8 @@ public class Arkanoid extends Canvas {
 	private Player player;
 	public static Ball ball;
 	private List<Actor> actors = new ArrayList<Actor>();
-	private List<Actor> explosionlist = new ArrayList<Actor>();
+	private List<Actor> animationList = new ArrayList<Actor>();
+	animatedItem animItem = new animatedItem();
 	public static final int WIDTH=690;
 	public static final int HEIGHT=750;
 	public static final int PLAY_HEIGHT = 640; 
@@ -55,8 +56,11 @@ public class Arkanoid extends Canvas {
 	private boolean showFPS=false;
 	public static long hitTime=System.currentTimeMillis();
 	public static long godTime=System.currentTimeMillis();
+	public static long swordTime=System.currentTimeMillis();
 	public static int gamelevel=1;
 	public boolean godmode=false;
+	public boolean sword=false;
+	int swordPointer=0;
 	public static boolean harderBricks=false;
 	// Fase activa en el juego
 	Fase faseActiva = null;
@@ -98,6 +102,7 @@ public class Arkanoid extends Canvas {
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
 		requestFocus();
+		animationList.add(animItem);
 		//SENSOR RATON Botones
 		this.addMouseListener( new MouseAdapter() {
 			
@@ -160,8 +165,10 @@ public class Arkanoid extends Canvas {
 		@Override 
 		public void mouseMoved(MouseEvent e) { 
 			// TODO Auto-generated method stub
-			cursorx=e.getX();
-			cursory=e.getY();
+			if(menu==1) {
+				cursorx=e.getX();
+				cursory=e.getY();
+			}
 			if(pause) {
 				
 			}else {
@@ -178,6 +185,13 @@ public class Arkanoid extends Canvas {
 				mouseInExit=true;
 			}else {
 				mouseInExit=false;
+			}
+			if(sword) {
+				
+
+				
+				animationList.get(0).setX(e.getX());
+				animationList.get(0).setY(e.getY());
 			}
 		}
 		});
@@ -327,13 +341,19 @@ public class Arkanoid extends Canvas {
 		if(actors.size()==this.faseActiva.numIrrompibles) {
 			actors.clear();
 		}
-		//Llamamos al act de cada explosion
-		for (int i = 0; i < explosionlist.size(); i++) {
-			Actor exp = explosionlist.get(i);
-			exp.act();
-			if(exp.getMarkedForRemoval()>3) { // decidimos cuantas veces queremos repetir la animacion
-				explosionlist.clear();
+		//Llamamos al act de cada explosion y para que se reproduzca su animacion
+		for (int i = 0; i < animationList.size(); i++) {
+			if(animationList.get(i) instanceof Explosion) {
+				Explosion exp = (Explosion) animationList.get(i);
+				exp.act();
+				if(exp.getMarkedForRemoval()>exp.getAnimRepeat()) { // decidimos cuantas veces queremos repetir la animacion
+					animationList.remove(i);
+				}
+			}else {
+				animatedItem animationItemac=(animatedItem) animationList.get(0);
+				animationItemac.act();
 			}
+
 		}
 		// Pausemos la pelota
 		if(pause || initPause) {
@@ -387,7 +407,17 @@ public class Arkanoid extends Canvas {
 			        break;
 			    }
 			}
+			// Comprobamos si tenemos el poder sword
+			if(sword) {
+		    	Rectangle mouseRect=animationList.get(0).getBounds();
 
+				if(ballRect.intersects(mouseRect)) {
+					System.out.println("REBOTAR");
+					String hitSide=null;
+					hitSide="sup";
+					ball.collisioned(hitSide);
+				}
+			}
 		}
 	}
 	public void paintWorld() {
@@ -407,10 +437,19 @@ public class Arkanoid extends Canvas {
 			Actor l = actors.get(i);
 			l.paint(g);
 		}
-		//Bucle para pintarse asi mism}o cada explosion
-		for (int i = 0; i < explosionlist.size(); i++) {
-			Actor exp = explosionlist.get(i);
-			exp.paint(g);
+		//Bucle para pintarse asi mismo cada explosion
+		for (int i = 0; i < animationList.size(); i++) {
+			if(animationList.get(i) instanceof Explosion) {
+				Actor exp=animationList.get(i);
+				exp.paint(g);
+			}else {
+				if(sword) {
+					animatedItem animationItem = (animatedItem) animationList.get(i);
+					animationItem.paint(g);	
+				}
+		
+			}
+
 		}
 		//Pintamos la nave y la pelota
 		player.paint(g);
@@ -430,8 +469,13 @@ public class Arkanoid extends Canvas {
 		// Vidas
 		g.drawImage( SpriteCache.getInstance().getSprite("livesbox-cut.png"), 10,this.HEIGHT-107, null );
 		// Si estamos en godmode dibujamos los segundos en vez de las vidas
-		if(godmode) {
-			g.drawString (""+(System.currentTimeMillis()-godTime)/1000, 135,this.HEIGHT-60);
+		if(godmode||sword) {
+			if(godmode) {
+				g.drawString (""+(15-(System.currentTimeMillis()-godTime)/1000), 135,this.HEIGHT-60);
+
+			}else {
+				g.drawString (""+(10-(System.currentTimeMillis()-swordTime)/1000), 135,this.HEIGHT-60);
+			}
 		}else {
 			g.drawString (""+player.lives, 135,this.HEIGHT-60);
 		}
@@ -482,7 +526,7 @@ public class Arkanoid extends Canvas {
 				
 			}
 			// Pintamos cursor
-			g.drawImage( SpriteCache.getInstance().getSprite("cursor1.png"), cursorx-11,cursory-40, null );
+			g.drawImage( SpriteCache.getInstance().getSprite("cursor2-cut.png"), cursorx-25,cursory-20, null );
 		}
 
 		strategy.show();
@@ -531,21 +575,25 @@ public class Arkanoid extends Canvas {
 			if(System.currentTimeMillis()-godTime>15500) { 
 				godmode=false;
 			}
+			// Para que acabe el sword mode al pasar el tiempo
+			if(System.currentTimeMillis()-swordTime>10000) { 
+				sword=false;
+			}
 		}
 	}
 	
 	/**
 	 * @return the explosionlist
 	 */
-	public List<Actor> getExplosionlist() {
-		return explosionlist;
+	public List<Actor> getAnimationlist() {
+		return animationList;
 	}
 
 	/**
 	 * @param explosionlist the explosionlist to set
 	 */
 	public void setExplosionlist(List<Actor> explosionlist) {
-		this.explosionlist = explosionlist;
+		this.animationList = explosionlist;
 	}
 
 	public int getMenu() {
