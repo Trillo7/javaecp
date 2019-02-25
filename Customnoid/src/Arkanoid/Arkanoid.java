@@ -238,9 +238,10 @@ public class Arkanoid extends Canvas {
 	}
 	
 	public void updateWorld() {
-		//INICIO SISTEMA DE NIVELES
-		LevelSystem.runLevel(actors, ball, player);
-
+		// INICIO SISTEMA DE NIVELES
+		if(actors.isEmpty()) {
+			LevelSystem.runLevel(actors, ball, player);
+		}
 		//FIN SISTEMA DE NIVELES
 		// Que la pelota siga a la nave en la pausa inicial
 		if(initPause) {

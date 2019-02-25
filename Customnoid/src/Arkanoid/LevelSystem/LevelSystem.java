@@ -15,8 +15,8 @@ import Arkanoid.soundUtils.PlaySound;
  *
  */
 public class LevelSystem {
+	
 	public static void runLevel(List<Actor> actors, Ball ball, Player player){
-		if(actors.isEmpty()) {
 			Arkanoid.getInstance().initPauseTime=System.currentTimeMillis();
 			Arkanoid.getInstance().initPause=true;
 			ball.trayectoria = null;
@@ -71,8 +71,7 @@ public class LevelSystem {
 					Arkanoid.getInstance().gamelevel=6;
 					break;
 			}
-			
-		}
+	
 	}
 
 }
