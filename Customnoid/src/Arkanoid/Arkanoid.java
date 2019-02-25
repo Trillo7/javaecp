@@ -157,7 +157,7 @@ public class Arkanoid extends Canvas {
 				player.setX(e.getX()-50);
 			}
 			// Si el raton esta encima del play
-			if(menu==1&&((e.getX()>Arkanoid.WIDTH/2-110)&& (e.getY()>Arkanoid.HEIGHT/2-44 && e.getY()<Arkanoid.HEIGHT/2+15))) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
+			if(menu==1&&(((e.getX()>Arkanoid.WIDTH/2-110))&& (e.getY()>Arkanoid.HEIGHT/2-44 && e.getY()<Arkanoid.HEIGHT/2+15))) { // Quitamos el menu al hacer click en jugar y paramos su m�sica
 				mouseInPlay=true;
 			}else {
 				mouseInPlay=false;
@@ -175,16 +175,13 @@ public class Arkanoid extends Canvas {
 		}
 		});
 		this.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			@Override public void keyTyped(KeyEvent e) {}
+			
 			@Override
 			public void keyReleased(KeyEvent e) {
 				player.keyReleased(e);
-				
 			}
+			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub

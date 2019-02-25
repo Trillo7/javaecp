@@ -7,7 +7,7 @@ public class b2ejer2 {
 		
 		float x=(float) 0.001;
 		
-		while(Math.sqrt(x)!=Math.log(x) || (-Math.log(x)-Math.sqrt(x)<x)) {
+		while(Math.sqrt(x)!=Math.log(x) || (-Math.log(x)-Math.sqrt(x)<0.001)) {
 			x+=0.001;
 		}
 		System.out.println(x);
