@@ -1,4 +1,4 @@
-package EjerCap6;
+package Cap6Math;
 
 import javax.swing.JOptionPane;
 
