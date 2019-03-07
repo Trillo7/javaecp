@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class hashmapej1 {
+public class HashmapUI {
 	private HashMap<String, Articulo> almacenmap = new HashMap<String, Articulo>();
 	public String articuloslist="";
 
 	
-	public hashmapej1() {
+	public HashmapUI() {
 		JFrame f=new JFrame("Aplicacion almacen");  
 	    JButton b=new JButton("Añadir articulo");  
 	    b.setBounds(100,80,195,30); 
@@ -48,7 +48,7 @@ public class hashmapej1 {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		hashmapej1 main=new hashmapej1();
+		HashmapUI main=new HashmapUI();
 	}
 	//FUNCIONES BOTONES
 	public void anadirarticulo() {

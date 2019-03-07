@@ -142,7 +142,7 @@ public class Arkanoid extends Canvas {
 				}
 			}
 		});
-		// Sensor raton motion
+		// INICIO LISTENERS
 		this.addMouseMotionListener( new MouseMotionAdapter() {
 		@Override 
 		public void mouseMoved(MouseEvent e) { 
@@ -208,6 +208,8 @@ public class Arkanoid extends Canvas {
 				}
 			}
 		});
+		// FIN LISTENERS
+		// FIN ARKANOID BUILDER
 	}
 
 	/**
