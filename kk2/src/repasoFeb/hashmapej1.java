@@ -62,10 +62,16 @@ public class hashmapej1 {
 	
 	public void borrararticulo() {
 		System.err.println("Borrar articulo");
+		muestraArticulos();
+		String codigo=JOptionPane.showInputDialog("Codigo de barras del articulo a eliminar: ");
+		almacenmap.remove(codigo);
 	}
 	public void actualizaEstante() {
 		System.err.println("Actualizamos estante");
-
+		muestraArticulos();
+		String codigo=JOptionPane.showInputDialog("Codigo de barras del articulo a modificar estante: ");
+		String estante=JOptionPane.showInputDialog("Introduce el estante nuevo: ");
+		almacenmap.get(codigo).estante=estante;
 	}
 	public void muestraArticulos() {
 		System.err.println("Mostramos articulos");
@@ -78,6 +84,9 @@ public class hashmapej1 {
 				articuloslist+=articulo.codigo+" - "+articulo.descripcion+"\n";
 			}
 			JOptionPane.showMessageDialog(null, articuloslist);
+		}else {
+			JOptionPane.showMessageDialog(null, "Lista vacia");
+
 		}
 
 
