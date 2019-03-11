@@ -1,4 +1,4 @@
-package repasoFeb.Bloque4Excepciones.Ej2Bombilla;
+package repasoFeb.Bloque4Excepciones.Ej2Frases;
 
 public class ExcepcionEspacios extends Exception {
 
