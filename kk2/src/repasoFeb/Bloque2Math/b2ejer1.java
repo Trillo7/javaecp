@@ -1,4 +1,4 @@
-package Cap6Math;
+package repasoFeb.Bloque2Math;
 
 import javax.swing.JOptionPane;
 

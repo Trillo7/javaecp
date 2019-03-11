@@ -1,4 +1,4 @@
-package repasoFeb;
+package repasoFeb.Bloque1Hashmap;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,10 +38,10 @@ public class HashmapUI {
 	    f.setSize(400,400);  
 	    f.setLayout(null);  
 	    f.setVisible(true);   
-	    b.addActionListener(new PageActionListener(1));
-	    c.addActionListener(new PageActionListener(2));
-	    d.addActionListener(new PageActionListener(3));
-	    e.addActionListener(new PageActionListener(4));
+	    b.addActionListener(new PasaDatoBoton(1));
+	    c.addActionListener(new PasaDatoBoton(2));
+	    d.addActionListener(new PasaDatoBoton(3));
+	    e.addActionListener(new PasaDatoBoton(4));
 
 	}
 	
@@ -61,20 +61,20 @@ public class HashmapUI {
 	}
 	
 	public void borrararticulo() {
-		System.err.println("Borrar articulo");
+		System.out.println("Borrar articulo");
 		muestraArticulos();
 		String codigo=JOptionPane.showInputDialog("Codigo de barras del articulo a eliminar: ");
 		almacenmap.remove(codigo);
 	}
 	public void actualizaEstante() {
-		System.err.println("Actualizamos estante");
+		System.out.println("Actualizamos estante");
 		muestraArticulos();
 		String codigo=JOptionPane.showInputDialog("Codigo de barras del articulo a modificar estante: ");
 		String estante=JOptionPane.showInputDialog("Introduce el estante nuevo: ");
 		almacenmap.get(codigo).estante=estante;
 	}
 	public void muestraArticulos() {
-		System.err.println("Mostramos articulos");
+		System.out.println("Mostramos articulos");
 		System.out.println("\nRecorrido de los objetos del HashMap:");
 		articuloslist="";
 		Iterator<Articulo> personas = almacenmap.values().iterator();
@@ -91,10 +91,10 @@ public class HashmapUI {
 
 
 	}
-	private class PageActionListener implements ActionListener {
+	private class PasaDatoBoton implements ActionListener {
 	    private int opcion;
 
-	    public PageActionListener(int opcion) {
+	    public PasaDatoBoton(int opcion) {
 	        this.opcion = opcion;
 	    }
 

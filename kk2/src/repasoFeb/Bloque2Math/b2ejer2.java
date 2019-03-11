@@ -1,4 +1,4 @@
-package Cap6Math;
+package repasoFeb.Bloque2Math;
 
 public class b2ejer2 {
 
