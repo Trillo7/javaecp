@@ -1,97 +1,69 @@
 package repasoFeb.Bloque3Wrappers;
 
-
-
 import javax.swing.JOptionPane;
-
- 
 
 public class Ej2CharIs {
 
- 
+	public static void main(String[] args) {
 
-                public static void main(String[] args) {
+		// TODO Auto-generated method stub
 
-                               // TODO Auto-generated method stub
+		System.out.println(contrasena());
 
-                               System.out.println(contrasena());
+	}
 
-                }
+	private static String contrasena() {
 
- 
+		String contrasena;
 
-                private static String contrasena() {
+		boolean sal = false;
 
-                               String contrasena;
+		do {
 
-                               boolean sal = false;
+			contrasena = JOptionPane.showInputDialog("Introduce contrasena");
 
-                              
+			boolean mayus = false;
 
-                               do {
+			boolean minus = false;
 
-                                               contrasena = JOptionPane.showInputDialog("Introduce contrasena");
+			boolean digit = false;
 
-                                               boolean mayus = false;
+			boolean noalf = false;
 
-                                               boolean minus = false;
+			for (int i = 0; i < contrasena.length(); i++) {
 
-                                               boolean digit = false;
+				Character letra = contrasena.charAt(i);
 
-                                               boolean noalf = false;
+				if (Character.isUpperCase(letra)) {
 
-                                              
+					mayus = true;
 
-                                              
+				} else if (Character.isLowerCase(letra)) {
 
-                                               for (int i = 0; i < contrasena.length(); i++) {
+					minus = true;
 
-                                                               Character letra = contrasena.charAt(i);
+				} else if (Character.isDigit(letra)) {
 
-                                                              
+					digit = true;
 
-                                                               if (Character.isUpperCase(letra)) {
+				} else {
 
-                                                                               mayus = true;
+					noalf = true;
 
-                                                               } else if (Character.isLowerCase(letra)) {
+				}
 
-                                                                               minus = true;
+			}
 
-                                                               } else if (Character.isDigit(letra)) {
+			if (mayus && minus && digit && noalf) {
 
-                                                                               digit = true;
+				sal = true;
 
-                                                               } else {
+			}
 
-                                                                               noalf = true;
+		} while (!sal);
 
-                                                               }
+		return contrasena;
 
-                                                              
-
-                                               }
-
-                                              
-
-                                               if (mayus && minus && digit && noalf) {
-
-                                                               sal = true;
-
-                                               }
-
-                               } while (!sal);
-
-                              
-
-                               return contrasena;
-
-                              
-
-                }
-
-               
-
-               
+	}
 
 }
