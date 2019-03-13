@@ -535,6 +535,8 @@ public class Arkanoid extends Canvas {
 	public static void main(String[] args) {
 		//Bucle del juego, creamos un objeto de esta clase misma
 		CacheRecursos.getInstancia().cargarRecursosEnMemoria();
+		//Lo ponemos a escuchar
+		Brick.addDestroyBrickListener(new DestroyBrick());
 		Arkanoid.getInstance().game();
 	}
 }

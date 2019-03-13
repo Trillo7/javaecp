@@ -1,12 +1,29 @@
 package Arkanoid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Arkanoid.soundUtils.PlaySound;
 
+
 public class Brick extends Actor {
 	protected int vx;
 	private int lscore;
+	private static List<ListenerBrick> ListaListeners=new ArrayList<ListenerBrick>();
+	
+	public static void addDestroyBrickListener (ListenerBrick listener) {
+		ListaListeners.add(listener);
+	}
+	
+	public static void removeDestroyBrickListener (ListenerBrick listener) {
+		ListaListeners.remove(listener);
+	}
+	
+	public static void fireDigitoEncontradoListener (BrickEvent evento) {
+		for (ListenerBrick listener : ListaListeners) {
+			listener.DestroyBrick(evento);;
+		}
+	}
 	
 	public Brick(int lid) {
 		super();
@@ -55,6 +72,9 @@ public class Brick extends Actor {
     		}
     		CacheRecursos.getInstancia().playSonido("chirrido-arka.wav");
     	}else {
+    		//Llamamos al evento y luego continuamos
+    		BrickEvent evento=new BrickEvent(this);
+    		fireDigitoEncontradoListener(evento);
     		player.myscore+=this.lscore;
         	actors.remove(i);
         	Explosion exp = new Explosion();
