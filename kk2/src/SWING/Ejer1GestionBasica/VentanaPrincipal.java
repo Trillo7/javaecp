@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
@@ -96,7 +97,7 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				guardar();
+				initData();
 			}
 		});
 		
@@ -104,21 +105,18 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	
-	private void guardar() {
+	private void initData() {
 		try {
 			Connection conn =ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps=conn.prepareStatement("INSERT INTO tutorialjavacoches.fabricante(id, cif, nombre) VALUES(?,?,?)");
+			PreparedStatement ps=conn.prepareStatement("SELECT * from tutorialjavacoches.fabricante where id=?");
 			ps.setInt(1, Integer.parseInt(tfId.getText()));
-			ps.setString(2, tfCif.getText());
-			ps.setString(3, tfNombre.getText());
 			
-			int filasafectadas= ps.executeUpdate();
-			if(filasafectadas != 1) {
-				throw new SQLException ("No ha sido posible la inserci�n con la cadena:\n");
-
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()) {
+				actualizar();
 			}else {
-				JOptionPane.showMessageDialog(null, "Datos añadidos con exito");
+				guardar();
 			}
 			
 			ps.close();
@@ -133,6 +131,31 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 	
+	private void actualizar() {
+		try {
+			System.out.println("update");
+			Connection conn =ConnectionManagerV2.getConexion();
+			
+			PreparedStatement ps=conn.prepareStatement("UPDATE tutorialjavacoches.fabricante set cif=?, nombre=? where id=?");
+			ps.setString(1, tfCif.getText());
+			ps.setString(2, tfNombre.getText());
+			ps.setInt(3, Integer.parseInt(tfId.getText()));
+			
+			ps.executeUpdate();
+			JOptionPane.showMessageDialog(null,"Datos actualizados con éxito");
+			
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ImposibleConectarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void guardar() {
+		
+	}
 	private void setDimensionesBasicas () {
 		this.setExtendedState(JFrame.NORMAL);
 		this.setBounds(0, 0, 800, 600);
