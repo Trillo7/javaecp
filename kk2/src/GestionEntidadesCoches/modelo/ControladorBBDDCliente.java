@@ -11,7 +11,7 @@ import GestionEntidadesCoches.modelo.entidades.Coche;
 import GestionEntidadesCoches.modelo.entidades.Fabricante;
 
 
-public class ControladorBBDDFabricante {
+public class ControladorBBDDCliente {
 
 	
 	/**
