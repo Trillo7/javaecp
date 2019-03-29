@@ -17,8 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import GestionEntidadesCoches.modelo.ControladorBBDDCliente;
 import GestionEntidadesCoches.modelo.ControladorBBDDCoche;
 import GestionEntidadesCoches.modelo.ControladorBBDDFabricante;
+import GestionEntidadesCoches.modelo.entidades.Cliente;
 import GestionEntidadesCoches.modelo.entidades.Coche;
 import GestionEntidadesCoches.modelo.entidades.Fabricante;
 import utils.CacheImagenes;
@@ -42,7 +44,7 @@ public class PanelGestionCliente extends JPanel {
 	JButton jbtNuevo = new JButton();
 	JButton jbtEliminar = new JButton();
 	
-	Fabricante fabricante = new Fabricante(); // Coche mostrado en pantalla
+	Cliente cliente = new Cliente(); //  mostrado en pantalla
 	
 	/**
 	 * 
@@ -67,12 +69,12 @@ public class PanelGestionCliente extends JPanel {
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				if (e.getUnitsToScroll() < 0) {
-					if (ControladorBBDDFabricante.getSiguienteFabricante(fabricante) != null) {
+					if (ControladorBBDDCliente.getSiguienteCliente(cliente) != null) {
 						navegaASiguiente();
 					}
 				}
 				else {
-					if (ControladorBBDDFabricante.getAnteriorFabricante(fabricante) != null) {
+					if (ControladorBBDDCliente.getAnteriorCliente(cliente) != null) {
 						navegaAAnterior();
 					}
 				}
@@ -98,20 +100,26 @@ public class PanelGestionCliente extends JPanel {
 		this.add(jtfId, gridBagConstraints);
 		
 	
-		// Incorporamos el Cif
-		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
-		this.add(new JLabel("CIF:"), gridBagConstraints);
-		
-		colocaComponente(1, 1, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
-		this.add(jtfCif, gridBagConstraints);
-		
 		// Incorporamos el Nombre
-		colocaComponente(0, 2, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
 		this.add(new JLabel("Nombre:"), gridBagConstraints);
 		
-		colocaComponente(1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		colocaComponente(1, 1, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfNombre, gridBagConstraints);
+		
+		// Incorporamos los Apellidos
+		colocaComponente(0, 2, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Apellidos:"), gridBagConstraints);
+		
+		colocaComponente(1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfApellidos, gridBagConstraints);
 	
+		// Incorporamos la Localidad
+		colocaComponente(0, 2, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Apellidos:"), gridBagConstraints);
+		
+		colocaComponente(1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfApellidos, gridBagConstraints);
 		
 		// Incorporamos fila botones
 		colocaComponente(0, 5, GridBagConstraints.CENTER, 1, 1, GridBagConstraints.CENTER);
