@@ -89,44 +89,49 @@ public class PanelGestionCoche extends JPanel {
 		gridBagConstraints.insets = new Insets(5, 5, 5, 5);
 
 		// Incorporamos los components del Id
-		colocaComponente(0, 0, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		colocaComponente(0, 0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
 		this.add(new JLabel("Id:"), gridBagConstraints);
 		
-		colocaComponente(1, 0, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		colocaComponente(1, 0, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfId, gridBagConstraints);
 		
 		// Incorporamos el fabricante
-		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		colocaComponente(0, 1, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
 		this.add(new JLabel("Fabricante:"), gridBagConstraints);
 		
-		colocaComponente(1, 1, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		colocaComponente(1, 1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 		inicializaComboBoxFabricante();
 		this.add(jcbFabricante, gridBagConstraints);
 		
 		// Incorporamos el bastidor
-		colocaComponente(0, 2, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		colocaComponente(0, 2, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
 		this.add(new JLabel("IdBastidor:"), gridBagConstraints);
 		
-		colocaComponente(1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		colocaComponente(1, 2, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfBastidor, gridBagConstraints);
 		
 		// Incorporamos el Modelo
-		colocaComponente(0, 3, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		colocaComponente(0, 3, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
 		this.add(new JLabel("Modelo:"), gridBagConstraints);
 		
-		colocaComponente(1, 3, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		colocaComponente(1, 3, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfModelo, gridBagConstraints);
 		
 		// Incorporamos el Color
-		colocaComponente(0, 4, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		colocaComponente(0, 4, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
 		this.add(new JLabel("Color:"), gridBagConstraints);
 		
-		colocaComponente(1, 4, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		colocaComponente(1, 4, 1, GridBagConstraints.EAST, 0.90, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfColor, gridBagConstraints);
 		
+		
+		colocaComponente(2, 4, 1, GridBagConstraints.EAST, 0.05, 0, GridBagConstraints.BOTH);
+		JPanel colorpanel=new JPanel();
+		colorpanel.setBackground(Color.blue);
+		this.add(colorpanel,gridBagConstraints);
+	
 		// Incorporamos fila botones
-		colocaComponente(0, 5, GridBagConstraints.CENTER, 1, 1, GridBagConstraints.CENTER);
-		gridBagConstraints.gridwidth = 2;
+		colocaComponente(0, 5, 3, GridBagConstraints.CENTER, 1, 1, GridBagConstraints.CENTER);
 		this.add(getBotonera(), gridBagConstraints);		
 	}
 	
@@ -366,13 +371,15 @@ public class PanelGestionCoche extends JPanel {
 	 * 
 	 * @param gridX
 	 * @param gridY
+	 * @param anchor
 	 * @param pesoColumna
 	 * @param pesoFila
 	 * @param fill
 	 */
-	private void colocaComponente (int gridX, int gridY, int anchor, double pesoColumna, double pesoFila, int fill) {
+	private void colocaComponente (int gridX, int gridY, int gridWith, int anchor, double pesoColumna, double pesoFila, int fill) {
 		gridBagConstraints.gridx = gridX;
 		gridBagConstraints.gridy = gridY;
+		gridBagConstraints.gridwidth = gridWith;
 		gridBagConstraints.anchor = anchor;
 		gridBagConstraints.weightx = pesoColumna;
 		gridBagConstraints.weighty = pesoFila;

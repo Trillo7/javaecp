@@ -1,5 +1,7 @@
 package GestionEntidadesCoches.modelo.entidades;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Cliente {
@@ -113,6 +115,9 @@ public class Cliente {
 	 * @return the fechaNac
 	 */
 	public Date getFechaNac() {
+
+		System.out.println(fechaNac);
+		
 		return fechaNac;
 	}
 
@@ -120,6 +125,8 @@ public class Cliente {
 	 * @param fechaNac the fechaNac to set
 	 */
 	public void setFechaNac(Date fechaNac) {
+		
+		
 		this.fechaNac = fechaNac;
 	}
 

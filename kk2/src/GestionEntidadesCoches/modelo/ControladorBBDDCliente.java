@@ -1,12 +1,14 @@
 package GestionEntidadesCoches.modelo;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import GestionEntidadesCoches.modelo.entidades.Cliente;
 import GestionEntidadesCoches.modelo.entidades.Coche;
 import GestionEntidadesCoches.modelo.entidades.Fabricante;
 
@@ -16,67 +18,42 @@ public class ControladorBBDDCliente {
 	
 	/**
 	 * 
-	 * @return
-	 */
-	public static List<Fabricante> getTodosFabricantes () {
-		List<Fabricante> resultado = new ArrayList<Fabricante>();
-		try {
-			Connection conn = ConnectionManagerV2.getConexion();
-			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante order by nombre");
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				resultado.add(getFabricanteFromResultSet(rs));
-			}
-			rs.close();
-			ps.close();
-			conn.close();
-		} catch (SQLException | ImposibleConectarException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return resultado;
-	}
-	
-	
-	
-	
-	
-	/**
-	 * 
 	 * @param rs
 	 * @return
 	 */
-	private static Fabricante getFabricanteFromResultSet (ResultSet rs) {
-		Fabricante fabricante = new Fabricante();
+	private static Cliente getClienteFromResultSet (ResultSet rs) {
+		Cliente cliente = new Cliente();
 		
 		try {
-			fabricante.setId(rs.getInt("id"));
-			fabricante.setCif(rs.getString("cif"));
-			fabricante.setNombre(rs.getString("nombre"));
+			cliente.setId(rs.getInt("id"));
+			cliente.setNombre(rs.getString("nombre"));
+			cliente.setApellidos(rs.getString("apellidos"));
+			cliente.setLocalidad(rs.getString("localidad"));
+			cliente.setDniNie(rs.getString("dniNie"));
+			cliente.setFechaNac(rs.getDate("fechaNac"));
+			cliente.setActivo(rs.getBoolean("activo"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return fabricante;
+		return cliente;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static Fabricante getSiguienteFabricante (Fabricante fabricanteActual) {
-		Fabricante	fabricanteResultado = null;
+	public static Cliente getSiguienteCliente (Cliente clienteActual) {
+		Cliente	clienteResultado = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante where id > ? order by id limit 1");
-			ps.setInt(1, fabricanteActual.getId()); // conseguir los fabricantes que sean de id mayor que el que estamos
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.cliente where id > ? order by id limit 1");
+			ps.setInt(1, clienteActual.getId()); // conseguir los fabricantes que sean de id mayor que el que estamos
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricanteResultado = getFabricanteFromResultSet(rs);	// si hay alguno lo ajustamos al fabricante
+				clienteResultado = getClienteFromResultSet(rs);	// si hay alguno lo ajustamos al fabricante
 			}
 			rs.close();
 			ps.close();
@@ -86,23 +63,23 @@ public class ControladorBBDDCliente {
 			e.printStackTrace();
 		}
 		
-		return fabricanteResultado;
+		return clienteResultado;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static Fabricante getAnteriorFabricante (Fabricante fabricanteActual) {
-		Fabricante	fabricanteResultado = null;
+	public static Cliente getAnteriorCliente (Cliente clienteActual) {
+		Cliente	clienteResultado = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante where id < ? order by id desc limit 1");
-			ps.setInt(1, fabricanteActual.getId()); // conseguir los fabricantes que sean de id mayor que el que estamos
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.cliente where id < ? order by id desc limit 1");
+			ps.setInt(1, clienteActual.getId()); // conseguir los fabricantes que sean de id mayor que el que estamos
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricanteResultado = getFabricanteFromResultSet(rs);		
+				clienteResultado = getClienteFromResultSet(rs);	// si hay alguno lo ajustamos al fabricante
 			}
 			rs.close();
 			ps.close();
@@ -112,22 +89,22 @@ public class ControladorBBDDCliente {
 			e.printStackTrace();
 		}
 		
-		return fabricanteResultado;
+		return clienteResultado;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static Fabricante getPrimerFabricante() {
-		Fabricante fabricante = null;
+	public static Cliente getPrimerCliente() {
+		Cliente cliente = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante order by id");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.cliente order by id");
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricante = getFabricanteFromResultSet(rs); // si hay alguno lo ajustamos al fabricante		
+				cliente = getClienteFromResultSet(rs); // si hay alguno lo ajustamos al fabricante		
 			}
 			rs.close();
 			ps.close();
@@ -137,7 +114,7 @@ public class ControladorBBDDCliente {
 			e.printStackTrace();
 		}
 		
-		return fabricante;
+		return cliente;
 	}
 	
 	
@@ -145,15 +122,15 @@ public class ControladorBBDDCliente {
 	 * 
 	 * @return
 	 */
-	public static Fabricante getUltimoFabricante () {
-		Fabricante fabricante = null;
+	public static Cliente getUltimoCliente () {
+		Cliente cliente = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante order by id desc limit 1");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.cliente order by id desc limit 1");
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricante = getFabricanteFromResultSet(rs); // si hay alguno lo ajustamos al fabricante		
+				cliente = getClienteFromResultSet(rs); // si hay alguno lo ajustamos al fabricante		
 			}
 			rs.close();
 			ps.close();
@@ -163,21 +140,21 @@ public class ControladorBBDDCliente {
 			e.printStackTrace();
 		}
 		
-		return fabricante;
+		return cliente;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static boolean eliminarFabricante (Fabricante fabricante) {
+	public static boolean eliminarCliente (Cliente cliente) {
 		boolean resultado = true;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
 			PreparedStatement ps = conn.prepareStatement(""
-					+ "DELETE FROM tutorialjavacoches.coche where id = ?");
-			ps.setInt(1, fabricante.getId());
+					+ "DELETE FROM tutorialjavacoches.cliente where id = ?");
+			ps.setInt(1, cliente.getId());
 			int registrosAfectados = ps.executeUpdate();
 			if (registrosAfectados != 1) {
 				resultado = false;		
@@ -197,16 +174,20 @@ public class ControladorBBDDCliente {
 	 * 
 	 * @return
 	 */
-	public static boolean guardarNuevoFabricante (Fabricante fabricante) {
+	public static boolean guardarNuevoCliente (Cliente cliente) {
 		boolean resultado = true;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
 			PreparedStatement ps = conn.prepareStatement(""
-					+ "INSERT INTO tutorialjavacoches.fabricante values (?, ?, ?)");
-			ps.setInt(1, getUltimoFabricante().getId() + 1);
-			ps.setString(2, fabricante.getCif());
-			ps.setString(3, fabricante.getNombre());
+					+ "INSERT INTO tutorialjavacoches.cliente values (?, ?, ?, ?, ?, ?, ?)");
+			ps.setInt(1, getUltimoCliente().getId() + 1);
+			ps.setString(2, cliente.getNombre());
+			ps.setString(3, cliente.getApellidos());
+			ps.setString(4, cliente.getLocalidad());
+			ps.setString(5, cliente.getDniNie());
+			ps.setDate(6, new java.sql.Date(cliente.getFechaNac().getTime()));
+			ps.setBoolean(7, cliente.isActivo());
 			int registrosAfectados = ps.executeUpdate();
 			if (registrosAfectados != 1) {
 				resultado = false;		
@@ -226,16 +207,20 @@ public class ControladorBBDDCliente {
 	 * 
 	 * @return
 	 */
-	public static boolean modificarFabricante (Fabricante fabricante) {
+	public static boolean modificarCliente (Cliente cliente) {
 		boolean resultado = true;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
 			PreparedStatement ps = conn.prepareStatement(""
-					+ "UPDATE tutorialjavacoches.fabricante SET cif= ?, nombre = ? where id = ?");
-			ps.setString(1, fabricante.getCif());
-			ps.setString(2, fabricante.getNombre());
-			ps.setInt(3, fabricante.getId());
+					+ "UPDATE tutorialjavacoches.cliente SET nombre = ?, apellidos = ?, localidad = ?, dniNie = ?, fechaNac = ?, activo= ?  where id = ?");
+			ps.setString(1, cliente.getNombre());
+			ps.setString(2, cliente.getApellidos());
+			ps.setString(3, cliente.getLocalidad());
+			ps.setString(4, cliente.getDniNie());
+			ps.setDate(5, new java.sql.Date(cliente.getFechaNac().getTime()));
+			ps.setBoolean(6, cliente.isActivo());
+			ps.setInt(7, cliente.getId());
 			int registrosAfectados = ps.executeUpdate();
 			if (registrosAfectados != 1) {
 				resultado = false;		
