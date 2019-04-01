@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import GestionEntidadesCoches.modelo.ControladorBBDDCoche;
@@ -124,14 +125,38 @@ public class PanelGestionCoche extends JPanel {
 		colocaComponente(1, 4, 1, GridBagConstraints.EAST, 0.90, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfColor, gridBagConstraints);
 		
-		
 		colocaComponente(2, 4, 1, GridBagConstraints.EAST, 0.05, 0, GridBagConstraints.BOTH);
 		JPanel colorpanel=new JPanel();
 		colorpanel.setBackground(Color.blue);
 		this.add(colorpanel,gridBagConstraints);
-	
+		
+		// Slider color
+		colocaComponente(0, 5, 3, GridBagConstraints.CENTER, 0.05, 0, GridBagConstraints.BOTH);
+		JSlider jsColor1 = new JSlider (JSlider.HORIZONTAL, 0, 255, 155);
+		jsColor1.setMajorTickSpacing(50);
+		jsColor1.setMinorTickSpacing(5);
+		jsColor1.setPaintTicks(true);
+		jsColor1.setPaintLabels(true);
+		this.add(jsColor1, gridBagConstraints);
+		
+		colocaComponente(0, 6, 3, GridBagConstraints.CENTER, 0.05, 0, GridBagConstraints.BOTH);
+		JSlider jsColor2 = new JSlider (JSlider.HORIZONTAL, 0, 255, 155);
+		jsColor2.setMajorTickSpacing(50);
+		jsColor2.setMinorTickSpacing(5);
+		jsColor2.setPaintTicks(true);
+		jsColor2.setPaintLabels(true);
+		this.add(jsColor2, gridBagConstraints);
+		
+		colocaComponente(0, 7, 3, GridBagConstraints.CENTER, 0.05, 0, GridBagConstraints.BOTH);
+		JSlider jsColor3 = new JSlider (JSlider.HORIZONTAL, 0, 255, 155);
+		jsColor3.setMajorTickSpacing(50);
+		jsColor3.setMinorTickSpacing(5);
+		jsColor3.setPaintTicks(true);
+		jsColor3.setPaintLabels(true);
+		this.add(jsColor3, gridBagConstraints);
+		
 		// Incorporamos fila botones
-		colocaComponente(0, 5, 3, GridBagConstraints.CENTER, 1, 1, GridBagConstraints.CENTER);
+		colocaComponente(0, 8, 3, GridBagConstraints.CENTER, 1, 1, GridBagConstraints.CENTER);
 		this.add(getBotonera(), gridBagConstraints);		
 	}
 	

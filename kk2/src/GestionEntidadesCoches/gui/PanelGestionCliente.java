@@ -373,6 +373,7 @@ public class PanelGestionCliente extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
+		this.cliente.setDniNie(this.jtfdniNie.getText());
 		this.cliente.setLocalidad(this.jtfLocalidad.getText());
 
 		
